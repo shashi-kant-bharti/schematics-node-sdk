@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,30 +63,6 @@ describe('SchematicsV1', () => {
     schematicsService = SchematicsV1.newInstance();
 
     // end-common
-  });
-
-  test('listSchematicsLocation request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('listSchematicsLocation() result:');
-    // begin-list_schematics_location
-
-    let res;
-    try {
-      res = await schematicsService.listSchematicsLocation({});
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-list_schematics_location
   });
 
   test('listLocations request example', async () => {
@@ -176,13 +152,23 @@ describe('SchematicsV1', () => {
 
     // Request models needed by this operation.
 
+    // GitSource
+    const gitSourceModel = {
+      computed_git_repo_url: 'https://github.com/IBM-Cloud/terraform-provider-ibm/tree/master/examples/ibm-vsi',
+      git_repo_url: 'https://github.com/IBM-Cloud/terraform-provider-ibm',
+      git_repo_folder: 'examples/ibm-vsi',
+      git_release: 'v1.0.0',
+      git_branch: 'master',
+    };
+
     // ExternalSource
     const externalSourceModel = {
-      source_type: 'local',
+      source_type: 'git_hub',
+      git: gitSourceModel,
     };
 
     const params = {
-      templateType: 'testString',
+      templateType: 'terraform_v1_0',
       source: externalSourceModel,
     };
 
@@ -234,7 +220,36 @@ describe('SchematicsV1', () => {
     originalLog('createWorkspace() result:');
     // begin-create_workspace
 
-    const params = {};
+    // Request models needed by this operation.
+
+    // WorkspaceVariableRequest
+    const workspaceVariableRequestModel = {
+      name: 'region',
+      type: 'string',
+      value: 'us-south',
+    };
+
+    // TemplateSourceDataRequest
+    const templateSourceDataRequestModel = {
+      type: 'terraform_v1.9',
+      variablestore: [workspaceVariableRequestModel],
+    };
+
+    // TemplateRepoRequest
+    const templateRepoRequestModel = {
+      url: 'https://github.com/ptaube/tf_cloudless_sleepy',
+    };
+
+    const params = {
+      description: 'Workspace to provision infrastructure',
+      location: 'us-east',
+      name: 'my-terraform-workspace',
+      resourceGroup: 'Default',
+      tags: ['env:dev', 'project:demo'],
+      templateData: [templateSourceDataRequestModel],
+      templateRepo: templateRepoRequestModel,
+      type: ['terraform_v1.9'],
+    };
 
     let res;
     try {
@@ -275,34 +290,6 @@ describe('SchematicsV1', () => {
     // end-get_workspace
   });
 
-  test('replaceWorkspace request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('replaceWorkspace() result:');
-    // begin-replace_workspace
-
-    const params = {
-      wId: 'testString',
-    };
-
-    let res;
-    try {
-      res = await schematicsService.replaceWorkspace(params);
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-replace_workspace
-  });
-
   test('updateWorkspace request example', async () => {
     consoleLogMock.mockImplementation((output) => {
       originalLog(output);
@@ -316,8 +303,19 @@ describe('SchematicsV1', () => {
     originalLog('updateWorkspace() result:');
     // begin-update_workspace
 
+    // Request models needed by this operation.
+
+    // WorkspaceStatusUpdateRequest
+    const workspaceStatusUpdateRequestModel = {
+      frozen: false,
+    };
+
     const params = {
       wId: 'testString',
+      description: 'Updated workspace description',
+      name: 'my-workspace-updated',
+      tags: ['env:production', 'team:devops'],
+      workspaceStatus: workspaceStatusUpdateRequestModel,
     };
 
     let res;
@@ -329,6 +327,68 @@ describe('SchematicsV1', () => {
     }
 
     // end-update_workspace
+  });
+
+  test('replaceWorkspace request example', async () => {
+    consoleLogMock.mockImplementation((output) => {
+      originalLog(output);
+    });
+    consoleWarnMock.mockImplementation((output) => {
+      // if an error occurs, display the message and then fail the test
+      originalWarn(output);
+      expect(true).toBeFalsy();
+    });
+
+    originalLog('replaceWorkspace() result:');
+    // begin-replace_workspace
+
+    // Request models needed by this operation.
+
+    // WorkspaceVariableRequest
+    const workspaceVariableRequestModel = {
+      description: 'Description of sample_var',
+      name: 'sample_var',
+      secure: false,
+      value: 'THIS IS IBM CLOUD TERRAFORM CLI DEMO',
+    };
+
+    // TemplateSourceDataRequest
+    const templateSourceDataRequestModel = {
+      folder: '.',
+      type: 'terraform_v1.0',
+      variablestore: [workspaceVariableRequestModel],
+    };
+
+    // TemplateRepoUpdateRequest
+    const templateRepoUpdateRequestModel = {
+      url: 'https://github.com/ptaube/tf_cloudless_sleepy',
+    };
+
+    // WorkspaceStatusUpdateRequest
+    const workspaceStatusUpdateRequestModel = {
+      frozen: true,
+    };
+
+    const params = {
+      wId: 'testString',
+      description: 'terraform workspace updated',
+      name: 'testWorkspaceApi',
+      tags: ['department:HR', 'application:compensation', 'environment:staging'],
+      templateData: [templateSourceDataRequestModel],
+      templateRepo: templateRepoUpdateRequestModel,
+      type: ['terraform_v1.0'],
+      workspaceStatus: workspaceStatusUpdateRequestModel,
+    };
+
+    let res;
+    try {
+      res = await schematicsService.replaceWorkspace(params);
+      console.log(JSON.stringify(res.result, null, 2));
+    } catch (err) {
+      console.warn(err);
+    }
+
+    // end-replace_workspace
   });
 
   test('getWorkspaceReadme request example', async () => {
@@ -430,9 +490,23 @@ describe('SchematicsV1', () => {
     originalLog('replaceWorkspaceInputs() result:');
     // begin-replace_workspace_inputs
 
+    // Request models needed by this operation.
+
+    // WorkspaceVariableRequest
+    const workspaceVariableRequestModel = {
+      description: 'IBM Cloud region',
+      name: 'region',
+      secure: false,
+      type: 'string',
+      value: 'us-south',
+    };
+
     const params = {
       wId: 'testString',
       tId: 'testString',
+      envValues: [{ name: 'env_variable_name', value: 'env_variable_value' }],
+      values: 'string',
+      variablestore: [workspaceVariableRequestModel],
     };
 
     let res;
@@ -474,6 +548,35 @@ describe('SchematicsV1', () => {
     // end-get_all_workspace_inputs
   });
 
+  test('getWorkspaceInputMetadataV2 request example', async () => {
+    consoleLogMock.mockImplementation((output) => {
+      originalLog(output);
+    });
+    consoleWarnMock.mockImplementation((output) => {
+      // if an error occurs, display the message and then fail the test
+      originalWarn(output);
+      expect(true).toBeFalsy();
+    });
+
+    originalLog('getWorkspaceInputMetadataV2() result:');
+    // begin-get_workspace_input_metadata_v2
+
+    const params = {
+      wId: 'testString',
+      tId: 'testString',
+    };
+
+    let res;
+    try {
+      res = await schematicsService.getWorkspaceInputMetadataV2(params);
+      console.log(JSON.stringify(res.result, null, 2));
+    } catch (err) {
+      console.warn(err);
+    }
+
+    // end-get_workspace_input_metadata_v2
+  });
+
   test('getWorkspaceInputMetadata request example', async () => {
     consoleLogMock.mockImplementation((output) => {
       originalLog(output);
@@ -503,6 +606,34 @@ describe('SchematicsV1', () => {
     // end-get_workspace_input_metadata
   });
 
+  test('getWorkspaceOutputsV2 request example', async () => {
+    consoleLogMock.mockImplementation((output) => {
+      originalLog(output);
+    });
+    consoleWarnMock.mockImplementation((output) => {
+      // if an error occurs, display the message and then fail the test
+      originalWarn(output);
+      expect(true).toBeFalsy();
+    });
+
+    originalLog('getWorkspaceOutputsV2() result:');
+    // begin-get_workspace_outputs_v2
+
+    const params = {
+      wId: 'testString',
+    };
+
+    let res;
+    try {
+      res = await schematicsService.getWorkspaceOutputsV2(params);
+      console.log(JSON.stringify(res.result, null, 2));
+    } catch (err) {
+      console.warn(err);
+    }
+
+    // end-get_workspace_outputs_v2
+  });
+
   test('getWorkspaceOutputs request example', async () => {
     consoleLogMock.mockImplementation((output) => {
       originalLog(output);
@@ -529,6 +660,34 @@ describe('SchematicsV1', () => {
     }
 
     // end-get_workspace_outputs
+  });
+
+  test('getWorkspaceResourcesV2 request example', async () => {
+    consoleLogMock.mockImplementation((output) => {
+      originalLog(output);
+    });
+    consoleWarnMock.mockImplementation((output) => {
+      // if an error occurs, display the message and then fail the test
+      originalWarn(output);
+      expect(true).toBeFalsy();
+    });
+
+    originalLog('getWorkspaceResourcesV2() result:');
+    // begin-get_workspace_resources_v2
+
+    const params = {
+      wId: 'testString',
+    };
+
+    let res;
+    try {
+      res = await schematicsService.getWorkspaceResourcesV2(params);
+      console.log(JSON.stringify(res.result, null, 2));
+    } catch (err) {
+      console.warn(err);
+    }
+
+    // end-get_workspace_resources_v2
   });
 
   test('getWorkspaceResources request example', async () => {
@@ -769,7 +928,27 @@ describe('SchematicsV1', () => {
     originalLog('createAction() result:');
     // begin-create_action
 
-    const params = {};
+    // Request models needed by this operation.
+
+    // GitSource
+    const gitSourceModel = {
+      git_repo_url: 'https://github.com/Cloud-Schematics/ansible-is-instance-actions',
+    };
+
+    // ExternalSource
+    const externalSourceModel = {
+      source_type: 'git',
+      git: gitSourceModel,
+    };
+
+    const params = {
+      name: 'Example-12ab1334',
+      description: 'action_description',
+      location: 'us-south',
+      resourceGroup: 'test',
+      tags: ['department:HR', 'application:compensation', 'environment:staging', 'env:dev', 'k8s'],
+      source: externalSourceModel,
+    };
 
     let res;
     try {
@@ -823,8 +1002,41 @@ describe('SchematicsV1', () => {
     originalLog('updateAction() result:');
     // begin-update_action
 
+    // Request models needed by this operation.
+
+    // GitSource
+    const gitSourceModel = {
+      git_repo_url: 'https://github.com/Cloud-Schematics/ansible-lamp-stack',
+      git_branch: 'v2.0',
+    };
+
+    // ExternalSource
+    const externalSourceModel = {
+      source_type: 'git_hub',
+      git: gitSourceModel,
+    };
+
+    // VariableMetadata
+    const variableMetadataModel = {
+      type: 'string',
+      secure: true,
+    };
+
+    // VariableData
+    const variableDataModel = {
+      name: 'db_password',
+      value: 'NewSecurePassword456',
+      metadata: variableMetadataModel,
+    };
+
     const params = {
       actionId: 'testString',
+      name: 'Deploy LAMP Stack - Updated',
+      description: 'Updated action to deploy LAMP stack with new configuration',
+      tags: ['env:production', 'app:lamp', 'version:2.0'],
+      source: externalSourceModel,
+      commandParameter: 'site-v2.yml',
+      inputs: [variableDataModel],
     };
 
     let res;
@@ -966,8 +1178,8 @@ describe('SchematicsV1', () => {
     // begin-apply_workspace_command
 
     const params = {
-      wId: 'testString',
       refreshToken: 'testString',
+      wId: 'testString',
     };
 
     let res;
@@ -995,8 +1207,8 @@ describe('SchematicsV1', () => {
     // begin-destroy_workspace_command
 
     const params = {
-      wId: 'testString',
       refreshToken: 'testString',
+      wId: 'testString',
     };
 
     let res;
@@ -1107,6 +1319,10 @@ describe('SchematicsV1', () => {
 
     const params = {
       refreshToken: 'testString',
+      commandObject: 'action',
+      commandObjectId: 'us-east.ACTION.Example-12a1b212.3287dc42',
+      commandName: 'ansible_playbook_run',
+      commandParameter: 'site.yml',
     };
 
     let res;
@@ -1164,6 +1380,10 @@ describe('SchematicsV1', () => {
     const params = {
       jobId: 'testString',
       refreshToken: 'testString',
+      commandObject: 'action',
+      commandObjectId: 'us-east.ACTION.Example-12a1b212.3287dc42',
+      commandName: 'ansible_playbook_run',
+      commandParameter: 'site.yml',
     };
 
     let res;
@@ -1249,6 +1469,8 @@ describe('SchematicsV1', () => {
 
     const params = {
       refreshToken: 'testString',
+      job: 'delete',
+      workspaces: ['us-south.workspace.testWorkspace.a6010c37', 'us-south.workspace.teraformNewupdatedone.72011986', 'us-south.workspace.readterraform.400b427c', 'us-south.workspace.myworkspacesink.49745827', 'us-south.workspace.ReadTerraformTemp.c98c9774', 'us-south.workspace.SampleTest1.2a51c3a1'],
     };
 
     let res;
@@ -1327,7 +1549,13 @@ describe('SchematicsV1', () => {
     originalLog('createInventory() result:');
     // begin-create_inventory
 
-    const params = {};
+    const params = {
+      name: 'dev-inventoryapidocexample',
+      description: 'My cloud linux inventory',
+      location: 'us-east',
+      resourceGroup: 'Default',
+      inventoriesIni: '[windows]\n158.177.7.181',
+    };
 
     let res;
     try {
@@ -1381,8 +1609,44 @@ describe('SchematicsV1', () => {
     originalLog('replaceInventory() result:');
     // begin-replace_inventory
 
+    // Request models needed by this operation.
+
+    // CredentialVariableMetadata
+    const credentialVariableMetadataModel = {
+    };
+
+    // CredentialVariableData
+    const credentialVariableDataModel = {
+      metadata: credentialVariableMetadataModel,
+    };
+
+    // Host
+    const hostModel = {
+      name: '158.177.7.182',
+      credential: credentialVariableDataModel,
+    };
+
+    // Group
+    const groupModel = {
+      name: 'windows',
+      credentials: credentialVariableDataModel,
+      hosts: [hostModel],
+    };
+
+    // InventoryView
+    const inventoryViewModel = {
+      groups: [groupModel],
+    };
+
     const params = {
       inventoryId: 'testString',
+      name: 'dev-inventoryapidocexample',
+      description: 'My cloud linux inventory',
+      location: 'us-east',
+      resourceGroup: 'Default',
+      connectionType: 'ssh',
+      inventoriesIni: '[windows]\n158.177.7.182',
+      inventoryView: inventoryViewModel,
     };
 
     let res;
@@ -1433,7 +1697,26 @@ describe('SchematicsV1', () => {
     originalLog('createResourceQuery() result:');
     // begin-create_resource_query
 
-    const params = {};
+    // Request models needed by this operation.
+
+    // ResourceQueryParam
+    const resourceQueryParamModel = {
+      name: 'workspace-id',
+      value: 'us-east.ACTION.kubectlWorkshop.1010101',
+      description: 'string',
+    };
+
+    // ResourceQuery
+    const resourceQueryModel = {
+      query_type: 'workspaces',
+      query_condition: [resourceQueryParamModel],
+    };
+
+    const params = {
+      type: 'workspace_resource',
+      name: 'hello',
+      queries: [resourceQueryModel],
+    };
 
     let res;
     try {
@@ -1474,34 +1757,6 @@ describe('SchematicsV1', () => {
     // end-get_resources_query
   });
 
-  test('replaceResourcesQuery request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('replaceResourcesQuery() result:');
-    // begin-replace_resources_query
-
-    const params = {
-      queryId: 'testString',
-    };
-
-    let res;
-    try {
-      res = await schematicsService.replaceResourcesQuery(params);
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-replace_resources_query
-  });
-
   test('executeResourceQuery request example', async () => {
     consoleLogMock.mockImplementation((output) => {
       originalLog(output);
@@ -1530,7 +1785,7 @@ describe('SchematicsV1', () => {
     // end-execute_resource_query
   });
 
-  test('listAgent request example', async () => {
+  test('replaceResourcesQuery request example', async () => {
     consoleLogMock.mockImplementation((output) => {
       originalLog(output);
     });
@@ -1540,109 +1795,40 @@ describe('SchematicsV1', () => {
       expect(true).toBeFalsy();
     });
 
-    originalLog('listAgent() result:');
-    // begin-list_agent
+    originalLog('replaceResourcesQuery() result:');
+    // begin-replace_resources_query
 
-    let res;
-    try {
-      res = await schematicsService.listAgent({});
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
+    // Request models needed by this operation.
 
-    // end-list_agent
-  });
+    // ResourceQueryParam
+    const resourceQueryParamModel = {
+      name: 'workspace-id',
+      value: 'us-east.ACTION.kubectlWorkshop.1010101',
+      description: 'string',
+    };
 
-  test('registerAgent request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('registerAgent() result:');
-    // begin-register_agent
+    // ResourceQuery
+    const resourceQueryModel = {
+      query_type: 'workspaces',
+      query_condition: [resourceQueryParamModel],
+    };
 
     const params = {
-      name: 'MyDevAgent',
-      agentLocation: 'us-south',
-      location: 'us-south',
-      profileId: 'testString',
+      queryId: 'testString',
+      type: 'workspace_resource',
+      name: 'hello my world',
+      queries: [resourceQueryModel],
     };
 
     let res;
     try {
-      res = await schematicsService.registerAgent(params);
+      res = await schematicsService.replaceResourcesQuery(params);
       console.log(JSON.stringify(res.result, null, 2));
     } catch (err) {
       console.warn(err);
     }
 
-    // end-register_agent
-  });
-
-  test('getAgent request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('getAgent() result:');
-    // begin-get_agent
-
-    const params = {
-      agentId: 'testString',
-    };
-
-    let res;
-    try {
-      res = await schematicsService.getAgent(params);
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-get_agent
-  });
-
-  test('updateAgentRegistration request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('updateAgentRegistration() result:');
-    // begin-update_agent_registration
-
-    const params = {
-      agentId: 'testString',
-      name: 'MyDevAgent',
-      agentLocation: 'us-south',
-      location: 'us-south',
-      profileId: 'testString',
-    };
-
-    let res;
-    try {
-      res = await schematicsService.updateAgentRegistration(params);
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-update_agent_registration
+    // end-replace_resources_query
   });
 
   test('listAgentData request example', async () => {
@@ -1685,15 +1871,43 @@ describe('SchematicsV1', () => {
     // Request models needed by this operation.
 
     // AgentInfrastructure
-    const agentInfrastructureModel = {};
+    const agentInfrastructureModel = {
+      infra_type: 'ibm_kubernetes',
+      cluster_id: 'cluster_id',
+      cluster_resource_group: 'Default',
+      cos_instance_name: 'blueprint_basic',
+      cos_bucket_name: 'sample_bucket_name',
+      cos_bucket_region: 'us-east',
+    };
+
+    // VariableMetadata
+    const variableMetadataModel = {
+      secure: true,
+    };
+
+    // VariableData
+    const variableDataModel = {
+      name: 'ibmcloud_api_key',
+      value: '<api_key of the account where cluster and cos are present>',
+      metadata: variableMetadataModel,
+    };
+
+    // AgentUserState
+    const agentUserStateModel = {
+      state: 'enable',
+    };
 
     const params = {
-      name: 'MyDevAgent',
+      name: 'AgentName',
       resourceGroup: 'Default',
       version: 'v1.0.0',
       schematicsLocation: 'us-south',
       agentLocation: 'us-south',
       agentInfrastructure: agentInfrastructureModel,
+      description: 'Create Agent',
+      tags: ['tag1', 'tag2'],
+      agentInputs: [variableDataModel],
+      userState: agentUserStateModel,
     };
 
     let res;
@@ -1751,16 +1965,44 @@ describe('SchematicsV1', () => {
     // Request models needed by this operation.
 
     // AgentInfrastructure
-    const agentInfrastructureModel = {};
+    const agentInfrastructureModel = {
+      infra_type: 'ibm_kubernetes',
+      cluster_id: 'cluster_id',
+      cluster_resource_group: 'Default',
+      cos_instance_name: 'blueprint_basic',
+      cos_bucket_name: 'sample_bucket_name',
+      cos_bucket_region: 'us-east',
+    };
+
+    // VariableMetadata
+    const variableMetadataModel = {
+      secure: true,
+    };
+
+    // VariableData
+    const variableDataModel = {
+      name: 'ibmcloud_api_key',
+      value: '<api_key of the account where cluster and cos are present>',
+      metadata: variableMetadataModel,
+    };
+
+    // AgentUserState
+    const agentUserStateModel = {
+      state: 'enable',
+    };
 
     const params = {
       agentId: 'testString',
-      name: 'MyDevAgent',
+      name: 'AgentName',
       resourceGroup: 'Default',
       version: 'v1.0.0',
       schematicsLocation: 'us-south',
       agentLocation: 'us-south',
       agentInfrastructure: agentInfrastructureModel,
+      description: 'New Description',
+      tags: ['tag1', 'tag2'],
+      agentInputs: [variableDataModel],
+      userState: agentUserStateModel,
     };
 
     let res;
@@ -1798,34 +2040,6 @@ describe('SchematicsV1', () => {
     // end-get_agent_versions
   });
 
-  test('getPrsAgentJob request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('getPrsAgentJob() result:');
-    // begin-get_prs_agent_job
-
-    const params = {
-      agentId: 'testString',
-    };
-
-    let res;
-    try {
-      res = await schematicsService.getPrsAgentJob(params);
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-get_prs_agent_job
-  });
-
   test('prsAgentJob request example', async () => {
     consoleLogMock.mockImplementation((output) => {
       originalLog(output);
@@ -1854,34 +2068,6 @@ describe('SchematicsV1', () => {
     // end-prs_agent_job
   });
 
-  test('getHealthCheckAgentJob request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('getHealthCheckAgentJob() result:');
-    // begin-get_health_check_agent_job
-
-    const params = {
-      agentId: 'testString',
-    };
-
-    let res;
-    try {
-      res = await schematicsService.getHealthCheckAgentJob(params);
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-get_health_check_agent_job
-  });
-
   test('healthCheckAgentJob request example', async () => {
     consoleLogMock.mockImplementation((output) => {
       originalLog(output);
@@ -1908,34 +2094,6 @@ describe('SchematicsV1', () => {
     }
 
     // end-health_check_agent_job
-  });
-
-  test('getDeployAgentJob request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    originalLog('getDeployAgentJob() result:');
-    // begin-get_deploy_agent_job
-
-    const params = {
-      agentId: 'testString',
-    };
-
-    let res;
-    try {
-      res = await schematicsService.getDeployAgentJob(params);
-      console.log(JSON.stringify(res.result, null, 2));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-get_deploy_agent_job
   });
 
   test('deployAgentJob request example', async () => {
@@ -2007,7 +2165,21 @@ describe('SchematicsV1', () => {
     originalLog('updateKmsSettings() result:');
     // begin-update_kms_settings
 
-    const params = {};
+    // Request models needed by this operation.
+
+    // KMSSettingsPrimaryCrk
+    const kmsSettingsPrimaryCrkModel = {
+      kms_name: 'Key Protect-xxx',
+      kms_private_endpoint: 'https://private.us-south.kms.cloud.ibm.com',
+      key_crn: 'crn:v1:public:kms:us-south:a/010101010:key:3a14ceaf-c679-455d-10101010',
+    };
+
+    const params = {
+      location: 'US',
+      encryptionScheme: 'byok',
+      resourceGroup: 'Default',
+      primaryCrk: kmsSettingsPrimaryCrkModel,
+    };
 
     let res;
     try {
@@ -2086,7 +2258,14 @@ describe('SchematicsV1', () => {
     originalLog('createPolicy() result:');
     // begin-create_policy
 
-    const params = {};
+    const params = {
+      kind: 'agent_assignment_policy',
+      name: 'new-policy-dev',
+      description: 'Policy for job execution of secured workspaces on agent1',
+      resourceGroup: 'Default',
+      tags: ['policy:secured-job'],
+      location: 'us-south',
+    };
 
     let res;
     try {
@@ -2142,6 +2321,12 @@ describe('SchematicsV1', () => {
 
     const params = {
       policyId: 'testString',
+      kind: 'agent_assignment_policy',
+      name: 'new-policy-dev',
+      description: 'Policy for job execution of secured workspaces on agent1 updated',
+      resourceGroup: 'Default',
+      tags: ['policy:secured-job'],
+      location: 'us-south',
     };
 
     let res;
@@ -2169,8 +2354,8 @@ describe('SchematicsV1', () => {
     // begin-delete_workspace
 
     const params = {
-      refreshToken: 'testString',
       wId: 'testString',
+      refreshToken: 'testString',
     };
 
     let res;
@@ -2314,31 +2499,6 @@ describe('SchematicsV1', () => {
     // end-delete_resources_query
   });
 
-  test('deleteAgent request example', async () => {
-    consoleLogMock.mockImplementation((output) => {
-      originalLog(output);
-    });
-    consoleWarnMock.mockImplementation((output) => {
-      // if an error occurs, display the message and then fail the test
-      originalWarn(output);
-      expect(true).toBeFalsy();
-    });
-
-    // begin-delete_agent
-
-    const params = {
-      agentId: 'testString',
-    };
-
-    try {
-      await schematicsService.deleteAgent(params);
-    } catch (err) {
-      console.warn(err);
-    }
-
-    // end-delete_agent
-  });
-
   test('deleteAgentData request example', async () => {
     consoleLogMock.mockImplementation((output) => {
       originalLog(output);
@@ -2374,6 +2534,7 @@ describe('SchematicsV1', () => {
       expect(true).toBeFalsy();
     });
 
+    originalLog('deleteAgentResources() result:');
     // begin-delete_agent_resources
 
     const params = {
@@ -2381,8 +2542,10 @@ describe('SchematicsV1', () => {
       refreshToken: 'testString',
     };
 
+    let res;
     try {
-      await schematicsService.deleteAgentResources(params);
+      res = await schematicsService.deleteAgentResources(params);
+      console.log(JSON.stringify(res.result, null, 2));
     } catch (err) {
       console.warn(err);
     }

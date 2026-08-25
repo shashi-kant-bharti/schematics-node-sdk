@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,13 @@
  */
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.96.1-5136e54a-20241108-203028
+ * IBM OpenAPI SDK Code Generator Version: 3.114.2-b2884bfd-20260601-185447
  */
 
 import * as extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 import {
+  AbortSignal,
   Authenticator,
   BaseService,
   SDKLogger,
@@ -106,59 +107,6 @@ class SchematicsV1 extends BaseService {
    ************************/
 
   /**
-   * List supported schematics locations.
-   *
-   * Retrieve a list of IBM Cloud locations where you can create the Schematics workspace or action. workspaces.
-   *
-   *   <h3>Authorization</h3>
-   *
-   *   Schematics support generic authorization for its resources.
-   *   For more information, about Schematics access and permissions,
-   *   see [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.SchematicsLocations[]>>}
-   */
-  public listSchematicsLocation(
-    params?: SchematicsV1.ListSchematicsLocationParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.SchematicsLocations[]>> {
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'listSchematicsLocation'
-    );
-
-    const parameters = {
-      options: {
-        url: '/v1/locations',
-        method: 'GET',
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
    * List supported locations.
    *
    * Retrieve a list of IBM Cloud locations where you can work with the Schematics objects.
@@ -179,7 +127,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.SchematicsLocationsList>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -196,11 +144,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -228,7 +180,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.ResourceGroupResponse[]>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -245,11 +197,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -271,17 +227,13 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.VersionResponse>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
     }
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getSchematicsVersion'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getSchematicsVersion');
 
     const parameters = {
       options: {
@@ -292,11 +244,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -332,14 +288,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.TemplateMetaDataResponse>> {
     const _params = { ...params };
     const _requiredParams = ['templateType', 'source'];
-    const _validParams = [
-      'templateType',
-      'source',
-      'region',
-      'sourceType',
-      'xGithubToken',
-      'headers',
-    ];
+    const _validParams = ['templateType', 'source', 'region', 'sourceType', 'xGithubToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -352,11 +301,7 @@ class SchematicsV1 extends BaseService {
       'source_type': _params.sourceType,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'processTemplateMetaData'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'processTemplateMetaData');
 
     const parameters = {
       options: {
@@ -368,6 +313,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -375,6 +321,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -419,7 +368,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceResponseList>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['offset', 'limit', 'profile', 'resourceGroup', 'headers'];
+    const _validParams = ['offset', 'limit', 'profile', 'resourceGroup', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -444,11 +393,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -470,10 +423,12 @@ class SchematicsV1 extends BaseService {
    * and your data is stored. See [API endpoints](/apidocs/schematics#api-endpoints) for more information.
    *  * If you use the API endpoint for a geography and not a specific location, such as North America, you can specify
    * the location in your API request body.
+   *
    *  * If you do not specify the location in the request body, Schematics determines your workspace location based on
    * availability.
    *  * If you use an API endpoint for a specific location, such as Frankfurt, the location that you enter in your API
    * request body must match your API endpoint.
+   *
    *  * You also have the option to not specify a location in your API request body if you use a location-specific API
    * endpoint.
    *
@@ -533,26 +488,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceResponse>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = [
-      'appliedShareddataIds',
-      'catalogRef',
-      'dependencies',
-      'description',
-      'location',
-      'name',
-      'resourceGroup',
-      'sharedData',
-      'tags',
-      'templateData',
-      'templateRef',
-      'templateRepo',
-      'type',
-      'workspaceStatus',
-      'agentId',
-      'settings',
-      'xGithubToken',
-      'headers',
-    ];
+    const _validParams = ['appliedShareddataIds', 'catalogRef', 'dependencies', 'description', 'location', 'name', 'resourceGroup', 'sharedData', 'tags', 'templateData', 'templateRef', 'templateRepo', 'type', 'workspaceStatus', 'agentId', 'settings', 'xGithubToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -589,6 +525,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -596,6 +533,99 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Delete a workspace.
+   *
+   * Deletes a workspace from IBM Cloud Schematics. Deleting a workspace does not automatically remove the IBM Cloud
+   * resources that the workspace manages. To remove all resources that are associated with the workspace, use the
+   * `DELETE /v1/workspaces/{id}?destroy_resources=true` API.
+   *
+   *  **Note**: If you delete a workspace without deleting the resources,
+   *  you must manage your resources with the resource dashboard or CLI afterwards.
+   *  You cannot use IBM Cloud Schematics anymore to manage your resources.
+   *
+   *  <h3>Authorization</h3>
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.wId - The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
+   * @param {string} params.refreshToken - The IAM refresh token for the user or service identity. The IAM refresh token
+   * is required only if you want to destroy the Terraform resources before deleting the Schematics workspace. If you
+   * want to delete the workspace only and keep all your Terraform resources, refresh token is not required.
+   *
+   *   **Retrieving refresh token**:
+   *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
+   * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
+   * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   * key](/apidocs/iam-identity-token-api#create-api-key).
+   *
+   *   **Limitation**:
+   *   * If the token is expired, you can use `refresh token` to get a new IAM access token.
+   *   * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
+   *   * When the IAM access token is about to expire, use the API key to create a new access token.
+   * @param {string} [params.destroyResources] - If set to `true`, refresh_token header configuration is required to
+   * delete all the Terraform resources, and the Schematics workspace. If set to `false`, you can remove only the
+   * workspace. Your Terraform resources are still available and must be managed with the resource dashboard or CLI.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<string>>}
+   */
+  public deleteWorkspace(
+    params: SchematicsV1.DeleteWorkspaceParams
+  ): Promise<SchematicsV1.Response<string>> {
+    const _params = { ...params };
+    const _requiredParams = ['wId', 'refreshToken'];
+    const _validParams = ['wId', 'refreshToken', 'destroyResources', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const query = {
+      'destroy_resources': _params.destroyResources,
+    };
+
+    const path = {
+      'w_id': _params.wId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteWorkspace');
+
+    const parameters = {
+      options: {
+        url: '/v1/workspaces/{w_id}',
+        method: 'DELETE',
+        qs: query,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+            'refresh_token': _params.refreshToken,
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -623,7 +653,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceResponse>> {
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = ['wId', 'headers'];
+    const _validParams = ['wId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -645,212 +675,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Update workspace.
-   *
-   * Use this API to update or replace the entire workspace, including the Terraform template (`template_repo`) or IBM
-   * Cloud catalog software template (`catalog_ref`) that your workspace points to.
-   *
-   *  **Tip**:- If you want to update workspace metadata, use the `PATCH /v1/workspaces/{id}` API.
-   *  To update workspace variables, use the `PUT /v1/workspaces/{id}/template_data/{template_id}/values` API.
-   *
-   *  <h3>Authorization</h3>
-   *
-   *  Schematics support generic authorization for its resources.
-   *  For more information, about Schematics access and permissions,
-   *  see [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.wId - The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
-   * @param {CatalogRef} [params.catalogRef] - Information about the software template that you chose from the IBM Cloud
-   * catalog. This information is returned for IBM Cloud catalog offerings only.
-   * @param {string} [params.description] - The description of the workspace.
-   * @param {Dependencies} [params.dependencies] - Workspace dependencies.
-   * @param {string} [params.name] - The name of the workspace.
-   * @param {SharedTargetData} [params.sharedData] - Information about the Target used by the templates originating from
-   * the  IBM Cloud catalog offerings. This information is not relevant for workspace created using your own Terraform
-   * template.
-   * @param {string[]} [params.tags] - A list of tags that you want to associate with your workspace.
-   * @param {TemplateSourceDataRequest[]} [params.templateData] - Input data for the Template.
-   * @param {TemplateRepoUpdateRequest} [params.templateRepo] - Input to update the template repository data.
-   * @param {string[]} [params.type] - List of Workspace type.
-   * @param {WorkspaceStatusUpdateRequest} [params.workspaceStatus] - Input to update the workspace status.
-   * @param {WorkspaceStatusMessage} [params.workspaceStatusMsg] - Information about the last job that ran against the
-   * workspace. -.
-   * @param {string} [params.agentId] - agent id that process workspace jobs.
-   * @param {VariableData[]} [params.settings] - Input settings to be applied to the workspace, for example,
-   * `job_timeout_override`.
-   * @param {string} [params.xGithubToken] - The personal access token to authenticate with your private GitHub or
-   * GitLab repository and access your Terraform template.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.WorkspaceResponse>>}
-   */
-  public replaceWorkspace(
-    params: SchematicsV1.ReplaceWorkspaceParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceResponse>> {
-    const _params = { ...params };
-    const _requiredParams = ['wId'];
-    const _validParams = [
-      'wId',
-      'catalogRef',
-      'description',
-      'dependencies',
-      'name',
-      'sharedData',
-      'tags',
-      'templateData',
-      'templateRepo',
-      'type',
-      'workspaceStatus',
-      'workspaceStatusMsg',
-      'agentId',
-      'settings',
-      'xGithubToken',
-      'headers',
-    ];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const body = {
-      'catalog_ref': _params.catalogRef,
-      'description': _params.description,
-      'dependencies': _params.dependencies,
-      'name': _params.name,
-      'shared_data': _params.sharedData,
-      'tags': _params.tags,
-      'template_data': _params.templateData,
-      'template_repo': _params.templateRepo,
-      'type': _params.type,
-      'workspace_status': _params.workspaceStatus,
-      'workspace_status_msg': _params.workspaceStatusMsg,
-      'agent_id': _params.agentId,
-      'settings': _params.settings,
-    };
-
-    const path = {
-      'w_id': _params.wId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'replaceWorkspace');
-
-    const parameters = {
-      options: {
-        url: '/v1/workspaces/{w_id}',
-        method: 'PUT',
-        body,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-Github-token': _params.xGithubToken,
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Delete a workspace.
-   *
-   * Deletes a workspace from IBM Cloud Schematics. Deleting a workspace does not automatically remove the IBM Cloud
-   * resources that the workspace manages. To remove all resources that are associated with the workspace, use the
-   * `DELETE /v1/workspaces/{id}?destroy_resources=true` API.
-   *
-   *  **Note**: If you delete a workspace without deleting the resources,
-   *  you must manage your resources with the resource dashboard or CLI afterwards.
-   *  You cannot use IBM Cloud Schematics anymore to manage your resources.
-   *
-   *  <h3>Authorization</h3>
-   *
-   *  Schematics support generic authorization for its resources.
-   *  For more information, about Schematics access and permissions,
-   *  see [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.refreshToken - The IAM refresh token for the user or service identity. The IAM refresh token
-   * is required only if you want to destroy the Terraform resources before deleting the Schematics workspace. If you
-   * want to delete the workspace only and keep all your Terraform resources, refresh token is not required.
-   *
-   *   **Retrieving refresh token**:
-   *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
-   * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
-   * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
-   * key](/apidocs/iam-identity-token-api#create-api-key).
-   *
-   *   **Limitation**:
-   *   * If the token is expired, you can use `refresh token` to get a new IAM access token.
-   *   * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
-   *   * When the IAM access token is about to expire, use the API key to create a new access token.
-   * @param {string} params.wId - The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
-   * @param {string} [params.destroyResources] - If set to `true`, refresh_token header configuration is required to
-   * delete all the Terraform resources, and the Schematics workspace. If set to `false`, you can remove only the
-   * workspace. Your Terraform resources are still available and must be managed with the resource dashboard or CLI.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<string>>}
-   */
-  public deleteWorkspace(
-    params: SchematicsV1.DeleteWorkspaceParams
-  ): Promise<SchematicsV1.Response<string>> {
-    const _params = { ...params };
-    const _requiredParams = ['refreshToken', 'wId'];
-    const _validParams = ['refreshToken', 'wId', 'destroyResources', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const query = {
-      'destroy_resources': _params.destroyResources,
-    };
-
-    const path = {
-      'w_id': _params.wId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteWorkspace');
-
-    const parameters = {
-      options: {
-        url: '/v1/workspaces/{w_id}',
-        method: 'DELETE',
-        qs: query,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'refresh_token': _params.refreshToken,
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -909,23 +742,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceResponse>> {
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = [
-      'wId',
-      'catalogRef',
-      'description',
-      'dependencies',
-      'name',
-      'sharedData',
-      'tags',
-      'templateData',
-      'templateRepo',
-      'type',
-      'workspaceStatus',
-      'workspaceStatusMsg',
-      'agentId',
-      'settings',
-      'headers',
-    ];
+    const _validParams = ['wId', 'catalogRef', 'description', 'dependencies', 'name', 'sharedData', 'tags', 'templateData', 'templateRepo', 'type', 'workspaceStatus', 'workspaceStatusMsg', 'agentId', 'settings', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -964,12 +781,118 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Update workspace.
+   *
+   * Use this API to update or replace the entire workspace, including the Terraform template (`template_repo`) or IBM
+   * Cloud catalog software template (`catalog_ref`) that your workspace points to.
+   *
+   *  **Tip**:- If you want to update workspace metadata, use the `PATCH /v1/workspaces/{id}` API.
+   *  To update workspace variables, use the `PUT /v1/workspaces/{id}/template_data/{template_id}/values` API.
+   *
+   *  <h3>Authorization</h3>
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.wId - The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
+   * @param {CatalogRef} [params.catalogRef] - Information about the software template that you chose from the IBM Cloud
+   * catalog. This information is returned for IBM Cloud catalog offerings only.
+   * @param {string} [params.description] - The description of the workspace.
+   * @param {Dependencies} [params.dependencies] - Workspace dependencies.
+   * @param {string} [params.name] - The name of the workspace.
+   * @param {SharedTargetData} [params.sharedData] - Information about the Target used by the templates originating from
+   * the  IBM Cloud catalog offerings. This information is not relevant for workspace created using your own Terraform
+   * template.
+   * @param {string[]} [params.tags] - A list of tags that you want to associate with your workspace.
+   * @param {TemplateSourceDataRequest[]} [params.templateData] - Input data for the Template.
+   * @param {TemplateRepoUpdateRequest} [params.templateRepo] - Input to update the template repository data.
+   * @param {string[]} [params.type] - List of Workspace type.
+   * @param {WorkspaceStatusUpdateRequest} [params.workspaceStatus] - Input to update the workspace status.
+   * @param {WorkspaceStatusMessage} [params.workspaceStatusMsg] - Information about the last job that ran against the
+   * workspace. -.
+   * @param {string} [params.agentId] - agent id that process workspace jobs.
+   * @param {VariableData[]} [params.settings] - Input settings to be applied to the workspace, for example,
+   * `job_timeout_override`.
+   * @param {string} [params.xGithubToken] - The personal access token to authenticate with your private GitHub or
+   * GitLab repository and access your Terraform template.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.WorkspaceResponse>>}
+   */
+  public replaceWorkspace(
+    params: SchematicsV1.ReplaceWorkspaceParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceResponse>> {
+    const _params = { ...params };
+    const _requiredParams = ['wId'];
+    const _validParams = ['wId', 'catalogRef', 'description', 'dependencies', 'name', 'sharedData', 'tags', 'templateData', 'templateRepo', 'type', 'workspaceStatus', 'workspaceStatusMsg', 'agentId', 'settings', 'xGithubToken', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const body = {
+      'catalog_ref': _params.catalogRef,
+      'description': _params.description,
+      'dependencies': _params.dependencies,
+      'name': _params.name,
+      'shared_data': _params.sharedData,
+      'tags': _params.tags,
+      'template_data': _params.templateData,
+      'template_repo': _params.templateRepo,
+      'type': _params.type,
+      'workspace_status': _params.workspaceStatus,
+      'workspace_status_msg': _params.workspaceStatusMsg,
+      'agent_id': _params.agentId,
+      'settings': _params.settings,
+    };
+
+    const path = {
+      'w_id': _params.wId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'replaceWorkspace');
+
+    const parameters = {
+      options: {
+        url: '/v1/workspaces/{w_id}',
+        method: 'PUT',
+        body,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-Github-token': _params.xGithubToken,
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -998,7 +921,7 @@ class SchematicsV1 extends BaseService {
     SchematicsV1._logger.warn('A deprecated operation has been invoked: getWorkspaceReadme');
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = ['wId', 'ref', 'formatted', 'headers'];
+    const _validParams = ['wId', 'ref', 'formatted', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1026,11 +949,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1066,7 +993,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.TemplateRepoTarUploadResponse>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'tId'];
-    const _validParams = ['wId', 'tId', 'file', 'fileContentType', 'headers'];
+    const _validParams = ['wId', 'tId', 'file', 'fileContentType', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1097,12 +1024,16 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'multipart/form-data',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1134,7 +1065,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.TemplateValues>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'tId'];
-    const _validParams = ['wId', 'tId', 'headers'];
+    const _validParams = ['wId', 'tId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1157,11 +1088,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1195,7 +1130,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.UserValues>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'tId'];
-    const _validParams = ['wId', 'tId', 'envValues', 'values', 'variablestore', 'headers'];
+    const _validParams = ['wId', 'tId', 'envValues', 'values', 'variablestore', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1212,11 +1147,7 @@ class SchematicsV1 extends BaseService {
       't_id': _params.tId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'replaceWorkspaceInputs'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'replaceWorkspaceInputs');
 
     const parameters = {
       options: {
@@ -1229,12 +1160,16 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1264,7 +1199,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceTemplateValuesResponse>> {
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = ['wId', 'headers'];
+    const _validParams = ['wId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1274,11 +1209,7 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getAllWorkspaceInputs'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getAllWorkspaceInputs');
 
     const parameters = {
       options: {
@@ -1290,11 +1221,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1314,14 +1249,14 @@ class SchematicsV1 extends BaseService {
    * input variables. When you create a workspace, the Terraform template that your workspace points to is assigned a
    * unique ID. To find this ID, use the `GET /v1/workspaces` API and review the `template_data.id` value.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.JsonObject[]>>}
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.TemplateValuesMetaData>>}
    */
-  public getWorkspaceInputMetadata(
-    params: SchematicsV1.GetWorkspaceInputMetadataParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.JsonObject[]>> {
+  public getWorkspaceInputMetadataV2(
+    params: SchematicsV1.GetWorkspaceInputMetadataV2Params
+  ): Promise<SchematicsV1.Response<SchematicsV1.TemplateValuesMetaData>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'tId'];
-    const _validParams = ['wId', 'tId', 'headers'];
+    const _validParams = ['wId', 'tId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1332,11 +1267,68 @@ class SchematicsV1 extends BaseService {
       't_id': _params.tId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getWorkspaceInputMetadata'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceInputMetadataV2');
+
+    const parameters = {
+      options: {
+        url: '/v2/workspaces/{w_id}/template_data/{t_id}/values_metadata',
+        method: 'GET',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * List workspace variable metadata.
+   *
+   * **Deprecated**: This v1 API will be decommissioned within 12 months. Please migrate to the v2 API: `GET
+   * /v2/workspaces/{w_id}/template_data/{t_id}/values_metadata`. Retrieve the metadata for all the workspace input
+   * variables that are declared in the template that your workspace points to.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.wId - The ID of the workspace for which you want to retrieve the metadata of the input
+   * variables that are declared in the template. To find the workspace ID, use the `GET /v1/workspaces` API.
+   * @param {string} params.tId - The ID of the Terraform template for which you want to retrieve the metadata of your
+   * input variables. When you create a workspace, the Terraform template that your workspace points to is assigned a
+   * unique ID. To find this ID, use the `GET /v1/workspaces` API and review the `template_data.id` value.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.JsonObject[]>>}
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+  public getWorkspaceInputMetadata(
+    params: SchematicsV1.GetWorkspaceInputMetadataParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.JsonObject[]>> {
+    SchematicsV1._logger.warn('A deprecated operation has been invoked: getWorkspaceInputMetadata');
+    const _params = { ...params };
+    const _requiredParams = ['wId', 'tId'];
+    const _validParams = ['wId', 'tId', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'w_id': _params.wId,
+      't_id': _params.tId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceInputMetadata');
 
     const parameters = {
       options: {
@@ -1348,11 +1340,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1369,14 +1365,14 @@ class SchematicsV1 extends BaseService {
    * @param {string} params.wId - The ID of the workspace for which you want to retrieve output parameters and  values.
    * To find the workspace ID, use the `GET /workspaces` API.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.OutputValuesInner[]>>}
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.OutputValuesObject>>}
    */
-  public getWorkspaceOutputs(
-    params: SchematicsV1.GetWorkspaceOutputsParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.OutputValuesInner[]>> {
+  public getWorkspaceOutputsV2(
+    params: SchematicsV1.GetWorkspaceOutputsV2Params
+  ): Promise<SchematicsV1.Response<SchematicsV1.OutputValuesObject>> {
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = ['wId', 'headers'];
+    const _validParams = ['wId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1386,11 +1382,64 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getWorkspaceOutputs'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceOutputsV2');
+
+    const parameters = {
+      options: {
+        url: '/v2/workspaces/{w_id}/output_values',
+        method: 'GET',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * List workspace output values.
+   *
+   * **Deprecated**: This v1 API will be decommissioned within 12 months. Please migrate to the v2 API: `GET
+   * /v2/workspaces/{w_id}/output_values`. Retrieve a list of Terraform output variables. You define output values in
+   * your Terraform template to include information that you want to make accessible for other Terraform templates.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.wId - The ID of the workspace for which you want to retrieve output parameters and  values.
+   * To find the workspace ID, use the `GET /workspaces` API.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.OutputValuesInner[]>>}
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+  public getWorkspaceOutputs(
+    params: SchematicsV1.GetWorkspaceOutputsParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.OutputValuesInner[]>> {
+    SchematicsV1._logger.warn('A deprecated operation has been invoked: getWorkspaceOutputs');
+    const _params = { ...params };
+    const _requiredParams = ['wId'];
+    const _validParams = ['wId', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'w_id': _params.wId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceOutputs');
 
     const parameters = {
       options: {
@@ -1402,11 +1451,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1421,14 +1474,14 @@ class SchematicsV1 extends BaseService {
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.wId - The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.TemplateResources[]>>}
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.TemplateResourcesObject>>}
    */
-  public getWorkspaceResources(
-    params: SchematicsV1.GetWorkspaceResourcesParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.TemplateResources[]>> {
+  public getWorkspaceResourcesV2(
+    params: SchematicsV1.GetWorkspaceResourcesV2Params
+  ): Promise<SchematicsV1.Response<SchematicsV1.TemplateResourcesObject>> {
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = ['wId', 'headers'];
+    const _validParams = ['wId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1438,11 +1491,62 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getWorkspaceResources'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceResourcesV2');
+
+    const parameters = {
+      options: {
+        url: '/v2/workspaces/{w_id}/resources',
+        method: 'GET',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * List workspace resources.
+   *
+   * **Deprecated**: This v1 API will be decommissioned within 12 months. Please migrate to the v2 API: `GET
+   * /v2/workspaces/{w_id}/resources`. Retrieve a list of IBM Cloud resources that you created with your workspace.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.wId - The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.TemplateResources[]>>}
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+  public getWorkspaceResources(
+    params: SchematicsV1.GetWorkspaceResourcesParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.TemplateResources[]>> {
+    SchematicsV1._logger.warn('A deprecated operation has been invoked: getWorkspaceResources');
+    const _params = { ...params };
+    const _requiredParams = ['wId'];
+    const _validParams = ['wId', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'w_id': _params.wId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceResources');
 
     const parameters = {
       options: {
@@ -1454,11 +1558,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1495,7 +1603,7 @@ class SchematicsV1 extends BaseService {
     SchematicsV1._logger.warn('A deprecated operation has been invoked: getWorkspaceState');
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = ['wId', 'headers'];
+    const _validParams = ['wId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1517,11 +1625,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1553,7 +1665,7 @@ class SchematicsV1 extends BaseService {
     SchematicsV1._logger.warn('A deprecated operation has been invoked: getWorkspaceTemplateState');
     const _params = { ...params };
     const _requiredParams = ['wId', 'tId'];
-    const _validParams = ['wId', 'tId', 'headers'];
+    const _validParams = ['wId', 'tId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1564,11 +1676,7 @@ class SchematicsV1 extends BaseService {
       't_id': _params.tId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getWorkspaceTemplateState'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceTemplateState');
 
     const parameters = {
       options: {
@@ -1580,11 +1688,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1619,7 +1731,7 @@ class SchematicsV1 extends BaseService {
     SchematicsV1._logger.warn('A deprecated operation has been invoked: getWorkspaceActivityLogs');
     const _params = { ...params };
     const _requiredParams = ['wId', 'activityId'];
-    const _validParams = ['wId', 'activityId', 'headers'];
+    const _validParams = ['wId', 'activityId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1630,11 +1742,7 @@ class SchematicsV1 extends BaseService {
       'activity_id': _params.activityId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getWorkspaceActivityLogs'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceActivityLogs');
 
     const parameters = {
       options: {
@@ -1646,11 +1754,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1675,7 +1787,7 @@ class SchematicsV1 extends BaseService {
     SchematicsV1._logger.warn('A deprecated operation has been invoked: getWorkspaceLogUrls');
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = ['wId', 'headers'];
+    const _validParams = ['wId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1685,11 +1797,7 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getWorkspaceLogUrls'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceLogUrls');
 
     const parameters = {
       options: {
@@ -1701,11 +1809,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1745,15 +1857,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<string>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'tId'];
-    const _validParams = [
-      'wId',
-      'tId',
-      'logTfCmd',
-      'logTfPrefix',
-      'logTfNullResource',
-      'logTfAnsible',
-      'headers',
-    ];
+    const _validParams = ['wId', 'tId', 'logTfCmd', 'logTfPrefix', 'logTfNullResource', 'logTfAnsible', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1784,11 +1888,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1823,16 +1931,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<string>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'tId', 'activityId'];
-    const _validParams = [
-      'wId',
-      'tId',
-      'activityId',
-      'logTfCmd',
-      'logTfPrefix',
-      'logTfNullResource',
-      'logTfAnsible',
-      'headers',
-    ];
+    const _validParams = ['wId', 'tId', 'activityId', 'logTfCmd', 'logTfPrefix', 'logTfNullResource', 'logTfAnsible', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1851,11 +1950,7 @@ class SchematicsV1 extends BaseService {
       'activity_id': _params.activityId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getTemplateActivityLog'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getTemplateActivityLog');
 
     const parameters = {
       options: {
@@ -1868,11 +1963,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1919,7 +2018,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.ActionList>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['offset', 'limit', 'sort', 'profile', 'headers'];
+    const _validParams = ['offset', 'limit', 'sort', 'profile', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -1944,11 +2043,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -1971,9 +2074,12 @@ class SchematicsV1 extends BaseService {
    *  For more information, about the Schematics create action,
    *  see [ibmcloud schematics action
    * create](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-create-action).
+   *
    *  **Note** you cannot update the location and region once an action is created.
+   *
    *  Also, make sure your IP addresses are in the
    * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
+   *
    *
    *  <h3>Authorization</h3>
    *
@@ -2025,30 +2131,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.Action>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = [
-      'name',
-      'description',
-      'location',
-      'resourceGroup',
-      'bastionConnectionType',
-      'inventoryConnectionType',
-      'tags',
-      'userState',
-      'sourceReadmeUrl',
-      'source',
-      'sourceType',
-      'commandParameter',
-      'inventory',
-      'credentials',
-      'bastion',
-      'bastionCredential',
-      'targetsIni',
-      'inputs',
-      'outputs',
-      'settings',
-      'xGithubToken',
-      'headers',
-    ];
+    const _validParams = ['name', 'description', 'location', 'resourceGroup', 'bastionConnectionType', 'inventoryConnectionType', 'tags', 'userState', 'sourceReadmeUrl', 'source', 'sourceType', 'commandParameter', 'inventory', 'credentials', 'bastion', 'bastionCredential', 'targetsIni', 'inputs', 'outputs', 'settings', 'xGithubToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2089,6 +2172,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -2096,69 +2180,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Get action details.
-   *
-   * Retrieve the detailed information of an actions from your IBM Cloud account.  This API returns a URL to the log
-   * file that you can retrieve by using  the `GET /v2/actions/{action_id}/logs` API.
-   *
-   *  <h3>Authorization</h3>
-   *
-   *  Schematics support generic authorization for its resources.
-   *  For more information, about Schematics access and permissions, see
-   *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.actionId - Action Id.  Use GET /actions API to look up the Action Ids in your IBM Cloud
-   * account.
-   * @param {string} [params.profile] - Level of details returned by the get method.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.Action>>}
-   */
-  public getAction(
-    params: SchematicsV1.GetActionParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.Action>> {
-    const _params = { ...params };
-    const _requiredParams = ['actionId'];
-    const _validParams = ['actionId', 'profile', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const query = {
-      'profile': _params.profile,
-    };
-
-    const path = {
-      'action_id': _params.actionId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getAction');
-
-    const parameters = {
-      options: {
-        url: '/v2/actions/{action_id}',
-        method: 'GET',
-        qs: query,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2194,7 +2218,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['actionId'];
-    const _validParams = ['actionId', 'force', 'propagate', 'headers'];
+    const _validParams = ['actionId', 'force', 'propagate', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2216,12 +2240,83 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'force': _params.force,
             'propagate': _params.propagate,
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Get action details.
+   *
+   * Retrieve the detailed information of an actions from your IBM Cloud account.  This API returns a URL to the log
+   * file that you can retrieve by using  the `GET /v2/actions/{action_id}/logs` API.
+   *
+   *  <h3>Authorization</h3>
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.actionId - Action Id.  Use GET /actions API to look up the Action Ids in your IBM Cloud
+   * account.
+   * @param {string} [params.profile] - Level of details returned by the get method.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.Action>>}
+   */
+  public getAction(
+    params: SchematicsV1.GetActionParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.Action>> {
+    const _params = { ...params };
+    const _requiredParams = ['actionId'];
+    const _validParams = ['actionId', 'profile', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const query = {
+      'profile': _params.profile,
+    };
+
+    const path = {
+      'action_id': _params.actionId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getAction');
+
+    const parameters = {
+      options: {
+        url: '/v2/actions/{action_id}',
+        method: 'GET',
+        qs: query,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2236,12 +2331,14 @@ class SchematicsV1 extends BaseService {
    * [Schematics action state
    * diagram](https://cloud.ibm.com/docs/schematics?topic=schematics-action-setup#action-state-diagram).
    *
+   *
    *  The Schematics action API now supports bastion host connection with `non-root` user, and bastion connection type
    * is marked as optional, when inventory connection type is set as [Windows Remote
    * Management](https://www.ibm.com/docs/en/license-metric-tool?topic=v-configuring-winrm-hyper-hosts)(`winrm`).
    *
    *  **Note** you cannot update the location and region once an action is created. Also, make sure your IP addresses
    * are in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses].
+   *
    *
    *  <h3>Authorization</h3>
    *
@@ -2295,31 +2392,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.Action>> {
     const _params = { ...params };
     const _requiredParams = ['actionId'];
-    const _validParams = [
-      'actionId',
-      'name',
-      'description',
-      'location',
-      'resourceGroup',
-      'bastionConnectionType',
-      'inventoryConnectionType',
-      'tags',
-      'userState',
-      'sourceReadmeUrl',
-      'source',
-      'sourceType',
-      'commandParameter',
-      'inventory',
-      'credentials',
-      'bastion',
-      'bastionCredential',
-      'targetsIni',
-      'inputs',
-      'outputs',
-      'settings',
-      'xGithubToken',
-      'headers',
-    ];
+    const _validParams = ['actionId', 'name', 'description', 'location', 'resourceGroup', 'bastionConnectionType', 'inventoryConnectionType', 'tags', 'userState', 'sourceReadmeUrl', 'source', 'sourceType', 'commandParameter', 'inventory', 'credentials', 'bastion', 'bastionCredential', 'targetsIni', 'inputs', 'outputs', 'settings', 'xGithubToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2365,6 +2438,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -2372,6 +2446,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2404,7 +2481,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.TemplateRepoTarUploadResponse>> {
     const _params = { ...params };
     const _requiredParams = ['actionId'];
-    const _validParams = ['actionId', 'file', 'fileContentType', 'headers'];
+    const _validParams = ['actionId', 'file', 'fileContentType', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2421,11 +2498,7 @@ class SchematicsV1 extends BaseService {
       'action_id': _params.actionId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'uploadTemplateTarAction'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'uploadTemplateTarAction');
 
     const parameters = {
       options: {
@@ -2438,12 +2511,16 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'multipart/form-data',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2476,7 +2553,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivities>> {
     const _params = { ...params };
     const _requiredParams = ['wId'];
-    const _validParams = ['wId', 'offset', 'limit', 'headers'];
+    const _validParams = ['wId', 'offset', 'limit', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2491,11 +2568,7 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'listWorkspaceActivities'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'listWorkspaceActivities');
 
     const parameters = {
       options: {
@@ -2508,67 +2581,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Get workspace job details.
-   *
-   * Get the details for a workspace job that ran against the workspace. This API returns the job status and a URL to
-   * the log file that you can  retrieve by using the `GET /v1/workspaces/{id}/actions/{action_id}/logs` API.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.wId - The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
-   * @param {string} params.activityId - The ID of the activity or job, for which you want to retrieve details.  To find
-   * the job ID, use the `GET /v1/workspaces/{id}/actions` API.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivity>>}
-   */
-  public getWorkspaceActivity(
-    params: SchematicsV1.GetWorkspaceActivityParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivity>> {
-    const _params = { ...params };
-    const _requiredParams = ['wId', 'activityId'];
-    const _validParams = ['wId', 'activityId', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'w_id': _params.wId,
-      'activity_id': _params.activityId,
-    };
-
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getWorkspaceActivity'
-    );
-
-    const parameters = {
-      options: {
-        url: '/v1/workspaces/{w_id}/actions/{activity_id}',
-        method: 'GET',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2602,7 +2623,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivityApplyResult>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'activityId'];
-    const _validParams = ['wId', 'activityId', 'headers'];
+    const _validParams = ['wId', 'activityId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2613,11 +2634,7 @@ class SchematicsV1 extends BaseService {
       'activity_id': _params.activityId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteWorkspaceActivity'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteWorkspaceActivity');
 
     const parameters = {
       options: {
@@ -2629,11 +2646,71 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Get workspace job details.
+   *
+   * Get the details for a workspace job that ran against the workspace. This API returns the job status and a URL to
+   * the log file that you can  retrieve by using the `GET /v1/workspaces/{id}/actions/{action_id}/logs` API.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.wId - The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
+   * @param {string} params.activityId - The ID of the activity or job, for which you want to retrieve details.  To find
+   * the job ID, use the `GET /v1/workspaces/{id}/actions` API.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivity>>}
+   */
+  public getWorkspaceActivity(
+    params: SchematicsV1.GetWorkspaceActivityParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivity>> {
+    const _params = { ...params };
+    const _requiredParams = ['wId', 'activityId'];
+    const _validParams = ['wId', 'activityId', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'w_id': _params.wId,
+      'activity_id': _params.activityId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceActivity');
+
+    const parameters = {
+      options: {
+        url: '/v1/workspaces/{w_id}/actions/{activity_id}',
+        method: 'GET',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2660,8 +2737,8 @@ class SchematicsV1 extends BaseService {
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -2681,14 +2758,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivityCommandResult>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'refreshToken'];
-    const _validParams = [
-      'wId',
-      'refreshToken',
-      'commands',
-      'operationName',
-      'description',
-      'headers',
-    ];
+    const _validParams = ['wId', 'refreshToken', 'commands', 'operationName', 'description', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2704,11 +2774,7 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'runWorkspaceCommands'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'runWorkspaceCommands');
 
     const parameters = {
       options: {
@@ -2721,6 +2787,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -2728,6 +2795,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2748,10 +2818,12 @@ class SchematicsV1 extends BaseService {
    *  **Important**: Your workspace must be in an `Inactive`, `Active`, `Failed`, or
    *  `Stopped` state to perform a Schematics `apply` job. After all updates are applied,
    *  the state of the files is [persisted](https://cloud.ibm.com/docs/schematics?topic=schematics-persist-files)
+   *
    *  to determine what resources exist in your IBM Cloud account.
    *
    *
    *  **Note**: This API returns an activity or job ID that you use to retrieve the
+   *
    *  log URL with the `GET /v1/workspaces/{id}/actions/{action_id}/logs` API.
    *
    *
@@ -2769,22 +2841,22 @@ class SchematicsV1 extends BaseService {
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.wId - The ID of the workspace for which you want to run a Schematics `apply` job.  To find
-   * the workspace ID, use the `GET /workspaces` API.
    * @param {string} params.refreshToken - The IAM refresh token for the user or service identity.
    *
    *   **Retrieving refresh token**:
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
    *   * If the token is expired, you can use `refresh token` to get a new IAM access token.
    *   * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
    *   * When the IAM access token is about to expire, use the API key to create a new access token.
+   * @param {string} params.wId - The ID of the workspace for which you want to run a Schematics `apply` job.  To find
+   * the workspace ID, use the `GET /workspaces` API.
    * @param {WorkspaceActivityOptionsTemplate} [params.actionOptions] - Workspace job options template.
    * @param {string} [params.delegatedToken] - The IAM delegated token for your IBM Cloud account.  This token is
    * required for requests that are sent via the UI only.
@@ -2795,8 +2867,8 @@ class SchematicsV1 extends BaseService {
     params: SchematicsV1.ApplyWorkspaceCommandParams
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivityApplyResult>> {
     const _params = { ...params };
-    const _requiredParams = ['wId', 'refreshToken'];
-    const _validParams = ['wId', 'refreshToken', 'actionOptions', 'delegatedToken', 'headers'];
+    const _requiredParams = ['refreshToken', 'wId'];
+    const _validParams = ['refreshToken', 'wId', 'actionOptions', 'delegatedToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2810,11 +2882,7 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'applyWorkspaceCommand'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'applyWorkspaceCommand');
 
     const parameters = {
       options: {
@@ -2827,6 +2895,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -2835,6 +2904,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2865,22 +2937,22 @@ class SchematicsV1 extends BaseService {
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.wId - The ID of the workspace for which you want to perform a Schematics `destroy` job.  To
-   * find the workspace ID, use the `GET /workspaces` API.
    * @param {string} params.refreshToken - The IAM refresh token for the user or service identity.
    *
    *   **Retrieving refresh token**:
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
    *   * If the token is expired, you can use `refresh token` to get a new IAM access token.
    *   * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
    *   * When the IAM access token is about to expire, use the API key to create a new access token.
+   * @param {string} params.wId - The ID of the workspace for which you want to perform a Schematics `destroy` job.  To
+   * find the workspace ID, use the `GET /workspaces` API.
    * @param {WorkspaceActivityOptionsTemplate} [params.actionOptions] - Workspace job options template.
    * @param {string} [params.delegatedToken] - The IAM delegated token for your IBM Cloud account.  This token is
    * required for requests that are sent via the UI only.
@@ -2891,8 +2963,8 @@ class SchematicsV1 extends BaseService {
     params: SchematicsV1.DestroyWorkspaceCommandParams
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivityDestroyResult>> {
     const _params = { ...params };
-    const _requiredParams = ['wId', 'refreshToken'];
-    const _validParams = ['wId', 'refreshToken', 'actionOptions', 'delegatedToken', 'headers'];
+    const _requiredParams = ['refreshToken', 'wId'];
+    const _validParams = ['refreshToken', 'wId', 'actionOptions', 'delegatedToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -2906,11 +2978,7 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'destroyWorkspaceCommand'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'destroyWorkspaceCommand');
 
     const parameters = {
       options: {
@@ -2923,6 +2991,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -2931,6 +3000,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -2969,8 +3041,8 @@ class SchematicsV1 extends BaseService {
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -2988,7 +3060,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivityPlanResult>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'refreshToken'];
-    const _validParams = ['wId', 'refreshToken', 'actionOptions', 'delegatedToken', 'headers'];
+    const _validParams = ['wId', 'refreshToken', 'actionOptions', 'delegatedToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3002,11 +3074,7 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'planWorkspaceCommand'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'planWorkspaceCommand');
 
     const parameters = {
       options: {
@@ -3019,6 +3087,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3027,6 +3096,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3057,8 +3129,8 @@ class SchematicsV1 extends BaseService {
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -3075,7 +3147,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceActivityRefreshResult>> {
     const _params = { ...params };
     const _requiredParams = ['wId', 'refreshToken'];
-    const _validParams = ['wId', 'refreshToken', 'delegatedToken', 'headers'];
+    const _validParams = ['wId', 'refreshToken', 'delegatedToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3085,11 +3157,7 @@ class SchematicsV1 extends BaseService {
       'w_id': _params.wId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'refreshWorkspaceCommand'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'refreshWorkspaceCommand');
 
     const parameters = {
       options: {
@@ -3101,6 +3169,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'refresh_token': _params.refreshToken,
@@ -3108,6 +3177,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3153,18 +3225,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.JobList>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = [
-      'offset',
-      'limit',
-      'sort',
-      'profile',
-      'resource',
-      'resourceId',
-      'actionId',
-      'workspaceId',
-      'list',
-      'headers',
-    ];
+    const _validParams = ['offset', 'limit', 'sort', 'profile', 'resource', 'resourceId', 'actionId', 'workspaceId', 'list', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3194,11 +3255,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3218,8 +3283,8 @@ class SchematicsV1 extends BaseService {
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -3253,25 +3318,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.Job>> {
     const _params = { ...params };
     const _requiredParams = ['refreshToken'];
-    const _validParams = [
-      'refreshToken',
-      'commandObject',
-      'commandObjectId',
-      'commandName',
-      'commandParameter',
-      'commandOptions',
-      'inputs',
-      'settings',
-      'tags',
-      'location',
-      'status',
-      'cartOrderData',
-      'data',
-      'bastion',
-      'logSummary',
-      'agent',
-      'headers',
-    ];
+    const _validParams = ['refreshToken', 'commandObject', 'commandObjectId', 'commandName', 'commandParameter', 'commandOptions', 'inputs', 'settings', 'tags', 'location', 'status', 'cartOrderData', 'data', 'bastion', 'logSummary', 'agent', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3307,6 +3354,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3314,6 +3362,89 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Stop the running Job, and delete the Job.
+   *
+   * Stop the running Job, and delete the Job.  **Note** You cannot delete or stop the job activity from an ongoing
+   * execution of an action defined in the playbook.  You can repeat the execution of same job, whenever you patch or
+   * update the action or workspace.
+   *
+   *  <h3>Authorization</h3>
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.jobId - Job Id. Use `GET /v2/jobs` API to look up the Job Ids in your IBM Cloud account.
+   * @param {string} params.refreshToken - The IAM refresh token for the user or service identity.
+   *
+   *   **Retrieving refresh token**:
+   *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
+   * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
+   * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   * key](/apidocs/iam-identity-token-api#create-api-key).
+   *
+   *   **Limitation**:
+   *   * If the token is expired, you can use `refresh token` to get a new IAM access token.
+   *   * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
+   *   * When the IAM access token is about to expire, use the API key to create a new access token.
+   * @param {boolean} [params.force] - Equivalent to -force options in the command line.
+   * @param {boolean} [params.propagate] - Auto propagate the chaange or deletion to the dependent resources.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
+   */
+  public deleteJob(
+    params: SchematicsV1.DeleteJobParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
+    const _params = { ...params };
+    const _requiredParams = ['jobId', 'refreshToken'];
+    const _validParams = ['jobId', 'refreshToken', 'force', 'propagate', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'job_id': _params.jobId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteJob');
+
+    const parameters = {
+      options: {
+        url: '/v2/jobs/{job_id}',
+        method: 'DELETE',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+            'refresh_token': _params.refreshToken,
+            'force': _params.force,
+            'propagate': _params.propagate,
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3343,7 +3474,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.Job>> {
     const _params = { ...params };
     const _requiredParams = ['jobId'];
-    const _validParams = ['jobId', 'profile', 'headers'];
+    const _validParams = ['jobId', 'profile', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3370,11 +3501,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3402,8 +3537,8 @@ class SchematicsV1 extends BaseService {
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -3437,26 +3572,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.Job>> {
     const _params = { ...params };
     const _requiredParams = ['jobId', 'refreshToken'];
-    const _validParams = [
-      'jobId',
-      'refreshToken',
-      'commandObject',
-      'commandObjectId',
-      'commandName',
-      'commandParameter',
-      'commandOptions',
-      'inputs',
-      'settings',
-      'tags',
-      'location',
-      'status',
-      'cartOrderData',
-      'data',
-      'bastion',
-      'logSummary',
-      'agent',
-      'headers',
-    ];
+    const _validParams = ['jobId', 'refreshToken', 'commandObject', 'commandObjectId', 'commandName', 'commandParameter', 'commandOptions', 'inputs', 'settings', 'tags', 'location', 'status', 'cartOrderData', 'data', 'bastion', 'logSummary', 'agent', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3497,6 +3613,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3504,81 +3621,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Stop the running Job, and delete the Job.
-   *
-   * Stop the running Job, and delete the Job.  **Note** You cannot delete or stop the job activity from an ongoing
-   * execution of an action defined in the playbook.  You can repeat the execution of same job, whenever you patch or
-   * update the action or workspace.
-   *
-   *  <h3>Authorization</h3>
-   *
-   *  Schematics support generic authorization for its resources.
-   *  For more information, about Schematics access and permissions, see
-   *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.jobId - Job Id. Use `GET /v2/jobs` API to look up the Job Ids in your IBM Cloud account.
-   * @param {string} params.refreshToken - The IAM refresh token for the user or service identity.
-   *
-   *   **Retrieving refresh token**:
-   *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
-   * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
-   * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
-   * key](/apidocs/iam-identity-token-api#create-api-key).
-   *
-   *   **Limitation**:
-   *   * If the token is expired, you can use `refresh token` to get a new IAM access token.
-   *   * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
-   *   * When the IAM access token is about to expire, use the API key to create a new access token.
-   * @param {boolean} [params.force] - Equivalent to -force options in the command line.
-   * @param {boolean} [params.propagate] - Auto propagate the chaange or deletion to the dependent resources.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
-   */
-  public deleteJob(
-    params: SchematicsV1.DeleteJobParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
-    const _params = { ...params };
-    const _requiredParams = ['jobId', 'refreshToken'];
-    const _validParams = ['jobId', 'refreshToken', 'force', 'propagate', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'job_id': _params.jobId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteJob');
-
-    const parameters = {
-      options: {
-        url: '/v2/jobs/{job_id}',
-        method: 'DELETE',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'refresh_token': _params.refreshToken,
-            'force': _params.force,
-            'propagate': _params.propagate,
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3602,7 +3647,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.JobLog>> {
     const _params = { ...params };
     const _requiredParams = ['jobId'];
-    const _validParams = ['jobId', 'headers'];
+    const _validParams = ['jobId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3624,11 +3669,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3639,7 +3688,7 @@ class SchematicsV1 extends BaseService {
    * Get output files from the Job record.
    *
    * Get output files from the Job record. For more information, about the Schematics job status, download job logs, and
-   * download the output files, see Download Schematics
+   * download the output files, see [Download Schematics
    * Job](https://cloud.ibm.com/docs/schematics?topic=schematics-job-download).
    *
    * @param {Object} params - The parameters to send to the service.
@@ -3653,7 +3702,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.JobFileData>> {
     const _params = { ...params };
     const _requiredParams = ['jobId', 'fileType'];
-    const _validParams = ['jobId', 'fileType', 'headers'];
+    const _validParams = ['jobId', 'fileType', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3680,11 +3729,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3714,8 +3767,8 @@ class SchematicsV1 extends BaseService {
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -3733,7 +3786,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceBulkDeleteResponse>> {
     const _params = { ...params };
     const _requiredParams = ['refreshToken'];
-    const _validParams = ['refreshToken', 'job', 'version', 'workspaces', 'headers'];
+    const _validParams = ['refreshToken', 'job', 'version', 'workspaces', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3745,11 +3798,7 @@ class SchematicsV1 extends BaseService {
       'workspaces': _params.workspaces,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'createWorkspaceDeletionJob'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'createWorkspaceDeletionJob');
 
     const parameters = {
       options: {
@@ -3761,6 +3810,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -3768,6 +3818,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3796,7 +3849,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.WorkspaceJobResponse>> {
     const _params = { ...params };
     const _requiredParams = ['wjId'];
-    const _validParams = ['wjId', 'headers'];
+    const _validParams = ['wjId', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3806,11 +3859,7 @@ class SchematicsV1 extends BaseService {
       'wj_id': _params.wjId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getWorkspaceDeletionJobStatus'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getWorkspaceDeletionJobStatus');
 
     const parameters = {
       options: {
@@ -3822,11 +3871,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3871,7 +3924,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.InventoryResourceRecordList>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['offset', 'limit', 'sort', 'profile', 'headers'];
+    const _validParams = ['offset', 'limit', 'sort', 'profile', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3896,11 +3949,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -3916,6 +3973,7 @@ class SchematicsV1 extends BaseService {
    *
    *  **Note** you cannot update the location and region, resource group once an action is created. Also, make sure your
    * IP addresses are in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
+   *
    *  If your Git repository already contains a host file. Schematics does not overwrite the host file already present
    * in your Git repository.
    *
@@ -3934,12 +3992,19 @@ class SchematicsV1 extends BaseService {
    * @param {string} [params.location] - List of locations supported by IBM Cloud Schematics service.  While creating
    * your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the
    * location of the IBM Cloud resources, provisioned using Schematics.
-   * @param {string} [params.resourceGroup] - Resource-group name for the Inventory definition.   By default, Inventory
-   * definition will be created in Default Resource Group.
+   * @param {string} [params.resourceGroup] - Resource-group id for the shared dataset.
+   * @param {string} [params.connectionType] - connection type to be ssh or wirm.
+   * @param {CredentialVariableData[]} [params.credentials] - common credentials for the inventory.
+   * @param {CredentialVariableData} [params.commonCredentials] - User editable credential variable data and system
+   * generated reference to the value.
    * @param {string} [params.inventoriesIni] - Input inventory of host and host group for the playbook, in the `.ini`
    * file format.
    * @param {string[]} [params.resourceQueries] - Input resource query definitions that is used to dynamically generate
    * the inventory of host and host group for the playbook.
+   * @param {BastionResourceDefinition} [params.bastion] - Describes a bastion resource.
+   * @param {CredentialVariableData} [params.bastionCredential] - User editable credential variable data and system
+   * generated reference to the value.
+   * @param {InventoryView} [params.inventoryView] - Inventories' structured view for the provided inventory.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<SchematicsV1.Response<SchematicsV1.InventoryResourceRecord>>}
    */
@@ -3948,15 +4013,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.InventoryResourceRecord>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = [
-      'name',
-      'description',
-      'location',
-      'resourceGroup',
-      'inventoriesIni',
-      'resourceQueries',
-      'headers',
-    ];
+    const _validParams = ['name', 'description', 'location', 'resourceGroup', 'connectionType', 'credentials', 'commonCredentials', 'inventoriesIni', 'resourceQueries', 'bastion', 'bastionCredential', 'inventoryView', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -3967,8 +4024,14 @@ class SchematicsV1 extends BaseService {
       'description': _params.description,
       'location': _params.location,
       'resource_group': _params.resourceGroup,
+      'connection_type': _params.connectionType,
+      'credentials': _params.credentials,
+      'common_credentials': _params.commonCredentials,
       'inventories_ini': _params.inventoriesIni,
       'resource_queries': _params.resourceQueries,
+      'bastion': _params.bastion,
+      'bastion_credential': _params.bastionCredential,
+      'inventory_view': _params.inventoryView,
     };
 
     const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'createInventory');
@@ -3983,12 +4046,87 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Delete an inventory definition.
+   *
+   * Use this API to delete the resource inventory definition by using the inventory ID that you want to run against.
+   * For more information, about inventory delete, refer to [ibmcloud schematics inventory
+   * delete](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-delete-inventory).
+   *
+   *  **Note** you cannot delete the location and region, resource group from where your inventory is created. Also,
+   * make sure your IP addresses are in the
+   * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
+   *
+   *
+   *  <h3>Authorization</h3>
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.inventoryId - Resource Inventory Id.  Use `GET /v2/inventories` API to look up the Resource
+   * Inventory definition Ids  in your IBM Cloud account.
+   * @param {boolean} [params.force] - Equivalent to -force options in the command line.
+   * @param {boolean} [params.propagate] - Auto propagate the chaange or deletion to the dependent resources.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
+   */
+  public deleteInventory(
+    params: SchematicsV1.DeleteInventoryParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
+    const _params = { ...params };
+    const _requiredParams = ['inventoryId'];
+    const _validParams = ['inventoryId', 'force', 'propagate', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'inventory_id': _params.inventoryId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteInventory');
+
+    const parameters = {
+      options: {
+        url: '/v2/inventories/{inventory_id}',
+        method: 'DELETE',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+            'force': _params.force,
+            'propagate': _params.propagate,
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4005,6 +4143,7 @@ class SchematicsV1 extends BaseService {
    *  **Note** you can fetch only the location and region, resource group from where your inventory is created.
    *  Also, make sure your IP addresses are in the
    * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
+   *
    *
    *  <h3>Authorization</h3>
    *
@@ -4025,7 +4164,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.InventoryResourceRecord>> {
     const _params = { ...params };
     const _requiredParams = ['inventoryId'];
-    const _validParams = ['inventoryId', 'profile', 'headers'];
+    const _validParams = ['inventoryId', 'profile', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4052,11 +4191,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4073,6 +4216,7 @@ class SchematicsV1 extends BaseService {
    *  **Note** you cannot update the location and region, resource group once an action is created.
    *  Also, make sure your IP addresses are in the
    * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
+   *
    *
    *  <h3>Authorization</h3>
    *
@@ -4091,12 +4235,19 @@ class SchematicsV1 extends BaseService {
    * @param {string} [params.location] - List of locations supported by IBM Cloud Schematics service.  While creating
    * your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the
    * location of the IBM Cloud resources, provisioned using Schematics.
-   * @param {string} [params.resourceGroup] - Resource-group name for the Inventory definition.   By default, Inventory
-   * definition will be created in Default Resource Group.
+   * @param {string} [params.resourceGroup] - Resource-group id for the shared dataset.
+   * @param {string} [params.connectionType] - connection type to be ssh or wirm.
+   * @param {CredentialVariableData[]} [params.credentials] - common credentials for the inventory.
+   * @param {CredentialVariableData} [params.commonCredentials] - User editable credential variable data and system
+   * generated reference to the value.
    * @param {string} [params.inventoriesIni] - Input inventory of host and host group for the playbook, in the `.ini`
    * file format.
    * @param {string[]} [params.resourceQueries] - Input resource query definitions that is used to dynamically generate
    * the inventory of host and host group for the playbook.
+   * @param {BastionResourceDefinition} [params.bastion] - Describes a bastion resource.
+   * @param {CredentialVariableData} [params.bastionCredential] - User editable credential variable data and system
+   * generated reference to the value.
+   * @param {InventoryView} [params.inventoryView] - Inventories' structured view for the provided inventory.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<SchematicsV1.Response<SchematicsV1.InventoryResourceRecord>>}
    */
@@ -4105,16 +4256,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.InventoryResourceRecord>> {
     const _params = { ...params };
     const _requiredParams = ['inventoryId'];
-    const _validParams = [
-      'inventoryId',
-      'name',
-      'description',
-      'location',
-      'resourceGroup',
-      'inventoriesIni',
-      'resourceQueries',
-      'headers',
-    ];
+    const _validParams = ['inventoryId', 'name', 'description', 'location', 'resourceGroup', 'connectionType', 'credentials', 'commonCredentials', 'inventoriesIni', 'resourceQueries', 'bastion', 'bastionCredential', 'inventoryView', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4125,8 +4267,14 @@ class SchematicsV1 extends BaseService {
       'description': _params.description,
       'location': _params.location,
       'resource_group': _params.resourceGroup,
+      'connection_type': _params.connectionType,
+      'credentials': _params.credentials,
+      'common_credentials': _params.commonCredentials,
       'inventories_ini': _params.inventoriesIni,
       'resource_queries': _params.resourceQueries,
+      'bastion': _params.bastion,
+      'bastion_credential': _params.bastionCredential,
+      'inventory_view': _params.inventoryView,
     };
 
     const path = {
@@ -4146,77 +4294,16 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Delete an inventory definition.
-   *
-   * Use this API to delete the resource inventory definition by using the inventory ID that you want to run against.
-   * For more information, about inventory delete, refer to [ibmcloud schematics inventory
-   * delete](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-delete-inventory).
-   *
-   *  **Note** you cannot delete the location and region, resource group from where your inventory is created. Also,
-   * make sure your IP addresses are in the
-   * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
-   *
-   *  <h3>Authorization</h3>
-   *
-   *  Schematics support generic authorization for its resources.
-   *  For more information, about Schematics access and permissions, see
-   *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.inventoryId - Resource Inventory Id.  Use `GET /v2/inventories` API to look up the Resource
-   * Inventory definition Ids  in your IBM Cloud account.
-   * @param {boolean} [params.force] - Equivalent to -force options in the command line.
-   * @param {boolean} [params.propagate] - Auto propagate the chaange or deletion to the dependent resources.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
-   */
-  public deleteInventory(
-    params: SchematicsV1.DeleteInventoryParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
-    const _params = { ...params };
-    const _requiredParams = ['inventoryId'];
-    const _validParams = ['inventoryId', 'force', 'propagate', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'inventory_id': _params.inventoryId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteInventory');
-
-    const parameters = {
-      options: {
-        url: '/v2/inventories/{inventory_id}',
-        method: 'DELETE',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'force': _params.force,
-            'propagate': _params.propagate,
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4257,7 +4344,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecordList>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['offset', 'limit', 'sort', 'profile', 'headers'];
+    const _validParams = ['offset', 'limit', 'sort', 'profile', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4282,11 +4369,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4300,8 +4391,10 @@ class SchematicsV1 extends BaseService {
    * resources as the dynamic inventory for the Schematics Actions.  For more information, about resource query
    * commands, refer to  [ibmcloud schematics resource query
    * create](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-create-rq).
+   *
    * **Note** you cannot update the location and region, resource group  once an action is created. Also, make sure your
    * IP addresses are  in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
+   *
    * If your Git repository already contains a host file.  Schematics does not overwrite the host file already present
    * in your Git repository.
    * <h3>Authorization</h3>
@@ -4314,7 +4407,7 @@ class SchematicsV1 extends BaseService {
    * @param {Object} [params] - The parameters to send to the service.
    * @param {string} [params.type] - Resource type (cluster, vsi, icd, vpc).
    * @param {string} [params.name] - Resource query name.
-   * @param {ResourceQuery[]} [params.queries] -
+   * @param {ResourceQuery[]} [params.queries] - List of resource queries.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>>}
    */
@@ -4323,7 +4416,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['type', 'name', 'queries', 'headers'];
+    const _validParams = ['type', 'name', 'queries', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4335,11 +4428,7 @@ class SchematicsV1 extends BaseService {
       'queries': _params.queries,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'createResourceQuery'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'createResourceQuery');
 
     const parameters = {
       options: {
@@ -4351,197 +4440,16 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Get resources query.
-   *
-   * Use this API to retrieve the information resource query by Id.  For more information, about resource query
-   * commands, refer to  [ibmcloud schematics resource query
-   * get](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-get-rq).
-   * <h3>Authorization</h3>
-   *
-   *  Schematics support generic authorization for its resources.
-   *  For more information, about Schematics access and permissions, see
-   *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.queryId - Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query
-   * definition Ids  in your IBM Cloud account.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>>}
-   */
-  public getResourcesQuery(
-    params: SchematicsV1.GetResourcesQueryParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>> {
-    const _params = { ...params };
-    const _requiredParams = ['queryId'];
-    const _validParams = ['queryId', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'query_id': _params.queryId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getResourcesQuery');
-
-    const parameters = {
-      options: {
-        url: '/v2/resources_query/{query_id}',
-        method: 'GET',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Update resources query definition.
-   *
-   * Use this API to update the resource query definition used to build  the dynamic inventory for the Schematics
-   * Action.  For more information, about resource query commands, refer to [ibmcloud schematics resource query
-   * update](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-update-rq).
-   * **Note** you cannot update the location and region, resource group  once a resource query is created. Also, make
-   * sure your IP addresses  are in the
-   * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
-   * <h3>Authorization</h3>
-   *
-   *  Schematics support generic authorization for its resources.
-   *  For more information, about Schematics access and permissions, see
-   *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.queryId - Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query
-   * definition Ids  in your IBM Cloud account.
-   * @param {string} [params.type] - Resource type (cluster, vsi, icd, vpc).
-   * @param {string} [params.name] - Resource query name.
-   * @param {ResourceQuery[]} [params.queries] -
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>>}
-   */
-  public replaceResourcesQuery(
-    params: SchematicsV1.ReplaceResourcesQueryParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>> {
-    const _params = { ...params };
-    const _requiredParams = ['queryId'];
-    const _validParams = ['queryId', 'type', 'name', 'queries', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const body = {
-      'type': _params.type,
-      'name': _params.name,
-      'queries': _params.queries,
-    };
-
-    const path = {
-      'query_id': _params.queryId,
-    };
-
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'replaceResourcesQuery'
-    );
-
-    const parameters = {
-      options: {
-        url: '/v2/resources_query/{query_id}',
-        method: 'PUT',
-        body,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Run the resource query.
-   *
-   * Run the resource query.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.queryId - Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query
-   * definition Ids  in your IBM Cloud account.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryResponseRecord>>}
-   */
-  public executeResourceQuery(
-    params: SchematicsV1.ExecuteResourceQueryParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryResponseRecord>> {
-    const _params = { ...params };
-    const _requiredParams = ['queryId'];
-    const _validParams = ['queryId', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'query_id': _params.queryId,
-    };
-
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'executeResourceQuery'
-    );
-
-    const parameters = {
-      options: {
-        url: '/v2/resources_query/{query_id}',
-        method: 'POST',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4575,7 +4483,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
     const _params = { ...params };
     const _requiredParams = ['queryId'];
-    const _validParams = ['queryId', 'force', 'propagate', 'headers'];
+    const _validParams = ['queryId', 'force', 'propagate', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -4585,11 +4493,7 @@ class SchematicsV1 extends BaseService {
       'query_id': _params.queryId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteResourcesQuery'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteResourcesQuery');
 
     const parameters = {
       options: {
@@ -4601,12 +4505,208 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'force': _params.force,
             'propagate': _params.propagate,
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Get resources query.
+   *
+   * Use this API to retrieve the information resource query by Id.  For more information, about resource query
+   * commands, refer to  [ibmcloud schematics resource query
+   * get](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-get-rq).
+   *
+   * <h3>Authorization</h3>
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.queryId - Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query
+   * definition Ids  in your IBM Cloud account.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>>}
+   */
+  public getResourcesQuery(
+    params: SchematicsV1.GetResourcesQueryParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>> {
+    const _params = { ...params };
+    const _requiredParams = ['queryId'];
+    const _validParams = ['queryId', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'query_id': _params.queryId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getResourcesQuery');
+
+    const parameters = {
+      options: {
+        url: '/v2/resources_query/{query_id}',
+        method: 'GET',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Run the resource query.
+   *
+   * Run the resource query.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.queryId - Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query
+   * definition Ids  in your IBM Cloud account.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryResponseRecord>>}
+   */
+  public executeResourceQuery(
+    params: SchematicsV1.ExecuteResourceQueryParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryResponseRecord>> {
+    const _params = { ...params };
+    const _requiredParams = ['queryId'];
+    const _validParams = ['queryId', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'query_id': _params.queryId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'executeResourceQuery');
+
+    const parameters = {
+      options: {
+        url: '/v2/resources_query/{query_id}',
+        method: 'POST',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Update resources query definition.
+   *
+   * Use this API to update the resource query definition used to build  the dynamic inventory for the Schematics
+   * Action.  For more information, about resource query commands, refer to [ibmcloud schematics resource query
+   * update](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-update-rq).
+   *
+   * **Note** you cannot update the location and region, resource group  once a resource query is created. Also, make
+   * sure your IP addresses  are in the
+   * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
+   *
+   * <h3>Authorization</h3>
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.queryId - Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query
+   * definition Ids  in your IBM Cloud account.
+   * @param {string} [params.type] - Resource type (cluster, vsi, icd, vpc).
+   * @param {string} [params.name] - Resource query name.
+   * @param {ResourceQuery[]} [params.queries] - List of resource queries.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>>}
+   */
+  public replaceResourcesQuery(
+    params: SchematicsV1.ReplaceResourcesQueryParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.ResourceQueryRecord>> {
+    const _params = { ...params };
+    const _requiredParams = ['queryId'];
+    const _validParams = ['queryId', 'type', 'name', 'queries', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const body = {
+      'type': _params.type,
+      'name': _params.name,
+      'queries': _params.queries,
+    };
+
+    const path = {
+      'query_id': _params.queryId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'replaceResourcesQuery');
+
+    const parameters = {
+      options: {
+        url: '/v2/resources_query/{query_id}',
+        method: 'PUT',
+        body,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -4615,364 +4715,6 @@ class SchematicsV1 extends BaseService {
   /*************************
    * agent
    ************************/
-
-  /**
-   * Get all registered/unregistered agents in the Account.
-   *
-   * Get all registered or unregistered agents, in the Account.
-   *
-   *    <h3>Authorization</h3>
-   *
-   *    Schematics support generic authorization for its resources.
-   *    For more information, about Schematics access and permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} [params] - The parameters to send to the service.
-   * @param {number} [params.offset] - The starting position of the item in the list of items. For example, if you have
-   * three workspaces in your account, the first workspace is assigned position number 0, the second workspace is
-   * assigned position number 1, and so forth. If you have 6 workspaces and you want to list the details for workspaces
-   * `2-6`, enter 1. To limit the number of workspaces that is returned, use the `limit` option in addition to the
-   * `offset` option. Negative numbers are not supported and are ignored.
-   * @param {number} [params.limit] - The maximum number of items that you want to list. The number must be a positive
-   * integer between 1 and 2000. If no value is provided, 100 is used by default.
-   * @param {string} [params.profile] - Level of details returned by the get method.
-   * @param {string} [params.filter] - Use `new` to get all unregistered agents; use `saved` to get all registered
-   * agents.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.AgentList>>}
-   * @deprecated this method is deprecated and may be removed in a future release
-   */
-  public listAgent(
-    params?: SchematicsV1.ListAgentParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.AgentList>> {
-    SchematicsV1._logger.warn('A deprecated operation has been invoked: listAgent');
-    const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = ['offset', 'limit', 'profile', 'filter', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const query = {
-      'offset': _params.offset,
-      'limit': _params.limit,
-      'profile': _params.profile,
-      'filter': _params.filter,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'listAgent');
-
-    const parameters = {
-      options: {
-        url: '/v2/settings/agents',
-        method: 'GET',
-        qs: query,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Register the agent with schematics.
-   *
-   * Register the agent with schematics
-   *
-   *    <h3>Authorization</h3>
-   *
-   *    Schematics support generic authorization for its resources.
-   *    For more information, about Schematics access and permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.name - The name of the agent (must be unique, for an account).
-   * @param {string} params.agentLocation - The location where agent is deployed in the user environment.
-   * @param {string} params.location - List of locations supported by IBM Cloud Schematics service.  While creating your
-   * workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the location
-   * of the IBM Cloud resources, provisioned using Schematics.
-   * @param {string} params.profileId - The IAM trusted profile id, used by the Agent instance.
-   * @param {string} [params.description] - Agent description.
-   * @param {string} [params.resourceGroup] - The resource-group name for the agent.  By default, Agent will be
-   * registered in Default Resource Group.
-   * @param {string[]} [params.tags] - Tags for the agent.
-   * @param {AgentUserState} [params.userState] - User defined status of the agent.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.Agent>>}
-   * @deprecated this method is deprecated and may be removed in a future release
-   */
-  public registerAgent(
-    params: SchematicsV1.RegisterAgentParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.Agent>> {
-    SchematicsV1._logger.warn('A deprecated operation has been invoked: registerAgent');
-    const _params = { ...params };
-    const _requiredParams = ['name', 'agentLocation', 'location', 'profileId'];
-    const _validParams = [
-      'name',
-      'agentLocation',
-      'location',
-      'profileId',
-      'description',
-      'resourceGroup',
-      'tags',
-      'userState',
-      'headers',
-    ];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const body = {
-      'name': _params.name,
-      'agent_location': _params.agentLocation,
-      'location': _params.location,
-      'profile_id': _params.profileId,
-      'description': _params.description,
-      'resource_group': _params.resourceGroup,
-      'tags': _params.tags,
-      'user_state': _params.userState,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'registerAgent');
-
-    const parameters = {
-      options: {
-        url: '/v2/settings/agents',
-        method: 'POST',
-        body,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Get the registered agent details.
-   *
-   * Reterive list the registered agent details
-   *
-   *    <h3>Authorization</h3>
-   *
-   *    Schematics support generic authorization for its resources.
-   *    For more information, about Schematics access and permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.agentId - Agent ID to get the details of agent.
-   * @param {string} [params.profile] - Level of details returned by the get method.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.Agent>>}
-   * @deprecated this method is deprecated and may be removed in a future release
-   */
-  public getAgent(
-    params: SchematicsV1.GetAgentParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.Agent>> {
-    SchematicsV1._logger.warn('A deprecated operation has been invoked: getAgent');
-    const _params = { ...params };
-    const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'profile', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const query = {
-      'profile': _params.profile,
-    };
-
-    const path = {
-      'agent_id': _params.agentId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getAgent');
-
-    const parameters = {
-      options: {
-        url: '/v2/settings/agents/{agent_id}',
-        method: 'GET',
-        qs: query,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Deregister the agent.
-   *
-   * Deregistering an agent.
-   *
-   *    <h3>Authorization</h3>
-   *
-   *    Schematics support generic authorization for its resources.
-   *    For more information, about Schematics access and permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.agentId - Agent ID to get the details of agent.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
-   * @deprecated this method is deprecated and may be removed in a future release
-   */
-  public deleteAgent(
-    params: SchematicsV1.DeleteAgentParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
-    SchematicsV1._logger.warn('A deprecated operation has been invoked: deleteAgent');
-    const _params = { ...params };
-    const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'agent_id': _params.agentId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteAgent');
-
-    const parameters = {
-      options: {
-        url: '/v2/settings/agents/{agent_id}',
-        method: 'DELETE',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {}, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Update the agent registration.
-   *
-   * Update the agent registeration.
-   *
-   *    <h3>Authorization</h3>
-   *
-   *    Schematics support generic authorization for its resources.
-   *    For more information, about Schematics access and permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.agentId - Agent ID to get the details of agent.
-   * @param {string} params.name - The name of the agent (must be unique, for an account).
-   * @param {string} params.agentLocation - The location where agent is deployed in the user environment.
-   * @param {string} params.location - List of locations supported by IBM Cloud Schematics service.  While creating your
-   * workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the location
-   * of the IBM Cloud resources, provisioned using Schematics.
-   * @param {string} params.profileId - The IAM trusted profile id, used by the Agent instance.
-   * @param {string} [params.description] - Agent description.
-   * @param {string} [params.resourceGroup] - The resource-group name for the agent.  By default, Agent will be
-   * registered in Default Resource Group.
-   * @param {string[]} [params.tags] - Tags for the agent.
-   * @param {AgentUserState} [params.userState] - User defined status of the agent.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.Agent>>}
-   * @deprecated this method is deprecated and may be removed in a future release
-   */
-  public updateAgentRegistration(
-    params: SchematicsV1.UpdateAgentRegistrationParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.Agent>> {
-    SchematicsV1._logger.warn('A deprecated operation has been invoked: updateAgentRegistration');
-    const _params = { ...params };
-    const _requiredParams = ['agentId', 'name', 'agentLocation', 'location', 'profileId'];
-    const _validParams = [
-      'agentId',
-      'name',
-      'agentLocation',
-      'location',
-      'profileId',
-      'description',
-      'resourceGroup',
-      'tags',
-      'userState',
-      'headers',
-    ];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const body = {
-      'name': _params.name,
-      'agent_location': _params.agentLocation,
-      'location': _params.location,
-      'profile_id': _params.profileId,
-      'description': _params.description,
-      'resource_group': _params.resourceGroup,
-      'tags': _params.tags,
-      'user_state': _params.userState,
-    };
-
-    const path = {
-      'agent_id': _params.agentId,
-    };
-
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'updateAgentRegistration'
-    );
-
-    const parameters = {
-      options: {
-        url: '/v2/settings/agents/{agent_id}',
-        method: 'PATCH',
-        body,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          _params.headers
-        ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
 
   /**
    * List agents.
@@ -5000,7 +4742,8 @@ class SchematicsV1 extends BaseService {
    * @param {number} [params.limit] - The maximum number of items that you want to list. The number must be a positive
    * integer between 1 and 2000. If no value is provided, 100 is used by default.
    * @param {string} [params.profile] - Level of details returned by the get method.
-   * @param {string} [params.filter] - Use `new` to get all unregistered agents; use `saved` to get all registered agents.
+   * @param {string} [params.filter] - Use `new` to get all unregistered agents; use `saved` to get all registered
+   * agents.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<SchematicsV1.Response<SchematicsV1.AgentDataList>>}
    */
@@ -5009,7 +4752,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.AgentDataList>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['offset', 'limit', 'profile', 'filter', 'headers'];
+    const _validParams = ['offset', 'limit', 'profile', 'filter', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5034,11 +4777,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5052,8 +4799,8 @@ class SchematicsV1 extends BaseService {
    * used to deploy your agent to its target location.
    * **Getting API endpoint**:-
    * * The Schematics API endpoint that you use to create the agent determines where your Schematics agent run and your
-   * data is stored.
-   * If you use the API endpoint for a
+   * data is stored. For more information about supported API endpoints, see [API
+   * endpoints](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints). * If you use the API endpoint for a
    * geography and not a specific location, such as North America, you can specify the location in your API request
    * body. * If you do not specify the location in the request body, Schematics determines your agent location based on
    * availability. * If you use an API endpoint for a specific location, such as Frankfurt, the location that you enter
@@ -5093,29 +4840,8 @@ class SchematicsV1 extends BaseService {
     params: SchematicsV1.CreateAgentDataParams
   ): Promise<SchematicsV1.Response<SchematicsV1.AgentData>> {
     const _params = { ...params };
-    const _requiredParams = [
-      'name',
-      'resourceGroup',
-      'version',
-      'schematicsLocation',
-      'agentLocation',
-      'agentInfrastructure',
-    ];
-    const _validParams = [
-      'name',
-      'resourceGroup',
-      'version',
-      'schematicsLocation',
-      'agentLocation',
-      'agentInfrastructure',
-      'description',
-      'tags',
-      'agentMetadata',
-      'agentInputs',
-      'userState',
-      'agentKpi',
-      'headers',
-    ];
+    const _requiredParams = ['name', 'resourceGroup', 'version', 'schematicsLocation', 'agentLocation', 'agentInfrastructure'];
+    const _validParams = ['name', 'resourceGroup', 'version', 'schematicsLocation', 'agentLocation', 'agentInfrastructure', 'description', 'tags', 'agentMetadata', 'agentInputs', 'userState', 'agentKpi', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5148,12 +4874,84 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Delete agent.
+   *
+   * Use this API to disable and delete the agent. Follow the
+   * [steps](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-api#cs_api) to retrieve your IAM access token
+   * and authenticate with IBM Cloud Schematics by using the API. For more information about frequently asked questions,
+   * see [FAQ](/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
+   *
+   *    <h3>Authorization</h3>
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.agentId - Agent ID to get the details of agent.
+   * @param {boolean} [params.force] - Equivalent to -force options in the command line, default is false.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
+   */
+  public deleteAgentData(
+    params: SchematicsV1.DeleteAgentDataParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
+    const _params = { ...params };
+    const _requiredParams = ['agentId'];
+    const _validParams = ['agentId', 'force', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const query = {
+      'force': _params.force,
+    };
+
+    const path = {
+      'agent_id': _params.agentId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteAgentData');
+
+    const parameters = {
+      options: {
+        url: '/v2/agents/{agent_id}',
+        method: 'DELETE',
+        qs: query,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+            'Accept': 'application/json',
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5187,7 +4985,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.AgentData>> {
     const _params = { ...params };
     const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'profile', 'headers'];
+    const _validParams = ['agentId', 'profile', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5214,11 +5012,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5264,8 +5066,8 @@ class SchematicsV1 extends BaseService {
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -5279,32 +5081,8 @@ class SchematicsV1 extends BaseService {
     params: SchematicsV1.UpdateAgentDataParams
   ): Promise<SchematicsV1.Response<SchematicsV1.AgentData>> {
     const _params = { ...params };
-    const _requiredParams = [
-      'agentId',
-      'name',
-      'resourceGroup',
-      'version',
-      'schematicsLocation',
-      'agentLocation',
-      'agentInfrastructure',
-    ];
-    const _validParams = [
-      'agentId',
-      'name',
-      'resourceGroup',
-      'version',
-      'schematicsLocation',
-      'agentLocation',
-      'agentInfrastructure',
-      'description',
-      'tags',
-      'agentMetadata',
-      'agentInputs',
-      'userState',
-      'agentKpi',
-      'refreshToken',
-      'headers',
-    ];
+    const _requiredParams = ['agentId', 'name', 'resourceGroup', 'version', 'schematicsLocation', 'agentLocation', 'agentInfrastructure'];
+    const _validParams = ['agentId', 'name', 'resourceGroup', 'version', 'schematicsLocation', 'agentLocation', 'agentInfrastructure', 'description', 'tags', 'agentMetadata', 'agentInputs', 'userState', 'agentKpi', 'refreshToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5342,6 +5120,7 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -5349,63 +5128,9 @@ class SchematicsV1 extends BaseService {
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Delete agent.
-   *
-   * Use this API to disable and delete the agent. Follow the
-   * [steps](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-api#cs_api) to retrieve your IAM access token
-   * and authenticate with IBM Cloud Schematics by using the API. For more information about frequently asked questions,
-   * see [FAQ](/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
-   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
-   *
-   *    <h3>Authorization</h3>
-   *
-   *    Schematics support generic authorization for its resources.
-   *    For more information, about Schematics access and permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.agentId - Agent ID to get the details of agent.
-   * @param {boolean} [params.force] - Equivalent to -force options in the command line, default is false.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
-   */
-  public deleteAgentData(
-    params: SchematicsV1.DeleteAgentDataParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
-    const _params = { ...params };
-    const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'force', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const query = {
-      'force': _params.force,
-    };
-
-    const path = {
-      'agent_id': _params.agentId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteAgentData');
-
-    const parameters = {
-      options: {
-        url: '/v2/agents/{agent_id}',
-        method: 'DELETE',
-        qs: query,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {}, _params.headers),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5433,7 +5158,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.AgentVersions>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['headers'];
+    const _validParams = ['signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5450,67 +5175,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Get pre-requisite scanner job status.
-   *
-   * Use get pre-requisite scanner job status API for deploying an agent by using the `agent_id`, `job_id`. The API
-   * results the status as **pending**, **in-progress**, **success**, or **failed** in a string format. For more
-   * information about supported API endpoints, see [API
-   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
-   * <h3>Authorization</h3>
-   *
-   *   Schematics support generic authorization for its resources. For more information, about Schematics access and
-   * permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.agentId - Agent ID to get the details of agent.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.AgentPRSJob>>}
-   */
-  public getPrsAgentJob(
-    params: SchematicsV1.GetPrsAgentJobParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.AgentPRSJob>> {
-    const _params = { ...params };
-    const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'agent_id': _params.agentId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getPrsAgentJob');
-
-    const parameters = {
-      options: {
-        url: '/v2/agents/{agent_id}/prs',
-        method: 'GET',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5538,7 +5211,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.AgentPRSJob>> {
     const _params = { ...params };
     const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'force', 'headers'];
+    const _validParams = ['agentId', 'force', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5565,69 +5238,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Get agent health check job.
-   *
-   * Use get agent health check job API to retrieve the agent health check job status based on the agent ID. For more
-   * information about supported API endpoints, see [API endpoint](/apidocs/schematics/schematics#api-endpoints).
-   * <h3>Authorization</h3>
-   *
-   *  Schematics support generic authorization for its resources. For more information, about Schematics access and
-   * permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.agentId - Agent ID to get the details of agent.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.AgentHealthJob>>}
-   */
-  public getHealthCheckAgentJob(
-    params: SchematicsV1.GetHealthCheckAgentJobParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.AgentHealthJob>> {
-    const _params = { ...params };
-    const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'agent_id': _params.agentId,
-    };
-
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'getHealthCheckAgentJob'
-    );
-
-    const parameters = {
-      options: {
-        url: '/v2/agents/{agent_id}/health',
-        method: 'GET',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5655,7 +5274,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.AgentHealthJob>> {
     const _params = { ...params };
     const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'force', 'headers'];
+    const _validParams = ['agentId', 'force', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5669,11 +5288,7 @@ class SchematicsV1 extends BaseService {
       'agent_id': _params.agentId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'healthCheckAgentJob'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'healthCheckAgentJob');
 
     const parameters = {
       options: {
@@ -5686,64 +5301,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Get agent deployment job.
-   *
-   * Use get agent deployment job API to retrieve the agent deployment job status based on the agent ID. For more
-   * information about supported API endpoints, see [API
-   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
-   * <h3>Authorization</h3> Schematics support generic authorization for its resources. For more information, about
-   * Schematics access and permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.agentId - Agent ID to get the details of agent.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.AgentDeployJob>>}
-   */
-  public getDeployAgentJob(
-    params: SchematicsV1.GetDeployAgentJobParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.AgentDeployJob>> {
-    const _params = { ...params };
-    const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'agent_id': _params.agentId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'getDeployAgentJob');
-
-    const parameters = {
-      options: {
-        url: '/v2/agents/{agent_id}/deploy',
-        method: 'GET',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(
-          true,
-          sdkHeaders,
-          {
-            'Accept': 'application/json',
-          },
-          _params.headers
-        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5771,7 +5337,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.AgentDeployJob>> {
     const _params = { ...params };
     const _requiredParams = ['agentId'];
-    const _validParams = ['agentId', 'force', 'headers'];
+    const _validParams = ['agentId', 'force', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5798,11 +5364,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5822,8 +5392,8 @@ class SchematicsV1 extends BaseService {
    *   * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -5831,14 +5401,14 @@ class SchematicsV1 extends BaseService {
    *   * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
    *   * When the IAM access token is about to expire, use the API key to create a new access token.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.DeleteAgentResources202Response>>}
    */
   public deleteAgentResources(
     params: SchematicsV1.DeleteAgentResourcesParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
+  ): Promise<SchematicsV1.Response<SchematicsV1.DeleteAgentResources202Response>> {
     const _params = { ...params };
     const _requiredParams = ['agentId', 'refreshToken'];
-    const _validParams = ['agentId', 'refreshToken', 'headers'];
+    const _validParams = ['agentId', 'refreshToken', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5848,11 +5418,7 @@ class SchematicsV1 extends BaseService {
       'agent_id': _params.agentId,
     };
 
-    const sdkHeaders = getSdkHeaders(
-      SchematicsV1.DEFAULT_SERVICE_NAME,
-      'v1',
-      'deleteAgentResources'
-    );
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deleteAgentResources');
 
     const parameters = {
       options: {
@@ -5864,11 +5430,16 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
+            'Accept': 'application/json',
             'refresh_token': _params.refreshToken,
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5901,7 +5472,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.KMSSettings>> {
     const _params = { ...params };
     const _requiredParams = ['location'];
-    const _validParams = ['location', 'headers'];
+    const _validParams = ['location', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5923,11 +5494,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -5962,14 +5537,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.KMSSettings>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = [
-      'location',
-      'encryptionScheme',
-      'resourceGroup',
-      'primaryCrk',
-      'secondaryCrk',
-      'headers',
-    ];
+    const _validParams = ['location', 'encryptionScheme', 'resourceGroup', 'primaryCrk', 'secondaryCrk', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -5995,12 +5563,16 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6038,14 +5610,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.KMSDiscovery>> {
     const _params = { ...params };
     const _requiredParams = ['encryptionScheme', 'location'];
-    const _validParams = [
-      'encryptionScheme',
-      'location',
-      'resourceGroup',
-      'limit',
-      'sort',
-      'headers',
-    ];
+    const _validParams = ['encryptionScheme', 'location', 'resourceGroup', 'limit', 'sort', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6071,11 +5636,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6116,7 +5685,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.PolicyList>> {
     const _params = { ...params };
     const _requiredParams = [];
-    const _validParams = ['offset', 'limit', 'profile', 'headers'];
+    const _validParams = ['offset', 'limit', 'profile', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6140,11 +5709,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6166,7 +5739,9 @@ class SchematicsV1 extends BaseService {
    *    For more information, about Schematics access and permissions, see [Schematics service access
    *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
-   * @param {Object} [params] - The parameters to send to the service.
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.kind - Policy kind or categories for managing and deriving policy decision
+   *   * `agent_assignment_policy` Agent assignment policy for job execution.
    * @param {string} [params.name] - Name of Schematics customization policy.
    * @param {string} [params.description] - The description of Schematics customization policy.
    * @param {string} [params.resourceGroup] - The resource group name for the policy.  By default, Policy will be
@@ -6176,8 +5751,6 @@ class SchematicsV1 extends BaseService {
    * your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the
    * location of the IBM Cloud resources, provisioned using Schematics.
    * @param {UserState} [params.state] - User defined status of the Schematics object.
-   * @param {string} [params.kind] - Policy kind or categories for managing and deriving policy decision
-   *   * `agent_assignment_policy` Agent assignment policy for job execution.
    * @param {PolicyObjects} [params.target] - The objects for the Schematics policy.
    * @param {PolicyParameter} [params.parameter] - The parameter to tune the Schematics policy.
    * @param {ScopedResource[]} [params.scopedResources] - List of scoped Schematics resources targeted by the policy.
@@ -6185,36 +5758,24 @@ class SchematicsV1 extends BaseService {
    * @returns {Promise<SchematicsV1.Response<SchematicsV1.Policy>>}
    */
   public createPolicy(
-    params?: SchematicsV1.CreatePolicyParams
+    params: SchematicsV1.CreatePolicyParams
   ): Promise<SchematicsV1.Response<SchematicsV1.Policy>> {
     const _params = { ...params };
-    const _requiredParams = [];
-    const _validParams = [
-      'name',
-      'description',
-      'resourceGroup',
-      'tags',
-      'location',
-      'state',
-      'kind',
-      'target',
-      'parameter',
-      'scopedResources',
-      'headers',
-    ];
+    const _requiredParams = ['kind'];
+    const _validParams = ['kind', 'name', 'description', 'resourceGroup', 'tags', 'location', 'state', 'target', 'parameter', 'scopedResources', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
     }
 
     const body = {
+      'kind': _params.kind,
       'name': _params.name,
       'description': _params.description,
       'resource_group': _params.resourceGroup,
       'tags': _params.tags,
       'location': _params.location,
       'state': _params.state,
-      'kind': _params.kind,
       'target': _params.target,
       'parameter': _params.parameter,
       'scoped_resources': _params.scopedResources,
@@ -6232,12 +5793,77 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
+      }),
+    };
+
+    return this.createRequest(parameters);
+  }
+
+  /**
+   * Delete policy.
+   *
+   * Use this API to delete the policy. Follow the
+   * [steps](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-api#cs_api) to retrieve your IAM access token
+   * and authenticate with IBM Cloud Schematics by using the API. For more information about frequently asked questions,
+   * see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
+   *
+   *    <h3>Authorization</h3>
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.policyId - ID to get the details of policy.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
+   */
+  public deletePolicy(
+    params: SchematicsV1.DeletePolicyParams
+  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
+    const _params = { ...params };
+    const _requiredParams = ['policyId'];
+    const _validParams = ['policyId', 'signal', 'headers'];
+    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
+    if (_validationErrors) {
+      return Promise.reject(_validationErrors);
+    }
+
+    const path = {
+      'policy_id': _params.policyId,
+    };
+
+    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deletePolicy');
+
+    const parameters = {
+      options: {
+        url: '/v2/settings/policies/{policy_id}',
+        method: 'DELETE',
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(
+          true,
+          sdkHeaders,
+          this.baseOptions.headers,
+          {
+          },
+          _params.headers
+        ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6270,7 +5896,7 @@ class SchematicsV1 extends BaseService {
   ): Promise<SchematicsV1.Response<SchematicsV1.Policy>> {
     const _params = { ...params };
     const _requiredParams = ['policyId'];
-    const _validParams = ['policyId', 'profile', 'headers'];
+    const _validParams = ['policyId', 'profile', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
@@ -6297,62 +5923,15 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
           },
           _params.headers
         ),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  }
-
-  /**
-   * Delete policy.
-   *
-   * Use this API to delete the policy. Follow the
-   * [steps](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-api#cs_api) to retrieve your IAM access token
-   * and authenticate with IBM Cloud Schematics by using the API. For more information about frequently asked questions,
-   * see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
-   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
-   *
-   *    <h3>Authorization</h3>
-   *
-   *    Schematics support generic authorization for its resources.
-   *    For more information, about Schematics access and permissions, see [Schematics service access
-   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.policyId - ID to get the details of policy.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>>}
-   */
-  public deletePolicy(
-    params: SchematicsV1.DeletePolicyParams
-  ): Promise<SchematicsV1.Response<SchematicsV1.EmptyObject>> {
-    const _params = { ...params };
-    const _requiredParams = ['policyId'];
-    const _validParams = ['policyId', 'headers'];
-    const _validationErrors = validateParams(_params, _requiredParams, _validParams);
-    if (_validationErrors) {
-      return Promise.reject(_validationErrors);
-    }
-
-    const path = {
-      'policy_id': _params.policyId,
-    };
-
-    const sdkHeaders = getSdkHeaders(SchematicsV1.DEFAULT_SERVICE_NAME, 'v1', 'deletePolicy');
-
-    const parameters = {
-      options: {
-        url: '/v2/settings/policies/{policy_id}',
-        method: 'DELETE',
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {}, _params.headers),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6378,6 +5957,8 @@ class SchematicsV1 extends BaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.policyId - ID to get the details of policy.
+   * @param {string} params.kind - Policy kind or categories for managing and deriving policy decision
+   *   * `agent_assignment_policy` Agent assignment policy for job execution.
    * @param {string} [params.name] - Name of Schematics customization policy.
    * @param {string} [params.description] - The description of Schematics customization policy.
    * @param {string} [params.resourceGroup] - The resource group name for the policy.  By default, Policy will be
@@ -6387,8 +5968,6 @@ class SchematicsV1 extends BaseService {
    * your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the
    * location of the IBM Cloud resources, provisioned using Schematics.
    * @param {UserState} [params.state] - User defined status of the Schematics object.
-   * @param {string} [params.kind] - Policy kind or categories for managing and deriving policy decision
-   *   * `agent_assignment_policy` Agent assignment policy for job execution.
    * @param {PolicyObjects} [params.target] - The objects for the Schematics policy.
    * @param {PolicyParameter} [params.parameter] - The parameter to tune the Schematics policy.
    * @param {ScopedResource[]} [params.scopedResources] - List of scoped Schematics resources targeted by the policy.
@@ -6399,34 +5978,21 @@ class SchematicsV1 extends BaseService {
     params: SchematicsV1.UpdatePolicyParams
   ): Promise<SchematicsV1.Response<SchematicsV1.Policy>> {
     const _params = { ...params };
-    const _requiredParams = ['policyId'];
-    const _validParams = [
-      'policyId',
-      'name',
-      'description',
-      'resourceGroup',
-      'tags',
-      'location',
-      'state',
-      'kind',
-      'target',
-      'parameter',
-      'scopedResources',
-      'headers',
-    ];
+    const _requiredParams = ['policyId', 'kind'];
+    const _validParams = ['policyId', 'kind', 'name', 'description', 'resourceGroup', 'tags', 'location', 'state', 'target', 'parameter', 'scopedResources', 'signal', 'headers'];
     const _validationErrors = validateParams(_params, _requiredParams, _validParams);
     if (_validationErrors) {
       return Promise.reject(_validationErrors);
     }
 
     const body = {
+      'kind': _params.kind,
       'name': _params.name,
       'description': _params.description,
       'resource_group': _params.resourceGroup,
       'tags': _params.tags,
       'location': _params.location,
       'state': _params.state,
-      'kind': _params.kind,
       'target': _params.target,
       'parameter': _params.parameter,
       'scoped_resources': _params.scopedResources,
@@ -6449,12 +6015,16 @@ class SchematicsV1 extends BaseService {
         headers: extend(
           true,
           sdkHeaders,
+          this.baseOptions.headers,
           {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           _params.headers
         ),
+        axiosOptions: {
+          signal: _params.signal,
+        },
       }),
     };
 
@@ -6490,28 +6060,25 @@ namespace SchematicsV1 {
    * request interfaces
    ************************/
 
-  /** Parameters for the `listSchematicsLocation` operation. */
-  export interface ListSchematicsLocationParams {
-    headers?: OutgoingHttpHeaders;
-  }
+   interface DefaultParams {
+     headers?: OutgoingHttpHeaders;
+     signal?: AbortSignal;
+   }
 
   /** Parameters for the `listLocations` operation. */
-  export interface ListLocationsParams {
-    headers?: OutgoingHttpHeaders;
+  export interface ListLocationsParams extends DefaultParams {
   }
 
   /** Parameters for the `listResourceGroup` operation. */
-  export interface ListResourceGroupParams {
-    headers?: OutgoingHttpHeaders;
+  export interface ListResourceGroupParams extends DefaultParams {
   }
 
   /** Parameters for the `getSchematicsVersion` operation. */
-  export interface GetSchematicsVersionParams {
-    headers?: OutgoingHttpHeaders;
+  export interface GetSchematicsVersionParams extends DefaultParams {
   }
 
   /** Parameters for the `processTemplateMetaData` operation. */
-  export interface ProcessTemplateMetaDataParams {
+  export interface ProcessTemplateMetaDataParams extends DefaultParams {
     /** Template type such as **terraform**, **ansible**, **helm**, **cloudpak**, or **bash script**. */
     templateType: string;
     /** Source of templates, playbooks, or controls. */
@@ -6524,7 +6091,6 @@ namespace SchematicsV1 {
      *  Terraform template.
      */
     xGithubToken?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `processTemplateMetaData` operation. */
@@ -6541,7 +6107,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `listWorkspaces` operation. */
-  export interface ListWorkspacesParams {
+  export interface ListWorkspacesParams extends DefaultParams {
     /** The starting position of the item in the list of items. For example, if you have three workspaces in your
      *  account, the first workspace is assigned position number 0, the second workspace is assigned position number 1,
      *  and so forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit
@@ -6557,7 +6123,6 @@ namespace SchematicsV1 {
     profile?: ListWorkspacesConstants.Profile | string;
     /** The resource group (by default, fetch from all resource groups) name or ID. */
     resourceGroup?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `listWorkspaces` operation. */
@@ -6570,7 +6135,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `createWorkspace` operation. */
-  export interface CreateWorkspaceParams {
+  export interface CreateWorkspaceParams extends DefaultParams {
     /** Deprecated: List of applied shared dataset ID. */
     appliedShareddataIds?: string[];
     /** Information about the software template that you chose from the IBM Cloud catalog. This information is
@@ -6619,18 +6184,81 @@ namespace SchematicsV1 {
      *  Terraform template.
      */
     xGithubToken?: string;
-    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `deleteWorkspace` operation. */
+  export interface DeleteWorkspaceParams extends DefaultParams {
+    /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
+    wId: string;
+    /** The IAM refresh token for the user or service identity. The IAM refresh token is required only if you want
+     *  to destroy the Terraform resources before deleting the Schematics workspace. If you want to delete the workspace
+     *  only and keep all your Terraform resources, refresh token is not required.
+     *
+     *    **Retrieving refresh token**:
+     *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
+     *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
+     *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *  key](/apidocs/iam-identity-token-api#create-api-key).
+     *
+     *    **Limitation**:
+     *    * If the token is expired, you can use `refresh token` to get a new IAM access token.
+     *    * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
+     *    * When the IAM access token is about to expire, use the API key to create a new access token.
+     */
+    refreshToken: string;
+    /** If set to `true`, refresh_token header configuration is required to delete all the Terraform resources, and
+     *  the Schematics workspace. If set to `false`, you can remove only the workspace. Your Terraform resources are
+     *  still available and must be managed with the resource dashboard or CLI.
+     */
+    destroyResources?: string;
   }
 
   /** Parameters for the `getWorkspace` operation. */
-  export interface GetWorkspaceParams {
+  export interface GetWorkspaceParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
-    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `updateWorkspace` operation. */
+  export interface UpdateWorkspaceParams extends DefaultParams {
+    /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
+    wId: string;
+    /** Information about the software template that you chose from the IBM Cloud catalog. This information is
+     *  returned for IBM Cloud catalog offerings only.
+     */
+    catalogRef?: CatalogRef;
+    /** The description of the workspace. */
+    description?: string;
+    /** Workspace dependencies. */
+    dependencies?: Dependencies;
+    /** The name of the workspace. */
+    name?: string;
+    /** Information about the Target used by the templates originating from the  IBM Cloud catalog offerings. This
+     *  information is not relevant for workspace created using your own Terraform template.
+     */
+    sharedData?: SharedTargetData;
+    /** A list of tags that you want to associate with your workspace. */
+    tags?: string[];
+    /** Input data for the Template. */
+    templateData?: TemplateSourceDataRequest[];
+    /** Input to update the template repository data. */
+    templateRepo?: TemplateRepoUpdateRequest;
+    /** List of Workspace type. */
+    type?: string[];
+    /** Input to update the workspace status. */
+    workspaceStatus?: WorkspaceStatusUpdateRequest;
+    /** Information about the last job that ran against the workspace. -. */
+    workspaceStatusMsg?: WorkspaceStatusMessage;
+    /** agent id that process workspace jobs. */
+    agentId?: string;
+    /** Input settings to be applied to the workspace, for example, `job_timeout_override`. */
+    settings?: VariableData[];
   }
 
   /** Parameters for the `replaceWorkspace` operation. */
-  export interface ReplaceWorkspaceParams {
+  export interface ReplaceWorkspaceParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** Information about the software template that you chose from the IBM Cloud catalog. This information is
@@ -6667,78 +6295,10 @@ namespace SchematicsV1 {
      *  Terraform template.
      */
     xGithubToken?: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `deleteWorkspace` operation. */
-  export interface DeleteWorkspaceParams {
-    /** The IAM refresh token for the user or service identity. The IAM refresh token is required only if you want
-     *  to destroy the Terraform resources before deleting the Schematics workspace. If you want to delete the workspace
-     *  only and keep all your Terraform resources, refresh token is not required.
-     *
-     *    **Retrieving refresh token**:
-     *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
-     *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
-     *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
-     *  key](/apidocs/iam-identity-token-api#create-api-key).
-     *
-     *    **Limitation**:
-     *    * If the token is expired, you can use `refresh token` to get a new IAM access token.
-     *    * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
-     *    * When the IAM access token is about to expire, use the API key to create a new access token.
-     */
-    refreshToken: string;
-    /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
-    wId: string;
-    /** If set to `true`, refresh_token header configuration is required to delete all the Terraform resources, and
-     *  the Schematics workspace. If set to `false`, you can remove only the workspace. Your Terraform resources are
-     *  still available and must be managed with the resource dashboard or CLI.
-     */
-    destroyResources?: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `updateWorkspace` operation. */
-  export interface UpdateWorkspaceParams {
-    /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
-    wId: string;
-    /** Information about the software template that you chose from the IBM Cloud catalog. This information is
-     *  returned for IBM Cloud catalog offerings only.
-     */
-    catalogRef?: CatalogRef;
-    /** The description of the workspace. */
-    description?: string;
-    /** Workspace dependencies. */
-    dependencies?: Dependencies;
-    /** The name of the workspace. */
-    name?: string;
-    /** Information about the Target used by the templates originating from the  IBM Cloud catalog offerings. This
-     *  information is not relevant for workspace created using your own Terraform template.
-     */
-    sharedData?: SharedTargetData;
-    /** A list of tags that you want to associate with your workspace. */
-    tags?: string[];
-    /** Input data for the Template. */
-    templateData?: TemplateSourceDataRequest[];
-    /** Input to update the template repository data. */
-    templateRepo?: TemplateRepoUpdateRequest;
-    /** List of Workspace type. */
-    type?: string[];
-    /** Input to update the workspace status. */
-    workspaceStatus?: WorkspaceStatusUpdateRequest;
-    /** Information about the last job that ran against the workspace. -. */
-    workspaceStatusMsg?: WorkspaceStatusMessage;
-    /** agent id that process workspace jobs. */
-    agentId?: string;
-    /** Input settings to be applied to the workspace, for example, `job_timeout_override`. */
-    settings?: VariableData[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getWorkspaceReadme` operation. */
-  export interface GetWorkspaceReadmeParams {
+  export interface GetWorkspaceReadmeParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** The GitHub or GitLab branch where the `README.md` file is stored,  or the commit ID or tag that references
@@ -6748,7 +6308,6 @@ namespace SchematicsV1 {
     ref?: string;
     /** The format of the readme file.  Value ''markdown'' will give markdown, otherwise html. */
     formatted?: GetWorkspaceReadmeConstants.Formatted | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getWorkspaceReadme` operation. */
@@ -6761,7 +6320,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `templateRepoUpload` operation. */
-  export interface TemplateRepoUploadParams {
+  export interface TemplateRepoUploadParams extends DefaultParams {
     /** The ID of the workspace where you want to upload your `.tar` file. To find the workspace ID, use the `GET
      *  /v1/workspaces` API.
      */
@@ -6775,11 +6334,10 @@ namespace SchematicsV1 {
     file?: NodeJS.ReadableStream | Buffer;
     /** The content type of file. */
     fileContentType?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getWorkspaceInputs` operation. */
-  export interface GetWorkspaceInputsParams {
+  export interface GetWorkspaceInputsParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** The ID of the Terraform template in your workspace.  When you create a workspace, the Terraform template
@@ -6787,11 +6345,10 @@ namespace SchematicsV1 {
      *  IDs  and template IDs or `template_data.id` in your IBM Cloud account.
      */
     tId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `replaceWorkspaceInputs` operation. */
-  export interface ReplaceWorkspaceInputsParams {
+  export interface ReplaceWorkspaceInputsParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** The ID of the Terraform template in your workspace.  When you create a workspace, the Terraform template
@@ -6812,20 +6369,18 @@ namespace SchematicsV1 {
     values?: string;
     /** VariablesRequest -. */
     variablestore?: WorkspaceVariableRequest[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getAllWorkspaceInputs` operation. */
-  export interface GetAllWorkspaceInputsParams {
+  export interface GetAllWorkspaceInputsParams extends DefaultParams {
     /** The ID of the workspace for which you want to retrieve input parameters and  values. To find the workspace
      *  ID, use the `GET /workspaces` API.
      */
     wId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `getWorkspaceInputMetadata` operation. */
-  export interface GetWorkspaceInputMetadataParams {
+  /** Parameters for the `getWorkspaceInputMetadataV2` operation. */
+  export interface GetWorkspaceInputMetadataV2Params extends DefaultParams {
     /** The ID of the workspace for which you want to retrieve the metadata of the input variables that are declared
      *  in the template. To find the workspace ID, use the `GET /v1/workspaces` API.
      */
@@ -6835,36 +6390,59 @@ namespace SchematicsV1 {
      *  this ID, use the `GET /v1/workspaces` API and review the `template_data.id` value.
      */
     tId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `getWorkspaceOutputs` operation. */
-  export interface GetWorkspaceOutputsParams {
+  /** Parameters for the `getWorkspaceInputMetadata` operation. */
+  export interface GetWorkspaceInputMetadataParams extends DefaultParams {
+    /** The ID of the workspace for which you want to retrieve the metadata of the input variables that are declared
+     *  in the template. To find the workspace ID, use the `GET /v1/workspaces` API.
+     */
+    wId: string;
+    /** The ID of the Terraform template for which you want to retrieve the metadata of your input variables. When
+     *  you create a workspace, the Terraform template that your workspace points to is assigned a unique ID. To find
+     *  this ID, use the `GET /v1/workspaces` API and review the `template_data.id` value.
+     */
+    tId: string;
+  }
+
+  /** Parameters for the `getWorkspaceOutputsV2` operation. */
+  export interface GetWorkspaceOutputsV2Params extends DefaultParams {
     /** The ID of the workspace for which you want to retrieve output parameters and  values. To find the workspace
      *  ID, use the `GET /workspaces` API.
      */
     wId: string;
-    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getWorkspaceOutputs` operation. */
+  export interface GetWorkspaceOutputsParams extends DefaultParams {
+    /** The ID of the workspace for which you want to retrieve output parameters and  values. To find the workspace
+     *  ID, use the `GET /workspaces` API.
+     */
+    wId: string;
+  }
+
+  /** Parameters for the `getWorkspaceResourcesV2` operation. */
+  export interface GetWorkspaceResourcesV2Params extends DefaultParams {
+    /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
+    wId: string;
   }
 
   /** Parameters for the `getWorkspaceResources` operation. */
-  export interface GetWorkspaceResourcesParams {
+  export interface GetWorkspaceResourcesParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getWorkspaceState` operation. */
-  export interface GetWorkspaceStateParams {
+  export interface GetWorkspaceStateParams extends DefaultParams {
     /** The ID of the workspace for which you want to retrieve the Terraform statefile.  To find the workspace ID,
      *  use the `GET /v1/workspaces` API.
      */
     wId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getWorkspaceTemplateState` operation. */
-  export interface GetWorkspaceTemplateStateParams {
+  export interface GetWorkspaceTemplateStateParams extends DefaultParams {
     /** The ID of the workspace for which you want to retrieve the Terraform statefile.  To find the workspace ID,
      *  use the `GET /v1/workspaces` API.
      */
@@ -6874,11 +6452,10 @@ namespace SchematicsV1 {
      *  the `GET /v1/workspaces` API and review the template_data.id value.
      */
     tId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getWorkspaceActivityLogs` operation. */
-  export interface GetWorkspaceActivityLogsParams {
+  export interface GetWorkspaceActivityLogsParams extends DefaultParams {
     /** The ID of the workspace for which you want to retrieve the Terraform statefile.  To find the workspace ID,
      *  use the `GET /v1/workspaces` API.
      */
@@ -6887,18 +6464,16 @@ namespace SchematicsV1 {
      *  /v1/workspaces/{id}/actions` API.
      */
     activityId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getWorkspaceLogUrls` operation. */
-  export interface GetWorkspaceLogUrlsParams {
+  export interface GetWorkspaceLogUrlsParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getTemplateLogs` operation. */
-  export interface GetTemplateLogsParams {
+  export interface GetTemplateLogsParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** The ID of the Terraform template or IBM Cloud catalog software template in the workspace.  Use the `GET
@@ -6918,11 +6493,10 @@ namespace SchematicsV1 {
     logTfNullResource?: boolean;
     /** `true` will format all logs to withhold the original format  of ansible output in the log statements. */
     logTfAnsible?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getTemplateActivityLog` operation. */
-  export interface GetTemplateActivityLogParams {
+  export interface GetTemplateActivityLogParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** The ID of the Terraform template or IBM Cloud catalog software template in the workspace.  Use the `GET
@@ -6946,11 +6520,10 @@ namespace SchematicsV1 {
     logTfNullResource?: boolean;
     /** `true` will format all logs to withhold the original format  of ansible output in the log statements. */
     logTfAnsible?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `listActions` operation. */
-  export interface ListActionsParams {
+  export interface ListActionsParams extends DefaultParams {
     /** The starting position of the item in the list of items. For example, if you have three workspaces in your
      *  account, the first workspace is assigned position number 0, the second workspace is assigned position number 1,
      *  and so forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit
@@ -6969,7 +6542,6 @@ namespace SchematicsV1 {
     sort?: string;
     /** Level of details returned by the get method. */
     profile?: ListActionsConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `listActions` operation. */
@@ -6982,7 +6554,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `createAction` operation. */
-  export interface CreateActionParams {
+  export interface CreateActionParams extends DefaultParams {
     /** The unique name of your action. The name can be up to 128 characters long and can include alphanumeric
      *  characters, spaces, dashes, and underscores. **Example** you can use the name to stop action.
      */
@@ -7042,7 +6614,6 @@ namespace SchematicsV1 {
      *  Terraform template.
      */
     xGithubToken?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `createAction` operation. */
@@ -7074,13 +6645,22 @@ namespace SchematicsV1 {
     }
   }
 
+  /** Parameters for the `deleteAction` operation. */
+  export interface DeleteActionParams extends DefaultParams {
+    /** Action Id.  Use GET /actions API to look up the Action Ids in your IBM Cloud account. */
+    actionId: string;
+    /** Equivalent to -force options in the command line. */
+    force?: boolean;
+    /** Auto propagate the chaange or deletion to the dependent resources. */
+    propagate?: boolean;
+  }
+
   /** Parameters for the `getAction` operation. */
-  export interface GetActionParams {
+  export interface GetActionParams extends DefaultParams {
     /** Action Id.  Use GET /actions API to look up the Action Ids in your IBM Cloud account. */
     actionId: string;
     /** Level of details returned by the get method. */
     profile?: GetActionConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getAction` operation. */
@@ -7093,19 +6673,8 @@ namespace SchematicsV1 {
     }
   }
 
-  /** Parameters for the `deleteAction` operation. */
-  export interface DeleteActionParams {
-    /** Action Id.  Use GET /actions API to look up the Action Ids in your IBM Cloud account. */
-    actionId: string;
-    /** Equivalent to -force options in the command line. */
-    force?: boolean;
-    /** Auto propagate the chaange or deletion to the dependent resources. */
-    propagate?: boolean;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `updateAction` operation. */
-  export interface UpdateActionParams {
+  export interface UpdateActionParams extends DefaultParams {
     /** Action Id.  Use GET /actions API to look up the Action Ids in your IBM Cloud account. */
     actionId: string;
     /** The unique name of your action. The name can be up to 128 characters long and can include alphanumeric
@@ -7167,7 +6736,6 @@ namespace SchematicsV1 {
      *  Terraform template.
      */
     xGithubToken?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `updateAction` operation. */
@@ -7200,18 +6768,17 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `uploadTemplateTarAction` operation. */
-  export interface UploadTemplateTarActionParams {
+  export interface UploadTemplateTarActionParams extends DefaultParams {
     /** Action Id.  Use GET /actions API to look up the Action Ids in your IBM Cloud account. */
     actionId: string;
     /** Template tar file. */
     file?: NodeJS.ReadableStream | Buffer;
     /** The content type of file. */
     fileContentType?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `listWorkspaceActivities` operation. */
-  export interface ListWorkspaceActivitiesParams {
+  export interface ListWorkspaceActivitiesParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** The starting position of the item in the list of items. For example, if you have three workspaces in your
@@ -7225,33 +6792,30 @@ namespace SchematicsV1 {
      *  If no value is provided, 100 is used by default.
      */
     limit?: number;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `getWorkspaceActivity` operation. */
-  export interface GetWorkspaceActivityParams {
-    /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
-    wId: string;
-    /** The ID of the activity or job, for which you want to retrieve details.  To find the job ID, use the `GET
-     *  /v1/workspaces/{id}/actions` API.
-     */
-    activityId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `deleteWorkspaceActivity` operation. */
-  export interface DeleteWorkspaceActivityParams {
+  export interface DeleteWorkspaceActivityParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** The ID of the activity or job, for which you want to retrieve details.  To find the job ID, use the `GET
      *  /v1/workspaces/{id}/actions` API.
      */
     activityId: string;
-    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `getWorkspaceActivity` operation. */
+  export interface GetWorkspaceActivityParams extends DefaultParams {
+    /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
+    wId: string;
+    /** The ID of the activity or job, for which you want to retrieve details.  To find the job ID, use the `GET
+     *  /v1/workspaces/{id}/actions` API.
+     */
+    activityId: string;
   }
 
   /** Parameters for the `runWorkspaceCommands` operation. */
-  export interface RunWorkspaceCommandsParams {
+  export interface RunWorkspaceCommandsParams extends DefaultParams {
     /** The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API. */
     wId: string;
     /** The IAM refresh token for the user or service identity.
@@ -7260,8 +6824,8 @@ namespace SchematicsV1 {
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -7279,23 +6843,48 @@ namespace SchematicsV1 {
     operationName?: string;
     /** Command description. */
     description?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `applyWorkspaceCommand` operation. */
-  export interface ApplyWorkspaceCommandParams {
+  export interface ApplyWorkspaceCommandParams extends DefaultParams {
+    /** The IAM refresh token for the user or service identity.
+     *
+     *    **Retrieving refresh token**:
+     *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
+     *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
+     *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *  key](/apidocs/iam-identity-token-api#create-api-key).
+     *
+     *    **Limitation**:
+     *    * If the token is expired, you can use `refresh token` to get a new IAM access token.
+     *    * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
+     *    * When the IAM access token is about to expire, use the API key to create a new access token.
+     */
+    refreshToken: string;
     /** The ID of the workspace for which you want to run a Schematics `apply` job.  To find the workspace ID, use
      *  the `GET /workspaces` API.
      */
     wId: string;
+    /** Workspace job options template. */
+    actionOptions?: WorkspaceActivityOptionsTemplate;
+    /** The IAM delegated token for your IBM Cloud account.  This token is required for requests that are sent via
+     *  the UI only.
+     */
+    delegatedToken?: string;
+  }
+
+  /** Parameters for the `destroyWorkspaceCommand` operation. */
+  export interface DestroyWorkspaceCommandParams extends DefaultParams {
     /** The IAM refresh token for the user or service identity.
      *
      *    **Retrieving refresh token**:
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -7304,48 +6893,20 @@ namespace SchematicsV1 {
      *    * When the IAM access token is about to expire, use the API key to create a new access token.
      */
     refreshToken: string;
-    /** Workspace job options template. */
-    actionOptions?: WorkspaceActivityOptionsTemplate;
-    /** The IAM delegated token for your IBM Cloud account.  This token is required for requests that are sent via
-     *  the UI only.
-     */
-    delegatedToken?: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `destroyWorkspaceCommand` operation. */
-  export interface DestroyWorkspaceCommandParams {
     /** The ID of the workspace for which you want to perform a Schematics `destroy` job.  To find the workspace ID,
      *  use the `GET /workspaces` API.
      */
     wId: string;
-    /** The IAM refresh token for the user or service identity.
-     *
-     *    **Retrieving refresh token**:
-     *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
-     *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
-     *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
-     *  key](/apidocs/iam-identity-token-api#create-api-key).
-     *
-     *    **Limitation**:
-     *    * If the token is expired, you can use `refresh token` to get a new IAM access token.
-     *    * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
-     *    * When the IAM access token is about to expire, use the API key to create a new access token.
-     */
-    refreshToken: string;
     /** Workspace job options template. */
     actionOptions?: WorkspaceActivityOptionsTemplate;
     /** The IAM delegated token for your IBM Cloud account.  This token is required for requests that are sent via
      *  the UI only.
      */
     delegatedToken?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `planWorkspaceCommand` operation. */
-  export interface PlanWorkspaceCommandParams {
+  export interface PlanWorkspaceCommandParams extends DefaultParams {
     /** The ID of the workspace, for which you want to run a Schematics `plan` job.  To find the ID of your
      *  workspace, use the `GET /v1/workspaces` API.
      */
@@ -7356,8 +6917,8 @@ namespace SchematicsV1 {
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -7372,11 +6933,10 @@ namespace SchematicsV1 {
      *  the UI only.
      */
     delegatedToken?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `refreshWorkspaceCommand` operation. */
-  export interface RefreshWorkspaceCommandParams {
+  export interface RefreshWorkspaceCommandParams extends DefaultParams {
     /** The ID of the workspace, for which you want to run a Schematics `refresh` job.  To find the ID of your
      *  workspace, use the `GET /v1/workspaces` API.
      */
@@ -7387,8 +6947,8 @@ namespace SchematicsV1 {
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -7401,11 +6961,10 @@ namespace SchematicsV1 {
      *  the UI only.
      */
     delegatedToken?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `listJobs` operation. */
-  export interface ListJobsParams {
+  export interface ListJobsParams extends DefaultParams {
     /** The starting position of the item in the list of items. For example, if you have three workspaces in your
      *  account, the first workspace is assigned position number 0, the second workspace is assigned position number 1,
      *  and so forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit
@@ -7434,7 +6993,6 @@ namespace SchematicsV1 {
     workspaceId?: string;
     /** list jobs. */
     list?: ListJobsConstants.List | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `listJobs` operation. */
@@ -7458,15 +7016,15 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `createJob` operation. */
-  export interface CreateJobParams {
+  export interface CreateJobParams extends DefaultParams {
     /** The IAM refresh token for the user or service identity.
      *
      *    **Retrieving refresh token**:
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -7508,7 +7066,6 @@ namespace SchematicsV1 {
     logSummary?: JobLogSummary;
     /** Agent name, Agent id and associated policy ID information. */
     agent?: AgentInfo;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `createJob` operation. */
@@ -7554,13 +7111,38 @@ namespace SchematicsV1 {
     }
   }
 
+  /** Parameters for the `deleteJob` operation. */
+  export interface DeleteJobParams extends DefaultParams {
+    /** Job Id. Use `GET /v2/jobs` API to look up the Job Ids in your IBM Cloud account. */
+    jobId: string;
+    /** The IAM refresh token for the user or service identity.
+     *
+     *    **Retrieving refresh token**:
+     *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
+     *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
+     *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *  key](/apidocs/iam-identity-token-api#create-api-key).
+     *
+     *    **Limitation**:
+     *    * If the token is expired, you can use `refresh token` to get a new IAM access token.
+     *    * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
+     *    * When the IAM access token is about to expire, use the API key to create a new access token.
+     */
+    refreshToken: string;
+    /** Equivalent to -force options in the command line. */
+    force?: boolean;
+    /** Auto propagate the chaange or deletion to the dependent resources. */
+    propagate?: boolean;
+  }
+
   /** Parameters for the `getJob` operation. */
-  export interface GetJobParams {
+  export interface GetJobParams extends DefaultParams {
     /** Job Id. Use `GET /v2/jobs` API to look up the Job Ids in your IBM Cloud account. */
     jobId: string;
     /** Level of details returned by the get method. */
     profile?: GetJobConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getJob` operation. */
@@ -7574,7 +7156,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `updateJob` operation. */
-  export interface UpdateJobParams {
+  export interface UpdateJobParams extends DefaultParams {
     /** Job Id. Use `GET /v2/jobs` API to look up the Job Ids in your IBM Cloud account. */
     jobId: string;
     /** The IAM refresh token for the user or service identity.
@@ -7583,8 +7165,8 @@ namespace SchematicsV1 {
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -7626,7 +7208,6 @@ namespace SchematicsV1 {
     logSummary?: JobLogSummary;
     /** Agent name, Agent id and associated policy ID information. */
     agent?: AgentInfo;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `updateJob` operation. */
@@ -7672,47 +7253,18 @@ namespace SchematicsV1 {
     }
   }
 
-  /** Parameters for the `deleteJob` operation. */
-  export interface DeleteJobParams {
-    /** Job Id. Use `GET /v2/jobs` API to look up the Job Ids in your IBM Cloud account. */
-    jobId: string;
-    /** The IAM refresh token for the user or service identity.
-     *
-     *    **Retrieving refresh token**:
-     *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
-     *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
-     *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
-     *  key](/apidocs/iam-identity-token-api#create-api-key).
-     *
-     *    **Limitation**:
-     *    * If the token is expired, you can use `refresh token` to get a new IAM access token.
-     *    * The `refresh_token` parameter cannot be used to retrieve a new IAM access token.
-     *    * When the IAM access token is about to expire, use the API key to create a new access token.
-     */
-    refreshToken: string;
-    /** Equivalent to -force options in the command line. */
-    force?: boolean;
-    /** Auto propagate the chaange or deletion to the dependent resources. */
-    propagate?: boolean;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `listJobLogs` operation. */
-  export interface ListJobLogsParams {
+  export interface ListJobLogsParams extends DefaultParams {
     /** Job Id. Use `GET /v2/jobs` API to look up the Job Ids in your IBM Cloud account. */
     jobId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getJobFiles` operation. */
-  export interface GetJobFilesParams {
+  export interface GetJobFilesParams extends DefaultParams {
     /** Job Id. Use `GET /v2/jobs` API to look up the Job Ids in your IBM Cloud account. */
     jobId: string;
     /** The type of file you want to download eg.state_file, plan_json. */
     fileType: GetJobFilesConstants.FileType | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getJobFiles` operation. */
@@ -7728,15 +7280,15 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `createWorkspaceDeletionJob` operation. */
-  export interface CreateWorkspaceDeletionJobParams {
+  export interface CreateWorkspaceDeletionJobParams extends DefaultParams {
     /** The IAM refresh token for the user or service identity.
      *
      *    **Retrieving refresh token**:
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -7751,18 +7303,16 @@ namespace SchematicsV1 {
     version?: string;
     /** The List of workspaces to be deleted. */
     workspaces?: string[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getWorkspaceDeletionJobStatus` operation. */
-  export interface GetWorkspaceDeletionJobStatusParams {
+  export interface GetWorkspaceDeletionJobStatusParams extends DefaultParams {
     /** The workspace job ID. */
     wjId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `listInventories` operation. */
-  export interface ListInventoriesParams {
+  export interface ListInventoriesParams extends DefaultParams {
     /** The starting position of the item in the list of items. For example, if you have three workspaces in your
      *  account, the first workspace is assigned position number 0, the second workspace is assigned position number 1,
      *  and so forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit
@@ -7781,7 +7331,6 @@ namespace SchematicsV1 {
     sort?: string;
     /** Level of details returned by the get method. */
     profile?: ListInventoriesConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `listInventories` operation. */
@@ -7794,7 +7343,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `createInventory` operation. */
-  export interface CreateInventoryParams {
+  export interface CreateInventoryParams extends DefaultParams {
     /** The unique name of your Inventory definition. The name can be up to 128 characters long and can include
      *  alphanumeric characters, spaces, dashes, and underscores.
      */
@@ -7806,17 +7355,26 @@ namespace SchematicsV1 {
      *  resources, provisioned using Schematics.
      */
     location?: CreateInventoryConstants.Location | string;
-    /** Resource-group name for the Inventory definition.   By default, Inventory definition will be created in
-     *  Default Resource Group.
-     */
+    /** Resource-group id for the shared dataset. */
     resourceGroup?: string;
+    /** connection type to be ssh or wirm. */
+    connectionType?: string;
+    /** common credentials for the inventory. */
+    credentials?: CredentialVariableData[];
+    /** User editable credential variable data and system generated reference to the value. */
+    commonCredentials?: CredentialVariableData;
     /** Input inventory of host and host group for the playbook, in the `.ini` file format. */
     inventoriesIni?: string;
     /** Input resource query definitions that is used to dynamically generate the inventory of host and host group
      *  for the playbook.
      */
     resourceQueries?: string[];
-    headers?: OutgoingHttpHeaders;
+    /** Describes a bastion resource. */
+    bastion?: BastionResourceDefinition;
+    /** User editable credential variable data and system generated reference to the value. */
+    bastionCredential?: CredentialVariableData;
+    /** Inventories' structured view for the provided inventory. */
+    inventoryView?: InventoryView;
   }
 
   /** Constants for the `createInventory` operation. */
@@ -7830,15 +7388,26 @@ namespace SchematicsV1 {
     }
   }
 
+  /** Parameters for the `deleteInventory` operation. */
+  export interface DeleteInventoryParams extends DefaultParams {
+    /** Resource Inventory Id.  Use `GET /v2/inventories` API to look up the Resource Inventory definition Ids  in
+     *  your IBM Cloud account.
+     */
+    inventoryId: string;
+    /** Equivalent to -force options in the command line. */
+    force?: boolean;
+    /** Auto propagate the chaange or deletion to the dependent resources. */
+    propagate?: boolean;
+  }
+
   /** Parameters for the `getInventory` operation. */
-  export interface GetInventoryParams {
+  export interface GetInventoryParams extends DefaultParams {
     /** Resource Inventory Id.  Use `GET /v2/inventories` API to look up the Resource Inventory definition Ids  in
      *  your IBM Cloud account.
      */
     inventoryId: string;
     /** Level of details returned by the get method. */
     profile?: GetInventoryConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getInventory` operation. */
@@ -7852,7 +7421,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `replaceInventory` operation. */
-  export interface ReplaceInventoryParams {
+  export interface ReplaceInventoryParams extends DefaultParams {
     /** Resource Inventory Id.  Use `GET /v2/inventories` API to look up the Resource Inventory definition Ids  in
      *  your IBM Cloud account.
      */
@@ -7868,17 +7437,26 @@ namespace SchematicsV1 {
      *  resources, provisioned using Schematics.
      */
     location?: ReplaceInventoryConstants.Location | string;
-    /** Resource-group name for the Inventory definition.   By default, Inventory definition will be created in
-     *  Default Resource Group.
-     */
+    /** Resource-group id for the shared dataset. */
     resourceGroup?: string;
+    /** connection type to be ssh or wirm. */
+    connectionType?: string;
+    /** common credentials for the inventory. */
+    credentials?: CredentialVariableData[];
+    /** User editable credential variable data and system generated reference to the value. */
+    commonCredentials?: CredentialVariableData;
     /** Input inventory of host and host group for the playbook, in the `.ini` file format. */
     inventoriesIni?: string;
     /** Input resource query definitions that is used to dynamically generate the inventory of host and host group
      *  for the playbook.
      */
     resourceQueries?: string[];
-    headers?: OutgoingHttpHeaders;
+    /** Describes a bastion resource. */
+    bastion?: BastionResourceDefinition;
+    /** User editable credential variable data and system generated reference to the value. */
+    bastionCredential?: CredentialVariableData;
+    /** Inventories' structured view for the provided inventory. */
+    inventoryView?: InventoryView;
   }
 
   /** Constants for the `replaceInventory` operation. */
@@ -7892,21 +7470,8 @@ namespace SchematicsV1 {
     }
   }
 
-  /** Parameters for the `deleteInventory` operation. */
-  export interface DeleteInventoryParams {
-    /** Resource Inventory Id.  Use `GET /v2/inventories` API to look up the Resource Inventory definition Ids  in
-     *  your IBM Cloud account.
-     */
-    inventoryId: string;
-    /** Equivalent to -force options in the command line. */
-    force?: boolean;
-    /** Auto propagate the chaange or deletion to the dependent resources. */
-    propagate?: boolean;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `listResourceQuery` operation. */
-  export interface ListResourceQueryParams {
+  export interface ListResourceQueryParams extends DefaultParams {
     /** The starting position of the item in the list of items. For example, if you have three workspaces in your
      *  account, the first workspace is assigned position number 0, the second workspace is assigned position number 1,
      *  and so forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit
@@ -7925,7 +7490,6 @@ namespace SchematicsV1 {
     sort?: string;
     /** Level of details returned by the get method. */
     profile?: ListResourceQueryConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `listResourceQuery` operation. */
@@ -7938,13 +7502,13 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `createResourceQuery` operation. */
-  export interface CreateResourceQueryParams {
+  export interface CreateResourceQueryParams extends DefaultParams {
     /** Resource type (cluster, vsi, icd, vpc). */
     type?: CreateResourceQueryConstants.Type | string;
     /** Resource query name. */
     name?: string;
+    /** List of resource queries. */
     queries?: ResourceQuery[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `createResourceQuery` operation. */
@@ -7955,17 +7519,36 @@ namespace SchematicsV1 {
     }
   }
 
-  /** Parameters for the `getResourcesQuery` operation. */
-  export interface GetResourcesQueryParams {
+  /** Parameters for the `deleteResourcesQuery` operation. */
+  export interface DeleteResourcesQueryParams extends DefaultParams {
     /** Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query definition Ids  in your
      *  IBM Cloud account.
      */
     queryId: string;
-    headers?: OutgoingHttpHeaders;
+    /** Equivalent to -force options in the command line. */
+    force?: boolean;
+    /** Auto propagate the chaange or deletion to the dependent resources. */
+    propagate?: boolean;
+  }
+
+  /** Parameters for the `getResourcesQuery` operation. */
+  export interface GetResourcesQueryParams extends DefaultParams {
+    /** Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query definition Ids  in your
+     *  IBM Cloud account.
+     */
+    queryId: string;
+  }
+
+  /** Parameters for the `executeResourceQuery` operation. */
+  export interface ExecuteResourceQueryParams extends DefaultParams {
+    /** Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query definition Ids  in your
+     *  IBM Cloud account.
+     */
+    queryId: string;
   }
 
   /** Parameters for the `replaceResourcesQuery` operation. */
-  export interface ReplaceResourcesQueryParams {
+  export interface ReplaceResourcesQueryParams extends DefaultParams {
     /** Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query definition Ids  in your
      *  IBM Cloud account.
      */
@@ -7974,8 +7557,8 @@ namespace SchematicsV1 {
     type?: ReplaceResourcesQueryConstants.Type | string;
     /** Resource query name. */
     name?: string;
+    /** List of resource queries. */
     queries?: ResourceQuery[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `replaceResourcesQuery` operation. */
@@ -7986,164 +7569,8 @@ namespace SchematicsV1 {
     }
   }
 
-  /** Parameters for the `executeResourceQuery` operation. */
-  export interface ExecuteResourceQueryParams {
-    /** Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query definition Ids  in your
-     *  IBM Cloud account.
-     */
-    queryId: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `deleteResourcesQuery` operation. */
-  export interface DeleteResourcesQueryParams {
-    /** Resource query Id.  Use `GET /v2/resource_query` API to look up the Resource query definition Ids  in your
-     *  IBM Cloud account.
-     */
-    queryId: string;
-    /** Equivalent to -force options in the command line. */
-    force?: boolean;
-    /** Auto propagate the chaange or deletion to the dependent resources. */
-    propagate?: boolean;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `listAgent` operation. */
-  export interface ListAgentParams {
-    /** The starting position of the item in the list of items. For example, if you have three workspaces in your
-     *  account, the first workspace is assigned position number 0, the second workspace is assigned position number 1,
-     *  and so forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit
-     *  the number of workspaces that is returned, use the `limit` option in addition to the `offset` option. Negative
-     *  numbers are not supported and are ignored.
-     */
-    offset?: number;
-    /** The maximum number of items that you want to list. The number must be a positive integer between 1 and 2000.
-     *  If no value is provided, 100 is used by default.
-     */
-    limit?: number;
-    /** Level of details returned by the get method. */
-    profile?: ListAgentConstants.Profile | string;
-    /** Use `new` to get all unregistered agents; use `saved` to get all registered agents. */
-    filter?: ListAgentConstants.Filter | string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Constants for the `listAgent` operation. */
-  export namespace ListAgentConstants {
-    /** Level of details returned by the get method. */
-    export enum Profile {
-      SUMMARY = 'summary',
-      DETAILED = 'detailed',
-      IDS = 'ids',
-    }
-    /** Use `new` to get all unregistered agents; use `saved` to get all registered agents. */
-    export enum Filter {
-      ALL = 'all',
-      NEW = 'new',
-      SAVED = 'saved',
-    }
-  }
-
-  /** Parameters for the `registerAgent` operation. */
-  export interface RegisterAgentParams {
-    /** The name of the agent (must be unique, for an account). */
-    name: string;
-    /** The location where agent is deployed in the user environment. */
-    agentLocation: string;
-    /** List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action,
-     *  choose the right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud
-     *  resources, provisioned using Schematics.
-     */
-    location: RegisterAgentConstants.Location | string;
-    /** The IAM trusted profile id, used by the Agent instance. */
-    profileId: string;
-    /** Agent description. */
-    description?: string;
-    /** The resource-group name for the agent.  By default, Agent will be registered in Default Resource Group. */
-    resourceGroup?: string;
-    /** Tags for the agent. */
-    tags?: string[];
-    /** User defined status of the agent. */
-    userState?: AgentUserState;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Constants for the `registerAgent` operation. */
-  export namespace RegisterAgentConstants {
-    /** List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud resources, provisioned using Schematics. */
-    export enum Location {
-      US_SOUTH = 'us-south',
-      US_EAST = 'us-east',
-      EU_GB = 'eu-gb',
-      EU_DE = 'eu-de',
-    }
-  }
-
-  /** Parameters for the `getAgent` operation. */
-  export interface GetAgentParams {
-    /** Agent ID to get the details of agent. */
-    agentId: string;
-    /** Level of details returned by the get method. */
-    profile?: GetAgentConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Constants for the `getAgent` operation. */
-  export namespace GetAgentConstants {
-    /** Level of details returned by the get method. */
-    export enum Profile {
-      SUMMARY = 'summary',
-      DETAILED = 'detailed',
-      IDS = 'ids',
-    }
-  }
-
-  /** Parameters for the `deleteAgent` operation. */
-  export interface DeleteAgentParams {
-    /** Agent ID to get the details of agent. */
-    agentId: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `updateAgentRegistration` operation. */
-  export interface UpdateAgentRegistrationParams {
-    /** Agent ID to get the details of agent. */
-    agentId: string;
-    /** The name of the agent (must be unique, for an account). */
-    name: string;
-    /** The location where agent is deployed in the user environment. */
-    agentLocation: string;
-    /** List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action,
-     *  choose the right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud
-     *  resources, provisioned using Schematics.
-     */
-    location: UpdateAgentRegistrationConstants.Location | string;
-    /** The IAM trusted profile id, used by the Agent instance. */
-    profileId: string;
-    /** Agent description. */
-    description?: string;
-    /** The resource-group name for the agent.  By default, Agent will be registered in Default Resource Group. */
-    resourceGroup?: string;
-    /** Tags for the agent. */
-    tags?: string[];
-    /** User defined status of the agent. */
-    userState?: AgentUserState;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Constants for the `updateAgentRegistration` operation. */
-  export namespace UpdateAgentRegistrationConstants {
-    /** List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud resources, provisioned using Schematics. */
-    export enum Location {
-      US_SOUTH = 'us-south',
-      US_EAST = 'us-east',
-      EU_GB = 'eu-gb',
-      EU_DE = 'eu-de',
-    }
-  }
-
   /** Parameters for the `listAgentData` operation. */
-  export interface ListAgentDataParams {
+  export interface ListAgentDataParams extends DefaultParams {
     /** The starting position of the item in the list of items. For example, if you have three workspaces in your
      *  account, the first workspace is assigned position number 0, the second workspace is assigned position number 1,
      *  and so forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit
@@ -8159,7 +7586,6 @@ namespace SchematicsV1 {
     profile?: ListAgentDataConstants.Profile | string;
     /** Use `new` to get all unregistered agents; use `saved` to get all registered agents. */
     filter?: ListAgentDataConstants.Filter | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `listAgentData` operation. */
@@ -8179,7 +7605,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `createAgentData` operation. */
-  export interface CreateAgentDataParams {
+  export interface CreateAgentDataParams extends DefaultParams {
     /** The name of the agent (must be unique, for an account). */
     name: string;
     /** The resource-group name for the agent.  By default, agent will be registered in Default Resource Group. */
@@ -8207,7 +7633,6 @@ namespace SchematicsV1 {
     userState?: AgentUserState;
     /** Schematics Agent key performance indicators. */
     agentKpi?: AgentKPIData;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `createAgentData` operation. */
@@ -8221,13 +7646,20 @@ namespace SchematicsV1 {
     }
   }
 
+  /** Parameters for the `deleteAgentData` operation. */
+  export interface DeleteAgentDataParams extends DefaultParams {
+    /** Agent ID to get the details of agent. */
+    agentId: string;
+    /** Equivalent to -force options in the command line, default is false. */
+    force?: boolean;
+  }
+
   /** Parameters for the `getAgentData` operation. */
-  export interface GetAgentDataParams {
+  export interface GetAgentDataParams extends DefaultParams {
     /** Agent ID to get the details of agent. */
     agentId: string;
     /** Level of details returned by the get method. */
     profile?: GetAgentDataConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getAgentData` operation. */
@@ -8241,7 +7673,7 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `updateAgentData` operation. */
-  export interface UpdateAgentDataParams {
+  export interface UpdateAgentDataParams extends DefaultParams {
     /** Agent ID to get the details of agent. */
     agentId: string;
     /** The name of the agent (must be unique, for an account). */
@@ -8277,8 +7709,8 @@ namespace SchematicsV1 {
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -8287,7 +7719,6 @@ namespace SchematicsV1 {
      *    * When the IAM access token is about to expire, use the API key to create a new access token.
      */
     refreshToken?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `updateAgentData` operation. */
@@ -8301,70 +7732,36 @@ namespace SchematicsV1 {
     }
   }
 
-  /** Parameters for the `deleteAgentData` operation. */
-  export interface DeleteAgentDataParams {
-    /** Agent ID to get the details of agent. */
-    agentId: string;
-    /** Equivalent to -force options in the command line, default is false. */
-    force?: boolean;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `getAgentVersions` operation. */
-  export interface GetAgentVersionsParams {
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `getPrsAgentJob` operation. */
-  export interface GetPrsAgentJobParams {
-    /** Agent ID to get the details of agent. */
-    agentId: string;
-    headers?: OutgoingHttpHeaders;
+  export interface GetAgentVersionsParams extends DefaultParams {
   }
 
   /** Parameters for the `prsAgentJob` operation. */
-  export interface PrsAgentJobParams {
+  export interface PrsAgentJobParams extends DefaultParams {
     /** Agent ID to get the details of agent. */
     agentId: string;
     /** Equivalent to -force options in the command line, default is false. */
     force?: boolean;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `getHealthCheckAgentJob` operation. */
-  export interface GetHealthCheckAgentJobParams {
-    /** Agent ID to get the details of agent. */
-    agentId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `healthCheckAgentJob` operation. */
-  export interface HealthCheckAgentJobParams {
+  export interface HealthCheckAgentJobParams extends DefaultParams {
     /** Agent ID to get the details of agent. */
     agentId: string;
     /** Equivalent to -force options in the command line, default is false. */
     force?: boolean;
-    headers?: OutgoingHttpHeaders;
-  }
-
-  /** Parameters for the `getDeployAgentJob` operation. */
-  export interface GetDeployAgentJobParams {
-    /** Agent ID to get the details of agent. */
-    agentId: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `deployAgentJob` operation. */
-  export interface DeployAgentJobParams {
+  export interface DeployAgentJobParams extends DefaultParams {
     /** Agent ID to get the details of agent. */
     agentId: string;
     /** Equivalent to -force options in the command line, default is false. */
     force?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `deleteAgentResources` operation. */
-  export interface DeleteAgentResourcesParams {
+  export interface DeleteAgentResourcesParams extends DefaultParams {
     /** Agent ID to get the details of agent. */
     agentId: string;
     /** The IAM refresh token for the user or service identity.
@@ -8373,8 +7770,8 @@ namespace SchematicsV1 {
      *    * Use `export IBMCLOUD_API_KEY=<ibmcloud_api_key>`, and execute `curl -X POST
      *  "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
      *  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-     *    * For more information, about creating IAM access token and API Docs, refer, [IAM access
-     *  token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+     *    * For more information, about creating IAM access token and API Docs, refer,
+     *  [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
      *  key](/apidocs/iam-identity-token-api#create-api-key).
      *
      *    **Limitation**:
@@ -8383,18 +7780,16 @@ namespace SchematicsV1 {
      *    * When the IAM access token is about to expire, use the API key to create a new access token.
      */
     refreshToken: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `getKmsSettings` operation. */
-  export interface GetKmsSettingsParams {
+  export interface GetKmsSettingsParams extends DefaultParams {
     /** The location of the Resource. */
     location: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `updateKmsSettings` operation. */
-  export interface UpdateKmsSettingsParams {
+  export interface UpdateKmsSettingsParams extends DefaultParams {
     /** The location to integrate kms instance. For example, location can be `US` and `EU`. */
     location?: string;
     /** The encryption scheme values. **Allowable values** [`byok`,`kyok`]. */
@@ -8405,11 +7800,10 @@ namespace SchematicsV1 {
     primaryCrk?: KMSSettingsPrimaryCrk;
     /** The secondary kms instance details. */
     secondaryCrk?: KMSSettingsSecondaryCrk;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `listKms` operation. */
-  export interface ListKmsParams {
+  export interface ListKmsParams extends DefaultParams {
     /** The encryption scheme to be used. */
     encryptionScheme: string;
     /** The location of the Resource. */
@@ -8425,11 +7819,10 @@ namespace SchematicsV1 {
      *  ascending)   Ignore unrecognized or unsupported sort field.
      */
     sort?: string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `listPolicy` operation. */
-  export interface ListPolicyParams {
+  export interface ListPolicyParams extends DefaultParams {
     /** The starting position of the item in the list of items. For example, if you have three workspaces in your
      *  account, the first workspace is assigned position number 0, the second workspace is assigned position number 1,
      *  and so forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit
@@ -8443,7 +7836,6 @@ namespace SchematicsV1 {
     limit?: number;
     /** Level of details returned by the get method. */
     profile?: ListPolicyConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `listPolicy` operation. */
@@ -8457,7 +7849,11 @@ namespace SchematicsV1 {
   }
 
   /** Parameters for the `createPolicy` operation. */
-  export interface CreatePolicyParams {
+  export interface CreatePolicyParams extends DefaultParams {
+    /** Policy kind or categories for managing and deriving policy decision
+     *    * `agent_assignment_policy` Agent assignment policy for job execution.
+     */
+    kind: CreatePolicyConstants.Kind | string;
     /** Name of Schematics customization policy. */
     name?: string;
     /** The description of Schematics customization policy. */
@@ -8473,21 +7869,20 @@ namespace SchematicsV1 {
     location?: CreatePolicyConstants.Location | string;
     /** User defined status of the Schematics object. */
     state?: UserState;
-    /** Policy kind or categories for managing and deriving policy decision
-     *    * `agent_assignment_policy` Agent assignment policy for job execution.
-     */
-    kind?: CreatePolicyConstants.Kind | string;
     /** The objects for the Schematics policy. */
     target?: PolicyObjects;
     /** The parameter to tune the Schematics policy. */
     parameter?: PolicyParameter;
     /** List of scoped Schematics resources targeted by the policy. */
     scopedResources?: ScopedResource[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `createPolicy` operation. */
   export namespace CreatePolicyConstants {
+    /** Policy kind or categories for managing and deriving policy decision * `agent_assignment_policy` Agent assignment policy for job execution. */
+    export enum Kind {
+      AGENT_ASSIGNMENT_POLICY = 'agent_assignment_policy',
+    }
     /** List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud resources, provisioned using Schematics. */
     export enum Location {
       US_SOUTH = 'us-south',
@@ -8495,19 +7890,20 @@ namespace SchematicsV1 {
       EU_GB = 'eu-gb',
       EU_DE = 'eu-de',
     }
-    /** Policy kind or categories for managing and deriving policy decision * `agent_assignment_policy` Agent assignment policy for job execution. */
-    export enum Kind {
-      AGENT_ASSIGNMENT_POLICY = 'agent_assignment_policy',
-    }
+  }
+
+  /** Parameters for the `deletePolicy` operation. */
+  export interface DeletePolicyParams extends DefaultParams {
+    /** ID to get the details of policy. */
+    policyId: string;
   }
 
   /** Parameters for the `getPolicy` operation. */
-  export interface GetPolicyParams {
+  export interface GetPolicyParams extends DefaultParams {
     /** ID to get the details of policy. */
     policyId: string;
     /** Level of details returned by the get method. */
     profile?: GetPolicyConstants.Profile | string;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `getPolicy` operation. */
@@ -8520,17 +7916,14 @@ namespace SchematicsV1 {
     }
   }
 
-  /** Parameters for the `deletePolicy` operation. */
-  export interface DeletePolicyParams {
-    /** ID to get the details of policy. */
-    policyId: string;
-    headers?: OutgoingHttpHeaders;
-  }
-
   /** Parameters for the `updatePolicy` operation. */
-  export interface UpdatePolicyParams {
+  export interface UpdatePolicyParams extends DefaultParams {
     /** ID to get the details of policy. */
     policyId: string;
+    /** Policy kind or categories for managing and deriving policy decision
+     *    * `agent_assignment_policy` Agent assignment policy for job execution.
+     */
+    kind: UpdatePolicyConstants.Kind | string;
     /** Name of Schematics customization policy. */
     name?: string;
     /** The description of Schematics customization policy. */
@@ -8546,31 +7939,26 @@ namespace SchematicsV1 {
     location?: UpdatePolicyConstants.Location | string;
     /** User defined status of the Schematics object. */
     state?: UserState;
-    /** Policy kind or categories for managing and deriving policy decision
-     *    * `agent_assignment_policy` Agent assignment policy for job execution.
-     */
-    kind?: UpdatePolicyConstants.Kind | string;
     /** The objects for the Schematics policy. */
     target?: PolicyObjects;
     /** The parameter to tune the Schematics policy. */
     parameter?: PolicyParameter;
     /** List of scoped Schematics resources targeted by the policy. */
     scopedResources?: ScopedResource[];
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Constants for the `updatePolicy` operation. */
   export namespace UpdatePolicyConstants {
+    /** Policy kind or categories for managing and deriving policy decision * `agent_assignment_policy` Agent assignment policy for job execution. */
+    export enum Kind {
+      AGENT_ASSIGNMENT_POLICY = 'agent_assignment_policy',
+    }
     /** List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud resources, provisioned using Schematics. */
     export enum Location {
       US_SOUTH = 'us-south',
       US_EAST = 'us-east',
       EU_GB = 'eu-gb',
       EU_DE = 'eu-de',
-    }
-    /** Policy kind or categories for managing and deriving policy decision * `agent_assignment_policy` Agent assignment policy for job execution. */
-    export enum Kind {
-      AGENT_ASSIGNMENT_POLICY = 'agent_assignment_policy',
     }
   }
 
@@ -8660,7 +8048,7 @@ namespace SchematicsV1 {
     /** E-mail address of the user who updated an action. */
     updated_by?: string;
     /** Computed state of the Action. */
-    state?: ActionState;
+    state?: ActionLiteState;
     /** Playbook names retrieved from the repository. */
     playbook_names?: string[];
     /** System lock status. */
@@ -8787,81 +8175,6 @@ namespace SchematicsV1 {
         PENDING = 'pending',
         DISABLED = 'disabled',
         CRITICAL = 'critical',
-      }
-    }
-  }
-
-  /**
-   * Computed state of the Action.
-   */
-  export interface ActionState {
-    /** Status of automation (workspace or action). */
-    status_code?: ActionState.Constants.StatusCode | string;
-    /** Job id reference for this status. */
-    status_job_id?: string;
-    /** Automation status message - to be displayed along with the status_code. */
-    status_message?: string;
-  }
-  export namespace ActionState {
-    export namespace Constants {
-      /** Status of automation (workspace or action). */
-      export enum StatusCode {
-        NORMAL = 'normal',
-        PENDING = 'pending',
-        DISABLED = 'disabled',
-        CRITICAL = 'critical',
-      }
-    }
-  }
-
-  /**
-   * The agent registration details, with user inputs and system generated data.
-   */
-  export interface Agent {
-    /** The name of the agent (must be unique, for an account). */
-    name: string;
-    /** Agent description. */
-    description?: string;
-    /** The resource-group name for the agent.  By default, Agent will be registered in Default Resource Group. */
-    resource_group?: string;
-    /** Tags for the agent. */
-    tags?: string[];
-    /** The location where agent is deployed in the user environment. */
-    agent_location: string;
-    /** List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action,
-     *  choose the right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud
-     *  resources, provisioned using Schematics.
-     */
-    location: Agent.Constants.Location | string;
-    /** The IAM trusted profile id, used by the Agent instance. */
-    profile_id: string;
-    /** The Agent crn, obtained from the Schematics Agent deployment configuration. */
-    agent_crn?: string;
-    /** The Agent registration id. */
-    id?: string;
-    /** The Agent registration date-time. */
-    registered_at?: string;
-    /** The email address of an user who registered the Agent. */
-    registered_by?: string;
-    /** The Agent registration updation time. */
-    updated_at?: string;
-    /** Email address of user who updated the Agent registration. */
-    updated_by?: string;
-    /** User defined status of the agent. */
-    user_state?: AgentUserState;
-    /** Connection status of the agent. */
-    connection_state?: ConnectionState;
-    /** Computed state of the agent. */
-    system_state?: AgentSystemState;
-  }
-  export namespace Agent {
-    export namespace Constants {
-      /** List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action, choose the right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud resources, provisioned using Schematics. */
-      export enum Location {
-        US_SOUTH = 'us-south',
-        US_EAST = 'us-east',
-        EU_GB = 'eu-gb',
-        EU_DE = 'eu-de',
       }
     }
   }
@@ -9010,6 +8323,8 @@ namespace SchematicsV1 {
     system_state?: AgentSystemStatus;
     /** Schematics Agent key performance indicators' summary. */
     agent_kpi?: AgentKPIDataLite;
+    /** Encryption details about the workspace such as scheme (byok/kyok) and key CRN. */
+    encryption?: EncryptionInfo;
   }
   export namespace AgentDataLite {
     export namespace Constants {
@@ -9350,20 +8665,6 @@ namespace SchematicsV1 {
   }
 
   /**
-   * The list of agent details.
-   */
-  export interface AgentList {
-    /** The total number of records. */
-    total_count?: number;
-    /** The number of records returned. */
-    limit?: number;
-    /** The skipped number of records. */
-    offset: number;
-    /** The list of agents in the account. */
-    agents?: Agent[];
-  }
-
-  /**
    * AgentMetadataInfo.
    */
   export interface AgentMetadataInfo {
@@ -9472,28 +8773,6 @@ namespace SchematicsV1 {
   }
 
   /**
-   * Computed state of the agent.
-   */
-  export interface AgentSystemState {
-    /** Agent Status. */
-    state?: AgentSystemState.Constants.State | string;
-    /** The Agent status message. */
-    message?: string;
-  }
-  export namespace AgentSystemState {
-    export namespace Constants {
-      /** Agent Status. */
-      export enum State {
-        ERROR = 'error',
-        NORMAL = 'normal',
-        IN_PROGRESS = 'in_progress',
-        PENDING = 'pending',
-        DRAFT = 'draft',
-      }
-    }
-  }
-
-  /**
    * Describes a bastion resource.
    */
   export interface BastionResourceDefinition {
@@ -9550,6 +8829,7 @@ namespace SchematicsV1 {
     launch_url?: string;
     /** The version of the software template that you chose to install from the IBM Cloud catalog. */
     offering_version?: string;
+    /** Service Extensions. */
     service_extensions?: ServiceExtensions[];
   }
 
@@ -9610,28 +8890,6 @@ namespace SchematicsV1 {
   }
 
   /**
-   * Connection status of the agent.
-   */
-  export interface ConnectionState {
-    /** Agent Connection Status
-     *    * `Connected` When Schematics is able to connect to the agent.
-     *    * `Disconnected` When Schematics is able not connect to the agent.
-     */
-    state?: ConnectionState.Constants.State | string;
-    /** When the connection state is modified. */
-    checked_at?: string;
-  }
-  export namespace ConnectionState {
-    export namespace Constants {
-      /** Agent Connection Status * `Connected` When Schematics is able to connect to the agent. * `Disconnected` When Schematics is able not connect to the agent. */
-      export enum State {
-        CONNECTED = 'Connected',
-        DISCONNECTED = 'Disconnected',
-      }
-    }
-  }
-
-  /**
    * User editable credential variable data and system generated reference to the value.
    */
   export interface CredentialVariableData {
@@ -9642,6 +8900,8 @@ namespace SchematicsV1 {
      *  add SSH key in both `credentials` and `bastion_credentials`.
      */
     value?: string;
+    /** This is used to check if the credentials are masked or not. */
+    redacted?: string;
     /** True, will ignore the data in the value attribute, instead the data in metadata.default_value will be used. */
     use_default?: boolean;
     /** An user editable metadata for the credential variables. */
@@ -9802,13 +9062,31 @@ namespace SchematicsV1 {
   }
 
   /**
-   * InjectTerraformTemplateInnerTftParametersItem.
+   * Inventory host group.
    */
-  export interface InjectTerraformTemplateInnerTftParametersItem {
-    /** Key name to replace. */
+  export interface Group {
+    /** Name of the group. */
     name?: string;
-    /** Value to replace. */
-    value?: string;
+    /** group level variables. */
+    vars?: VariableData[];
+    /** User editable credential variable data and system generated reference to the value. */
+    credentials?: CredentialVariableData;
+    /** List of hosts in the group. */
+    hosts?: Host[];
+  }
+
+  /**
+   * This defines the inventory host.
+   */
+  export interface Host {
+    /** Host alias name. */
+    alias?: string;
+    /** Host name/IP. */
+    name?: string;
+    /** User editable credential variable data and system generated reference to the value. */
+    credential?: CredentialVariableData;
+    /** host level variables. */
+    vars?: VariableData[];
   }
 
   /**
@@ -9825,7 +9103,8 @@ namespace SchematicsV1 {
     injection_type?: string;
     /** Terraform template name. Maps to folder name in git repo. */
     tft_name?: string;
-    tft_parameters?: InjectTerraformTemplateInnerTftParametersItem[];
+    /** List of terraform template parameters. */
+    tft_parameters?: TftParametersObject[];
   }
 
   /**
@@ -9863,6 +9142,18 @@ namespace SchematicsV1 {
      *  playbook.
      */
     resource_queries?: string[];
+    /** connection type to be ssh or wirm. */
+    connection_type?: string;
+    /** common credentials for the inventory. */
+    credentials?: CredentialVariableData[];
+    /** User editable credential variable data and system generated reference to the value. */
+    common_credentials?: CredentialVariableData;
+    /** Describes a bastion resource. */
+    bastion?: BastionResourceDefinition;
+    /** User editable credential variable data and system generated reference to the value. */
+    bastion_credential?: CredentialVariableData;
+    /** Inventories' structured view for the provided inventory. */
+    inventory_view?: InventoryView;
   }
   export namespace InventoryResourceRecord {
     export namespace Constants {
@@ -9888,6 +9179,14 @@ namespace SchematicsV1 {
     offset: number;
     /** List of inventory definition records. */
     inventories?: InventoryResourceRecord[];
+  }
+
+  /**
+   * Inventories' structured view for the provided inventory.
+   */
+  export interface InventoryView {
+    /** List of inventory groups. */
+    groups?: Group[];
   }
 
   /**
@@ -10435,7 +9734,7 @@ namespace SchematicsV1 {
     /** Job log elapsed time (log_analyzed_till - log_start_at). */
     elapsed_time?: number;
     /** Job log errors. */
-    log_errors?: JobLogSummaryLogErrors[];
+    log_errors?: JobLogSummaryLogErrorsInner[];
     /** Repo download Job log summary. */
     repo_download_job?: JobLogSummaryRepoDownloadJob;
     /** Workspace Job log summary. */
@@ -10520,13 +9819,14 @@ namespace SchematicsV1 {
     workitems_pending?: number;
     /** Number of workitems failed. */
     workitems_failed?: number;
+    /** Job log summary of the flow workitem. */
     workitems?: JobLogSummaryWorkitems[];
   }
 
   /**
-   * JobLogSummaryLogErrors.
+   * JobLogSummaryLogErrorsInner.
    */
-  export interface JobLogSummaryLogErrors {
+  export interface JobLogSummaryLogErrorsInner {
     /** Error code in the Log. */
     error_code?: string;
     /** Summary error message in the log. */
@@ -10869,13 +10169,13 @@ namespace SchematicsV1 {
     /** The kms instance public endpoints. */
     kms_public_endpoint?: string;
     /** Detailed list of keys. */
-    keys?: KMSInstancesKeys[];
+    keys?: KMSInstancesKeysInner[];
   }
 
   /**
-   * KMSInstancesKeys.
+   * KMSInstancesKeysInner.
    */
-  export interface KMSInstancesKeys {
+  export interface KMSInstancesKeysInner {
     /** The name of the root key. */
     name?: string;
     /** The kms CRN of the root key. */
@@ -10994,6 +10294,38 @@ namespace SchematicsV1 {
   }
 
   /**
+   * Details of a Terraform output value with name, description, sensitivity, type, and value information.
+   */
+  export interface OutputValueDetail {
+    /** The name of the output variable. */
+    name?: string;
+    /** Description of the output value. */
+    description?: string;
+    /** Indicates whether the output value is sensitive. */
+    sensitive?: boolean;
+    /** The data type of the output value (e.g., string, number, list, map). */
+    type?: any;
+    /** The actual output value (can be any type - string, number, object, array, etc.). */
+    value?: any;
+  }
+
+  /**
+   * Terraform output values that are defined in the Terraform template or IBM Cloud software template.
+   */
+  export interface OutputValuesObject {
+    /** The ID that was assigned to your Terraform template or IBM Cloud catalog software template. */
+    id?: string;
+    /** The subfolder in the GitHub or GitLab repository where your Terraform template is stored. If the template is
+     *  stored in the root directory, `.` is returned.
+     */
+    folder?: string;
+    /** The Terraform version that was used to apply your template. */
+    type?: string;
+    /** A list of Terraform output values. */
+    values: OutputValueDetail[];
+  }
+
+  /**
    * OutputValuesInner.
    */
   export interface OutputValuesInner {
@@ -11032,7 +10364,7 @@ namespace SchematicsV1 {
     /** Policy kind or categories for managing and deriving policy decision
      *    * `agent_assignment_policy` Agent assignment policy for job execution.
      */
-    kind?: Policy.Constants.Kind | string;
+    kind: Policy.Constants.Kind | string;
     /** The objects for the Schematics policy. */
     target?: PolicyObjects;
     /** The parameter to tune the Schematics policy. */
@@ -11227,6 +10559,7 @@ namespace SchematicsV1 {
   export interface ResourceQuery {
     /** Type of the query(workspaces). */
     query_type?: ResourceQuery.Constants.QueryType | string;
+    /** List of query conditions. */
     query_condition?: ResourceQueryParam[];
     /** List of query selection parameters. */
     query_select?: string[];
@@ -11270,6 +10603,7 @@ namespace SchematicsV1 {
     updated_at?: string;
     /** Email address of user who updated the Resource query. */
     updated_by?: string;
+    /** List of resource queries. */
     queries?: ResourceQuery[];
   }
   export namespace ResourceQueryRecord {
@@ -11299,6 +10633,7 @@ namespace SchematicsV1 {
    * Describe resource query.
    */
   export interface ResourceQueryResponseRecord {
+    /** List of resource query response records. */
     response?: ResourceQueryResponseRecordResponse[];
   }
 
@@ -11318,9 +10653,11 @@ namespace SchematicsV1 {
   export interface ResourceQueryResponseRecordResponse {
     /** Type of the query(workspaces). */
     query_type?: ResourceQueryResponseRecordResponse.Constants.QueryType | string;
+    /** List of query conditions. */
     query_condition?: ResourceQueryParam[];
     /** List of query selection parameters. */
     query_select?: string[];
+    /** List of query outputs. */
     query_output?: ResourceQueryResponseRecordQueryOutput[];
   }
   export namespace ResourceQueryResponseRecordResponse {
@@ -11330,34 +10667,6 @@ namespace SchematicsV1 {
         WORKSPACES = 'workspaces',
       }
     }
-  }
-
-  /**
-   * Information about the location.
-   */
-  export interface SchematicsLocations {
-    /** The name of the location. */
-    name?: string;
-    /** The ID of the location. */
-    id?: string;
-    /** The country where the location is located. */
-    country?: string;
-    /** The geography that the location belongs to. */
-    geography?: string;
-    /** Geographical continent locations code having the data centres of IBM Cloud Schematics service. */
-    geography_code?: string;
-    /** The metro area that the location belongs to. */
-    metro?: string;
-    /** The multizone metro area that the location belongs to. */
-    multizone_metro?: string;
-    /** The kind of location. */
-    kind?: string;
-    /** The list of paired regions used by Schematics. */
-    paired_region?: string[];
-    /** The restricted region. */
-    restricted?: boolean;
-    /** The metadata of an agent. */
-    agent_metadata?: AgentMetadataInfo[];
   }
 
   /**
@@ -11424,7 +10733,7 @@ namespace SchematicsV1 {
     /** Name of the Service Data. */
     name?: string;
     /** Values of service data. */
-    value?: any;
+    value?: string;
     /** Type of the value string, int, bool. */
     type?: string;
   }
@@ -11535,9 +10844,57 @@ namespace SchematicsV1 {
    */
   export interface TemplateMetaDataResponse {
     /** The template type such as **terraform**, **ansible**, **helm**, **cloudpak**, or **bash script**. */
-    type?: string;
+    type: string;
     /** List of variables and its metadata. */
     variables: VariableData[];
+  }
+
+  /**
+   * Information about input variables and its metadata for the workspace.
+   */
+  export interface TemplateMetadataObject {
+    /** Name of the variable. */
+    name?: string;
+    /** Type of the variable. */
+    type?: string;
+    /** Source of variable. */
+    source?: string;
+    /** The variable's default value. */
+    default?: string;
+    /** The variable's override value. */
+    override_value?: string;
+    /** Alias names for the variable. */
+    var_aliases: string[];
+    /** Reference to the value for the variable. */
+    var_ref?: string;
+    /** List of possible string values for the variable. */
+    options: string[];
+    /** The Regex for the variable value. */
+    matches?: string;
+    /** Is the Variable is sensitive. */
+    secure?: boolean;
+    /** Is the Variable is hidden. */
+    hidden?: boolean;
+    /** Is the Variable is readonly. */
+    immutable?: boolean;
+    /** Minimum value of variable. */
+    min_value?: string;
+    /** Maximum value of variable. */
+    max_value?: string;
+    /** Minimum length of variable value. */
+    min_value_len?: string;
+    /** Maximum length of variable value. */
+    max_value_len?: string;
+    /** Description of the variable. */
+    description?: string;
+    /** Display sort order for variables. */
+    sort_order?: number;
+    /** Display group name for the variables. */
+    group_by?: string;
+    /** Indicate resources will be recreated if the value is changed. */
+    force_new?: boolean;
+    /** The object storage ID for values in options & default_value in MetadataValue. */
+    metadata_value_key?: string;
   }
 
   /**
@@ -11621,6 +10978,48 @@ namespace SchematicsV1 {
   }
 
   /**
+   * Resource extension information.
+   */
+  export interface TemplateResourceExtension {
+    /** Name of the resource extension. */
+    resource_name?: string;
+    /** Array of resource data. */
+    resource_data_array: JsonObject[];
+    /** Type of the resource extension. */
+    resource_type?: string;
+  }
+
+  /**
+   * Information about a single resource provisioned by Terraform.
+   */
+  export interface TemplateResourceItem {
+    /** Unique identifier of the resource. */
+    resource_id?: string;
+    /** Name of the resource. */
+    resource_name?: string;
+    /** Type of the resource (e.g., ibm_compute_vm_instance). */
+    resource_type?: string;
+    /** Cloud Resource Name (CRN) of the resource. */
+    resource_crn?: string;
+    /** URL to the resource icon. */
+    resource_icon_url?: string;
+    /** URL to the resource controller in IBM Cloud console. */
+    resource_controller_url?: string;
+    /** Name of the resource group. */
+    resource_group_name?: string;
+    /** Current status of the resource. */
+    resource_status?: string;
+    /** Flag indicating if the resource is tainted. The `resource_tainted` flag marks `true` when an instance times
+     *  out after few hours, if your resource provisioning takes longer duration. When you rerun the apply plan, based
+     *  on the `resource_taint` flag result the provisioning continues from the state where the provisioning has
+     *  stopped.
+     */
+    resource_tainted?: boolean;
+    /** Resource extension information. */
+    resource_extension?: TemplateResourceExtension;
+  }
+
+  /**
    * Information about the resources provisioned by the Terraform template.
    */
   export interface TemplateResources {
@@ -11646,6 +11045,28 @@ namespace SchematicsV1 {
     resources_count?: number;
     /** The Terraform version that was used to apply your template. */
     type?: string;
+  }
+
+  /**
+   * Information about the resources provisioned by the workspace template.
+   */
+  export interface TemplateResourcesObject {
+    /** The ID that was assigned to your Terraform template or IBM Cloud catalog software template. */
+    id?: string;
+    /** The subfolder in GitHub or GitLab where your Terraform templates are stored. If your template is stored in
+     *  the root directory, `.` is returned.
+     */
+    folder?: string;
+    /** The Terraform version that was used to apply your template. */
+    type?: string;
+    /** Timestamp when the terraform resource information was last generated. */
+    generated_at?: string;
+    /** Information about the IBM Cloud resources that are associated with your workspace. */
+    resources: TemplateResourceItem[];
+    /** List of null resources. */
+    null_resources: TemplateResourceItem[];
+    /** Total count of resources provisioned. */
+    resources_count?: number;
   }
 
   /**
@@ -11767,10 +11188,15 @@ namespace SchematicsV1 {
    * The content of the Terraform statefile (`terraform.tfstate`).
    */
   export interface TemplateStateStore {
+    /** The version of the state file format. */
     version?: number;
+    /** The Terraform version that was used to apply your template. */
     terraform_version?: string;
+    /** serial number. */
     serial?: number;
+    /** lineage. */
     lineage?: string;
+    /** modules. */
     modules?: JsonObject[];
   }
 
@@ -11780,6 +11206,14 @@ namespace SchematicsV1 {
   export interface TemplateValues {
     /** Information about workspace variable metadata. */
     values_metadata?: JsonObject[];
+  }
+
+  /**
+   * Information about the values meta data that are declared in the template that your workspace points to.
+   */
+  export interface TemplateValuesMetaData {
+    /** List of variable metadata. */
+    values_metadata: TemplateMetadataObject[];
   }
 
   /**
@@ -11805,6 +11239,16 @@ namespace SchematicsV1 {
     command_depends_on?: string;
     /** Displays the command executed status, either `success` or `failure`. */
     command_status?: string;
+  }
+
+  /**
+   * List of terraform template parameters.
+   */
+  export interface TftParametersObject {
+    /** Key name to replace. */
+    name?: string;
+    /** Value to replace. */
+    value?: string;
   }
 
   /**
@@ -12449,6 +11893,13 @@ namespace SchematicsV1 {
      *  variables](https://cloud.ibm.com/docs/schematics?topic=schematics-create-tf-config#declare-variable).
      */
     value?: string;
+  }
+
+  /**
+   * DeleteAgentResources202Response.
+   */
+  export interface DeleteAgentResources202Response {
+    message?: string;
   }
 }
 

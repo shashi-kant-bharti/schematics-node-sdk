@@ -17,6 +17,7 @@
     "sourceMap": true, /* Generates corresponding '.map' file. */
     /* Strict Type-Checking Options */
     "alwaysStrict": true, /* Parse in strict mode and emit "use strict" for each source file. */
+    "noImplicitAny": false, /* Allow variables/parameters to implicitly have type 'any'. Required by generated SDK code. */
     /* Module Resolution Options */
     "moduleResolution": "node", /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "types": [
