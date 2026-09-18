@@ -10,6 +10,18 @@
     "@ibm-cloud/ibm-code-engine-sdk": "^3.1.0",
     "@ibm-cloud/ibm-schematics": "^2.0.3"
   },
+  "overrides": {
+    "brace-expansion": ">=2.1.2",
+    "ip-address": ">=10.3.1",
+    "form-data": ">=4.0.6",
+    "axios": ">=1.18.0",
+    "js-yaml": ">=4.3.2",
+    "fast-uri": ">=3.1.6",
+    "browserslist": ">=4.28.7",
+    "picomatch": ">=2.3.2",
+    "jws": ">=3.2.3",
+    "sigstore": ">=4.1.1"
+  },
   "author": "",
   "license": "ISC"
 }
