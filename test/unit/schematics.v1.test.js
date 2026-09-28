@@ -18,6 +18,8 @@
 const sdkCorePackage = require('ibm-cloud-sdk-core');
 
 const { NoAuthAuthenticator } = sdkCorePackage;
+const SchematicsV1 = require('../../dist/schematics/v1');
+
 const {
   getOptions,
   checkUrlAndMethod,
@@ -26,7 +28,6 @@ const {
   checkUserHeader,
   checkForSuccessfulExecution,
 } = require('@ibm-cloud/sdk-test-utilities');
-const SchematicsV1 = require('../../dist/schematics/v1');
 
 const schematicsServiceOptions = {
   authenticator: new NoAuthAuthenticator(),
@@ -176,8 +177,7 @@ describe('SchematicsV1', () => {
         // Construct the params object for operation listResourceGroup
         const listResourceGroupParams = {};
 
-        const listResourceGroupResult =
-          schematicsService.listResourceGroup(listResourceGroupParams);
+        const listResourceGroupResult = schematicsService.listResourceGroup(listResourceGroupParams);
 
         // all methods should return a Promise
         expectToBePromise(listResourceGroupResult);
@@ -237,9 +237,7 @@ describe('SchematicsV1', () => {
         // Construct the params object for operation getSchematicsVersion
         const getSchematicsVersionParams = {};
 
-        const getSchematicsVersionResult = schematicsService.getSchematicsVersion(
-          getSchematicsVersionParams
-        );
+        const getSchematicsVersionResult = schematicsService.getSchematicsVersion(getSchematicsVersionParams);
 
         // all methods should return a Promise
         expectToBePromise(getSchematicsVersionResult);
@@ -353,9 +351,7 @@ describe('SchematicsV1', () => {
           xGithubToken,
         };
 
-        const processTemplateMetaDataResult = schematicsService.processTemplateMetaData(
-          processTemplateMetaDataParams
-        );
+        const processTemplateMetaDataResult = schematicsService.processTemplateMetaData(processTemplateMetaDataParams);
 
         // all methods should return a Promise
         expectToBePromise(processTemplateMetaDataResult);
@@ -1497,8 +1493,7 @@ describe('SchematicsV1', () => {
           formatted,
         };
 
-        const getWorkspaceReadmeResult =
-          schematicsService.getWorkspaceReadme(getWorkspaceReadmeParams);
+        const getWorkspaceReadmeResult = schematicsService.getWorkspaceReadme(getWorkspaceReadmeParams);
 
         // all methods should return a Promise
         expectToBePromise(getWorkspaceReadmeResult);
@@ -1590,8 +1585,7 @@ describe('SchematicsV1', () => {
           fileContentType,
         };
 
-        const templateRepoUploadResult =
-          schematicsService.templateRepoUpload(templateRepoUploadParams);
+        const templateRepoUploadResult = schematicsService.templateRepoUpload(templateRepoUploadParams);
 
         // all methods should return a Promise
         expectToBePromise(templateRepoUploadResult);
@@ -1601,11 +1595,7 @@ describe('SchematicsV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/v1/workspaces/{w_id}/template_data/{t_id}/template_repo_upload',
-          'PUT'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/template_data/{t_id}/template_repo_upload', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'multipart/form-data';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -1686,8 +1676,7 @@ describe('SchematicsV1', () => {
           tId,
         };
 
-        const getWorkspaceInputsResult =
-          schematicsService.getWorkspaceInputs(getWorkspaceInputsParams);
+        const getWorkspaceInputsResult = schematicsService.getWorkspaceInputs(getWorkspaceInputsParams);
 
         // all methods should return a Promise
         expectToBePromise(getWorkspaceInputsResult);
@@ -1697,11 +1686,7 @@ describe('SchematicsV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/v1/workspaces/{w_id}/template_data/{t_id}/values',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/template_data/{t_id}/values', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -1798,9 +1783,7 @@ describe('SchematicsV1', () => {
           variablestore,
         };
 
-        const replaceWorkspaceInputsResult = schematicsService.replaceWorkspaceInputs(
-          replaceWorkspaceInputsParams
-        );
+        const replaceWorkspaceInputsResult = schematicsService.replaceWorkspaceInputs(replaceWorkspaceInputsParams);
 
         // all methods should return a Promise
         expectToBePromise(replaceWorkspaceInputsResult);
@@ -1810,11 +1793,7 @@ describe('SchematicsV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/v1/workspaces/{w_id}/template_data/{t_id}/values',
-          'PUT'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/template_data/{t_id}/values', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'application/json';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -1894,9 +1873,7 @@ describe('SchematicsV1', () => {
           wId,
         };
 
-        const getAllWorkspaceInputsResult = schematicsService.getAllWorkspaceInputs(
-          getAllWorkspaceInputsParams
-        );
+        const getAllWorkspaceInputsResult = schematicsService.getAllWorkspaceInputs(getAllWorkspaceInputsParams);
 
         // all methods should return a Promise
         expectToBePromise(getAllWorkspaceInputsResult);
@@ -2612,11 +2589,261 @@ describe('SchematicsV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/v1/workspaces/{w_id}/runtime_data/{t_id}/state_store',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/v2/workspaces/{w_id}/resources', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.path.w_id).toEqual(wId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getWorkspaceResourcesV2Test();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        schematicsService.enableRetries();
+        __getWorkspaceResourcesV2Test();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        schematicsService.disableRetries();
+        __getWorkspaceResourcesV2Test();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const wId = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const getWorkspaceResourcesV2Params = {
+          wId,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        schematicsService.getWorkspaceResourcesV2(getWorkspaceResourcesV2Params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await schematicsService.getWorkspaceResourcesV2({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await schematicsService.getWorkspaceResourcesV2();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+
+  describe('getWorkspaceResources', () => {
+    describe('positive tests', () => {
+      function __getWorkspaceResourcesTest() {
+        // Construct the params object for operation getWorkspaceResources
+        const wId = 'testString';
+        const getWorkspaceResourcesParams = {
+          wId,
+        };
+
+        const getWorkspaceResourcesResult = schematicsService.getWorkspaceResources(getWorkspaceResourcesParams);
+
+        // all methods should return a Promise
+        expectToBePromise(getWorkspaceResourcesResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/resources', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.path.w_id).toEqual(wId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getWorkspaceResourcesTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        schematicsService.enableRetries();
+        __getWorkspaceResourcesTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        schematicsService.disableRetries();
+        __getWorkspaceResourcesTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const wId = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const getWorkspaceResourcesParams = {
+          wId,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        schematicsService.getWorkspaceResources(getWorkspaceResourcesParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await schematicsService.getWorkspaceResources({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await schematicsService.getWorkspaceResources();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+
+  describe('getWorkspaceState', () => {
+    describe('positive tests', () => {
+      function __getWorkspaceStateTest() {
+        // Construct the params object for operation getWorkspaceState
+        const wId = 'testString';
+        const getWorkspaceStateParams = {
+          wId,
+        };
+
+        const getWorkspaceStateResult = schematicsService.getWorkspaceState(getWorkspaceStateParams);
+
+        // all methods should return a Promise
+        expectToBePromise(getWorkspaceStateResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/state_stores', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.path.w_id).toEqual(wId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getWorkspaceStateTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        schematicsService.enableRetries();
+        __getWorkspaceStateTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        schematicsService.disableRetries();
+        __getWorkspaceStateTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const wId = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const getWorkspaceStateParams = {
+          wId,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        schematicsService.getWorkspaceState(getWorkspaceStateParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await schematicsService.getWorkspaceState({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await schematicsService.getWorkspaceState();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+
+  describe('getWorkspaceTemplateState', () => {
+    describe('positive tests', () => {
+      function __getWorkspaceTemplateStateTest() {
+        // Construct the params object for operation getWorkspaceTemplateState
+        const wId = 'testString';
+        const tId = 'testString';
+        const getWorkspaceTemplateStateParams = {
+          wId,
+          tId,
+        };
+
+        const getWorkspaceTemplateStateResult = schematicsService.getWorkspaceTemplateState(getWorkspaceTemplateStateParams);
+
+        // all methods should return a Promise
+        expectToBePromise(getWorkspaceTemplateStateResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/runtime_data/{t_id}/state_store', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -2695,9 +2922,7 @@ describe('SchematicsV1', () => {
           activityId,
         };
 
-        const getWorkspaceActivityLogsResult = schematicsService.getWorkspaceActivityLogs(
-          getWorkspaceActivityLogsParams
-        );
+        const getWorkspaceActivityLogsResult = schematicsService.getWorkspaceActivityLogs(getWorkspaceActivityLogsParams);
 
         // all methods should return a Promise
         expectToBePromise(getWorkspaceActivityLogsResult);
@@ -2707,11 +2932,7 @@ describe('SchematicsV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/v1/workspaces/{w_id}/actions/{activity_id}/logs',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/actions/{activity_id}/logs', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -2788,8 +3009,7 @@ describe('SchematicsV1', () => {
           wId,
         };
 
-        const getWorkspaceLogUrlsResult =
-          schematicsService.getWorkspaceLogUrls(getWorkspaceLogUrlsParams);
+        const getWorkspaceLogUrlsResult = schematicsService.getWorkspaceLogUrls(getWorkspaceLogUrlsParams);
 
         // all methods should return a Promise
         expectToBePromise(getWorkspaceLogUrlsResult);
@@ -2893,11 +3113,7 @@ describe('SchematicsV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/v1/workspaces/{w_id}/runtime_data/{t_id}/log_store',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/runtime_data/{t_id}/log_store', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -2990,9 +3206,7 @@ describe('SchematicsV1', () => {
           logTfAnsible,
         };
 
-        const getTemplateActivityLogResult = schematicsService.getTemplateActivityLog(
-          getTemplateActivityLogParams
-        );
+        const getTemplateActivityLogResult = schematicsService.getTemplateActivityLog(getTemplateActivityLogParams);
 
         // all methods should return a Promise
         expectToBePromise(getTemplateActivityLogResult);
@@ -3002,11 +3216,7 @@ describe('SchematicsV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/v1/workspaces/{w_id}/runtime_data/{t_id}/log_store/actions/{activity_id}',
-          'GET'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/v1/workspaces/{w_id}/runtime_data/{t_id}/log_store/actions/{activity_id}', 'GET');
         const expectedAccept = 'application/json';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -3845,9 +4055,7 @@ describe('SchematicsV1', () => {
           fileContentType,
         };
 
-        const uploadTemplateTarActionResult = schematicsService.uploadTemplateTarAction(
-          uploadTemplateTarActionParams
-        );
+        const uploadTemplateTarActionResult = schematicsService.uploadTemplateTarAction(uploadTemplateTarActionParams);
 
         // all methods should return a Promise
         expectToBePromise(uploadTemplateTarActionResult);
@@ -3857,11 +4065,7 @@ describe('SchematicsV1', () => {
 
         const mockRequestOptions = getOptions(createRequestMock);
 
-        checkUrlAndMethod(
-          mockRequestOptions,
-          '/v2/actions/{action_id}/template_repo_upload',
-          'PUT'
-        );
+        checkUrlAndMethod(mockRequestOptions, '/v2/actions/{action_id}/template_repo_upload', 'PUT');
         const expectedAccept = 'application/json';
         const expectedContentType = 'multipart/form-data';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
@@ -3941,9 +4145,7 @@ describe('SchematicsV1', () => {
           limit,
         };
 
-        const listWorkspaceActivitiesResult = schematicsService.listWorkspaceActivities(
-          listWorkspaceActivitiesParams
-        );
+        const listWorkspaceActivitiesResult = schematicsService.listWorkspaceActivities(listWorkspaceActivitiesParams);
 
         // all methods should return a Promise
         expectToBePromise(listWorkspaceActivitiesResult);
@@ -4236,9 +4438,7 @@ describe('SchematicsV1', () => {
           description,
         };
 
-        const runWorkspaceCommandsResult = schematicsService.runWorkspaceCommands(
-          runWorkspaceCommandsParams
-        );
+        const runWorkspaceCommandsResult = schematicsService.runWorkspaceCommands(runWorkspaceCommandsParams);
 
         // all methods should return a Promise
         expectToBePromise(runWorkspaceCommandsResult);
@@ -4342,9 +4542,7 @@ describe('SchematicsV1', () => {
           delegatedToken,
         };
 
-        const applyWorkspaceCommandResult = schematicsService.applyWorkspaceCommand(
-          applyWorkspaceCommandParams
-        );
+        const applyWorkspaceCommandResult = schematicsService.applyWorkspaceCommand(applyWorkspaceCommandParams);
 
         // all methods should return a Promise
         expectToBePromise(applyWorkspaceCommandResult);
@@ -4447,9 +4645,7 @@ describe('SchematicsV1', () => {
           delegatedToken,
         };
 
-        const destroyWorkspaceCommandResult = schematicsService.destroyWorkspaceCommand(
-          destroyWorkspaceCommandParams
-        );
+        const destroyWorkspaceCommandResult = schematicsService.destroyWorkspaceCommand(destroyWorkspaceCommandParams);
 
         // all methods should return a Promise
         expectToBePromise(destroyWorkspaceCommandResult);
@@ -4552,9 +4748,7 @@ describe('SchematicsV1', () => {
           delegatedToken,
         };
 
-        const planWorkspaceCommandResult = schematicsService.planWorkspaceCommand(
-          planWorkspaceCommandParams
-        );
+        const planWorkspaceCommandResult = schematicsService.planWorkspaceCommand(planWorkspaceCommandParams);
 
         // all methods should return a Promise
         expectToBePromise(planWorkspaceCommandResult);
@@ -4647,9 +4841,7 @@ describe('SchematicsV1', () => {
           delegatedToken,
         };
 
-        const refreshWorkspaceCommandResult = schematicsService.refreshWorkspaceCommand(
-          refreshWorkspaceCommandParams
-        );
+        const refreshWorkspaceCommandResult = schematicsService.refreshWorkspaceCommand(refreshWorkspaceCommandParams);
 
         // all methods should return a Promise
         expectToBePromise(refreshWorkspaceCommandResult);
@@ -5129,10 +5321,12 @@ describe('SchematicsV1', () => {
       };
 
       // JobLogSummaryRepoDownloadJob
-      const jobLogSummaryRepoDownloadJobModel = {};
+      const jobLogSummaryRepoDownloadJobModel = {
+      };
 
       // JobLogSummaryWorkspaceJob
-      const jobLogSummaryWorkspaceJobModel = {};
+      const jobLogSummaryWorkspaceJobModel = {
+      };
 
       // JobLogSummaryWorkitems
       const jobLogSummaryWorkitemsModel = {
@@ -5407,6 +5601,93 @@ describe('SchematicsV1', () => {
   });
 
   describe('getJob', () => {
+    describe('positive tests', () => {
+      function __getJobTest() {
+        // Construct the params object for operation getJob
+        const jobId = 'testString';
+        const profile = 'summary';
+        const getJobParams = {
+          jobId,
+          profile,
+        };
+
+        const getJobResult = schematicsService.getJob(getJobParams);
+
+        // all methods should return a Promise
+        expectToBePromise(getJobResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const mockRequestOptions = getOptions(createRequestMock);
+
+        checkUrlAndMethod(mockRequestOptions, '/v2/jobs/{job_id}', 'GET');
+        const expectedAccept = 'application/json';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(mockRequestOptions.qs.profile).toEqual(profile);
+        expect(mockRequestOptions.path.job_id).toEqual(jobId);
+      }
+
+      test('should pass the right params to createRequest with enable and disable retries', () => {
+        // baseline test
+        __getJobTest();
+
+        // enable retries and test again
+        createRequestMock.mockClear();
+        schematicsService.enableRetries();
+        __getJobTest();
+
+        // disable retries and test again
+        createRequestMock.mockClear();
+        schematicsService.disableRetries();
+        __getJobTest();
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const jobId = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const getJobParams = {
+          jobId,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        schematicsService.getJob(getJobParams);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async () => {
+        let err;
+        try {
+          await schematicsService.getJob({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+
+      test('should reject promise when required params are not given', async () => {
+        let err;
+        try {
+          await schematicsService.getJob();
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+      });
+    });
+  });
+
+  describe('updateJob', () => {
     describe('positive tests', () => {
       function __getJobTest() {
         // Construct the params object for operation getJob
@@ -5806,10 +6087,12 @@ describe('SchematicsV1', () => {
       };
 
       // JobLogSummaryRepoDownloadJob
-      const jobLogSummaryRepoDownloadJobModel = {};
+      const jobLogSummaryRepoDownloadJobModel = {
+      };
 
       // JobLogSummaryWorkspaceJob
-      const jobLogSummaryWorkspaceJobModel = {};
+      const jobLogSummaryWorkspaceJobModel = {
+      };
 
       // JobLogSummaryWorkitems
       const jobLogSummaryWorkitemsModel = {
@@ -6188,9 +6471,7 @@ describe('SchematicsV1', () => {
           workspaces,
         };
 
-        const createWorkspaceDeletionJobResult = schematicsService.createWorkspaceDeletionJob(
-          createWorkspaceDeletionJobParams
-        );
+        const createWorkspaceDeletionJobResult = schematicsService.createWorkspaceDeletionJob(createWorkspaceDeletionJobParams);
 
         // all methods should return a Promise
         expectToBePromise(createWorkspaceDeletionJobResult);
@@ -6277,9 +6558,7 @@ describe('SchematicsV1', () => {
           wjId,
         };
 
-        const getWorkspaceDeletionJobStatusResult = schematicsService.getWorkspaceDeletionJobStatus(
-          getWorkspaceDeletionJobStatusParams
-        );
+        const getWorkspaceDeletionJobStatusResult = schematicsService.getWorkspaceDeletionJobStatus(getWorkspaceDeletionJobStatusParams);
 
         // all methods should return a Promise
         expectToBePromise(getWorkspaceDeletionJobStatusResult);
@@ -6452,6 +6731,120 @@ describe('SchematicsV1', () => {
         name: 'testString',
         value:
           '-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n',
+        redacted: 'testString',
+        use_default: true,
+        metadata: credentialVariableMetadataModel,
+      };
+
+      // BastionResourceDefinition
+      const bastionResourceDefinitionModel = {
+        name: 'testString',
+        host: 'testString',
+      };
+
+      // VariableMetadata
+      const variableMetadataModel = {
+        type: 'boolean',
+        aliases: ['testString'],
+        description: 'testString',
+        cloud_data_type: 'testString',
+        default_value: 'testString',
+        link_status: 'normal',
+        secure: true,
+        immutable: true,
+        hidden: true,
+        required: true,
+        options: ['testString'],
+        min_value: 0,
+        max_value: 0,
+        min_length: 0,
+        max_length: 0,
+        matches: 'testString',
+        position: 0,
+        group_by: 'testString',
+        source: 'testString',
+      };
+
+      // VariableData
+      const variableDataModel = {
+        name: 'testString',
+        value: 'testString',
+        use_default: true,
+        metadata: variableMetadataModel,
+      };
+
+      // Host
+      const hostModel = {
+        alias: 'testString',
+        name: 'testString',
+        credential: credentialVariableDataModel,
+        vars: [variableDataModel],
+      };
+
+      // Group
+      const groupModel = {
+        name: 'testString',
+        vars: [variableDataModel],
+        credentials: credentialVariableDataModel,
+        hosts: [hostModel],
+      };
+
+      // InventoryView
+      const inventoryViewModel = {
+        groups: [groupModel],
+      };
+
+      function __createInventoryTest() {
+        // Construct the params object for operation createInventory
+        const name = 'dev-inventoryapidocexample';
+        const description = 'My cloud linux inventory';
+        const location = 'us-east';
+        const resourceGroup = 'Default';
+        const connectionType = 'testString';
+        const credentials = [credentialVariableDataModel];
+        const commonCredentials = credentialVariableDataModel;
+        const inventoriesIni = '[windows]\n158.177.7.181';
+        const resourceQueries = ['testString'];
+        const bastion = bastionResourceDefinitionModel;
+        const bastionCredential = credentialVariableDataModel;
+        const inventoryView = inventoryViewModel;
+        const createInventoryParams = {
+          name,
+          description,
+          location,
+          resourceGroup,
+          connectionType,
+          credentials,
+          commonCredentials,
+          inventoriesIni,
+          resourceQueries,
+          bastion,
+          bastionCredential,
+          inventoryView,
+        };
+
+        const createInventoryResult = schematicsService.createInventory(createInventoryParams);
+
+      // CredentialVariableMetadata
+      const credentialVariableMetadataModel = {
+        type: 'string',
+        aliases: ['testString'],
+        description: 'testString',
+        cloud_data_type: 'testString',
+        default_value: 'testString',
+        link_status: 'normal',
+        immutable: true,
+        hidden: true,
+        required: true,
+        position: 0,
+        group_by: 'testString',
+        source: 'testString',
+      };
+
+      // CredentialVariableData
+      const credentialVariableDataModel = {
+        name: 'testString',
+        value: '-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n',
         redacted: 'testString',
         use_default: true,
         metadata: credentialVariableMetadataModel,
@@ -7008,8 +7401,7 @@ describe('SchematicsV1', () => {
           profile,
         };
 
-        const listResourceQueryResult =
-          schematicsService.listResourceQuery(listResourceQueryParams);
+        const listResourceQueryResult = schematicsService.listResourceQuery(listResourceQueryParams);
 
         // all methods should return a Promise
         expectToBePromise(listResourceQueryResult);
@@ -7096,8 +7488,7 @@ describe('SchematicsV1', () => {
           queries,
         };
 
-        const createResourceQueryResult =
-          schematicsService.createResourceQuery(createResourceQueryParams);
+        const createResourceQueryResult = schematicsService.createResourceQuery(createResourceQueryParams);
 
         // all methods should return a Promise
         expectToBePromise(createResourceQueryResult);
@@ -7340,9 +7731,7 @@ describe('SchematicsV1', () => {
           queryId,
         };
 
-        const executeResourceQueryResult = schematicsService.executeResourceQuery(
-          executeResourceQueryParams
-        );
+        const executeResourceQueryResult = schematicsService.executeResourceQuery(executeResourceQueryParams);
 
         // all methods should return a Promise
         expectToBePromise(executeResourceQueryResult);
@@ -8496,9 +8885,7 @@ describe('SchematicsV1', () => {
           refreshToken,
         };
 
-        const deleteAgentResourcesResult = schematicsService.deleteAgentResources(
-          deleteAgentResourcesParams
-        );
+        const deleteAgentResourcesResult = schematicsService.deleteAgentResources(deleteAgentResourcesParams);
 
         // all methods should return a Promise
         expectToBePromise(deleteAgentResourcesResult);
@@ -8693,8 +9080,7 @@ describe('SchematicsV1', () => {
           secondaryCrk,
         };
 
-        const updateKmsSettingsResult =
-          schematicsService.updateKmsSettings(updateKmsSettingsParams);
+        const updateKmsSettingsResult = schematicsService.updateKmsSettings(updateKmsSettingsParams);
 
         // all methods should return a Promise
         expectToBePromise(updateKmsSettingsResult);
